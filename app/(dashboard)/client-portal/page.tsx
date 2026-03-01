@@ -1,362 +1,213 @@
-
 "use client";
 
 import React from "react";
+import { ProjectCard } from "@/components/client-portal/project-card";
+import { ServiceCard } from "@/components/client-portal/service-card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-export default function Page() {
-  return (
-    <div className="flex-1 flex flex-col flex-1 overflow-y-auto">
-      
-<div className="max-w-6xl mx-auto p-8 space-y-8 pb-20">
+export default function ClientPortalPage() {
+    const accountManager = {
+        name: "Selin Kaya",
+        title: "Senior Müşteri Yöneticisi",
+        avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+        phone: "+90 555 123 4567",
+        email: "selin@agenciflow.com",
+    };
 
-<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">
-<p className="text-[#617289] text-sm font-medium mb-1">Toplam Organik Trafik</p>
-<div className="flex items-end gap-2">
-<p className="text-[#111418] dark:text-white text-2xl font-black">425.800</p>
-<span className="text-green-600 text-[10px] font-bold mb-1">+12.4%</span>
-</div>
-<p className="text-[#617289] text-xs mt-1">Son 30 gün</p>
-</div>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">
-<p className="text-[#617289] text-sm font-medium mb-1">Ortalama Sıralama</p>
-<div className="flex items-end gap-2">
-<p className="text-[#111418] dark:text-white text-2xl font-black">14.2</p>
-<span className="text-green-600 text-[10px] font-bold mb-1">-1.5</span>
-</div>
-<p className="text-[#617289] text-xs mt-1">Geçen aya göre artış</p>
-</div>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">
-<p className="text-[#617289] text-sm font-medium mb-1">Teknik Sağlık Skoru</p>
-<div className="flex items-end gap-2">
-<p className="text-[#111418] dark:text-white text-2xl font-black">92/100</p>
-<span className="text-blue-600 text-[10px] font-bold mb-1">Mükemmel</span>
-</div>
-<p className="text-[#617289] text-xs mt-1">Denetim: 2 saat önce</p>
-</div>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">
-<p className="text-[#617289] text-sm font-medium mb-1">Toplam Anahtar Kelime</p>
-<div className="flex items-end gap-2">
-<p className="text-[#111418] dark:text-white text-2xl font-black">1.240</p>
-<span className="text-green-600 text-[10px] font-bold mb-1">+45</span>
-</div>
-<p className="text-[#617289] text-xs mt-1">İlk 10'daki kelimeler</p>
-</div>
-</section>
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<div className="lg:col-span-2 space-y-8">
-<div className="space-y-4">
-<div className="flex items-center justify-between">
-<h3 className="text-[#111418] dark:text-white text-xl font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-primary">checklist</span>
-                                SEO Görev Listesi
+    return (
+        <div className="flex-1 flex flex-col bg-gray-50/50 dark:bg-[#0f151c] min-h-screen">
+            <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full">
+
+                {/* Welcome Header */}
+                <section className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-[#1a2432] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <h1 className="text-2xl font-bold dark:text-white">Hoş Geldiniz, Acme Corp! 👋</h1>
+                            <Badge variant="secondary" className="bg-primary/10 text-primary uppercase text-[10px] hidden md:flex">VIP MÜŞTERİ</Badge>
+                        </div>
+                        <p className="text-sm text-gray-500">AgenciFlow müşteri portalınıza özel yönetim paneli. Tüm hizmetlerinizi ve raporlarınızı buradan takip edebilirsiniz.</p>
+                    </div>
+                    <div className="flex gap-3 w-full md:w-auto">
+                        <Button variant="default" className="relative h-10 w-full md:w-auto">
+                            <span className="material-symbols-outlined mr-2">notifications</span>
+                            <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 text-[9px] text-white justify-center items-center">2</span>
+                            </span>
+                            Bekleyen Onaylar
+                        </Button>
+                    </div>
+                </section>
+
+                {/* Two Column Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                    {/* Main Area (Left 2 columns) */}
+                    <div className="lg:col-span-2 space-y-8">
+
+                        {/* Project Progress Section */}
+                        <section>
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-lg font-bold flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-primary">analytics</span>
+                                    Aktif Projeler
+                                </h2>
+                                <Button variant="link" className="text-xs text-gray-500 p-0 h-auto">Tümünü Gör →</Button>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <ProjectCard
+                                    name="E-Ticaret Web Yenileme"
+                                    type="Web Geliştirme"
+                                    startDate="12 Eyl 2023"
+                                    endDate="24 Oca 2024"
+                                    progress={75}
+                                    status="active"
+                                    description="Yeni kurumsal e-ticaret altyapısı ve Next.js UX/UI dönüşümü."
+                                />
+                                <ProjectCard
+                                    name="Q4 Black Friday Kampanyası"
+                                    type="Performans Pazarlama"
+                                    startDate="01 Eki 2023"
+                                    endDate="30 Kas 2023"
+                                    progress={100}
+                                    status="completed"
+                                    description="Instagram, Facebook ve Google Ads entegre kampanya yönetimi."
+                                />
+                            </div>
+                        </section>
+
+                        {/* Active Services Grid */}
+                        <section>
+                            <h2 className="text-lg font-bold flex items-center gap-2 mb-4">
+                                <span className="material-symbols-outlined text-primary">dashboard</span>
+                                Hizmet Merkezi
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <ServiceCard
+                                    title="Arama Motoru Opt. (SEO)"
+                                    icon="travel_explore"
+                                    href="/client-portal/seo"
+                                    isActive={true}
+                                    lastUpdate="Bugün 14:30"
+                                    metrics={[
+                                        { label: "Organik Trafik", value: "145.2K", trend: "up", trendValue: "+12%" },
+                                        { label: "Otorite Skoru", value: "48", trend: "up", trendValue: "+2 Puan" }
+                                    ]}
+                                />
+                                <ServiceCard
+                                    title="Performans Pazarlama (SEM)"
+                                    icon="ads_click"
+                                    href="/client-portal/sem"
+                                    isActive={true}
+                                    lastUpdate="Dün"
+                                    metrics={[
+                                        { label: "ROAS", value: "4.2x", trend: "up", trendValue: "1.1x" },
+                                        { label: "Aylık Bütçe", value: "₺120K", trend: "neutral" }
+                                    ]}
+                                />
+                                <ServiceCard
+                                    title="Sosyal Medya Yönetimi"
+                                    icon="thumb_up"
+                                    href="/client-portal/social"
+                                    isActive={false}
+                                    lastUpdate="2 Ay Önce"
+                                    metrics={[
+                                        { label: "Takipçi", value: "12K", trend: "down", trendValue: "-1%" },
+                                        { label: "Etkileşim", value: "3.4%", trend: "down", trendValue: "-0.5%" }
+                                    ]}
+                                />
+                                <ServiceCard
+                                    title="Tasarım & UI/UX"
+                                    icon="design_services"
+                                    href="/client-portal/design"
+                                    isActive={true}
+                                    lastUpdate="2 Saat Önce"
+                                    metrics={[
+                                        { label: "Aktif Revizyon", value: "2", trend: "neutral" },
+                                        { label: "Teslim Edilen", value: "45 Asset", trend: "up", trendValue: "+5" }
+                                    ]}
+                                />
+                            </div>
+                        </section>
+
+                    </div>
+
+                    {/* Sidebar Area (Right 1 column) */}
+                    <div className="lg:col-span-1 space-y-8">
+
+                        {/* Account Manager Card */}
+                        <section className="bg-white dark:bg-[#1a2432] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-0"></div>
+                            <h3 className="font-bold text-sm mb-4 relative z-10 flex items-center gap-2">
+                                <span className="material-symbols-outlined text-primary text-xl">support_agent</span>
+                                Müşteri Temsilciniz
                             </h3>
-<button className="px-4 py-2 bg-primary hover:bg-primary/90 text-white text-xs font-bold rounded-lg transition-all flex items-center gap-2">
-<span className="material-symbols-outlined text-sm">add</span>
-                                Yeni Görev
-                            </button>
-</div>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl overflow-hidden shadow-sm">
-<table className="w-full text-left border-collapse">
-<thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-[#dbe0e6]">
-<tr>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Görev / Müşteri</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Öncelik</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Son Tarih</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Durum</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">İşlem</th>
-</tr>
-</thead>
-<tbody className="divide-y divide-[#dbe0e6]">
-<tr>
-<td className="px-6 py-4">
-<div className="flex items-center gap-3">
-<input className="rounded text-primary focus:ring-primary border-gray-300" type="checkbox" />
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Meta Tag Optimizasyonu</p>
-<p className="text-[11px] text-[#617289]">TechNova E-Ticaret</p>
-</div>
-</div>
-</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400">YÜKSEK</span>
-</td>
-<td className="px-6 py-4 text-xs font-medium">Bugün</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400">İŞLEMDE</span>
-</td>
-<td className="px-6 py-4">
-<button className="text-primary text-[11px] font-bold hover:underline">Detay</button>
-</td>
-</tr>
-<tr>
-<td className="px-6 py-4">
-<div className="flex items-center gap-3">
-<input className="rounded text-primary focus:ring-primary border-gray-300" type="checkbox" />
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Backlink Profil Analizi</p>
-<p className="text-[11px] text-[#617289]">Luxe Otel Grubu</p>
-</div>
-</div>
-</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400">ORTA</span>
-</td>
-<td className="px-6 py-4 text-xs font-medium">Yarın</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400">BEKLEMEDE</span>
-</td>
-<td className="px-6 py-4">
-<button className="text-primary text-[11px] font-bold hover:underline">Detay</button>
-</td>
-</tr>
-<tr>
-<td className="px-6 py-4">
-<div className="flex items-center gap-3">
-<input className="rounded text-primary focus:ring-primary border-gray-300" type="checkbox" />
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white">İçerik Stratejisi Planlama</p>
-<p className="text-[11px] text-[#617289]">Global Lojistik A.Ş.</p>
-</div>
-</div>
-</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400">DÜŞÜK</span>
-</td>
-<td className="px-6 py-4 text-xs font-medium">15 Haz</td>
-<td className="px-6 py-4">
-<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400">BEKLEMEDE</span>
-</td>
-<td className="px-6 py-4">
-<button className="text-primary text-[11px] font-bold hover:underline">Detay</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div className="space-y-4">
-<h3 className="text-[#111418] dark:text-white text-xl font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-primary">monitoring</span>
-                            Müşteri Performans Durumları
-                        </h3>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl overflow-hidden shadow-sm">
-<table className="w-full text-left border-collapse">
-<thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-[#dbe0e6]">
-<tr>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Müşteri</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Organik Trafik Trendi</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Anahtar Kelime Artışı</th>
-<th className="px-6 py-3 text-xs font-bold text-[#617289] uppercase tracking-wider">Teknik Durum</th>
-</tr>
-</thead>
-<tbody className="divide-y divide-[#dbe0e6]">
-<tr>
-<td className="px-6 py-4">
-<p className="text-sm font-bold text-[#111418] dark:text-white">TechNova E-Ticaret</p>
-</td>
-<td className="px-6 py-4">
-<div className="flex items-center gap-2 text-green-600 font-bold text-xs">
-<span className="material-symbols-outlined text-sm">trending_up</span>
-                                                +18%
-                                            </div>
-</td>
-<td className="px-6 py-4 text-xs font-bold text-green-600">
-                                            +24 Kelime
-                                        </td>
-<td className="px-6 py-4">
-<div className="flex items-center gap-2">
-<div className="w-20 bg-gray-200 rounded-full h-1.5">
-<div className="bg-green-500 h-1.5 rounded-full" style={{ "width": "95%" }}></div>
-</div>
-<span className="text-xs font-bold">95/100</span>
-</div>
-</td>
-</tr>
-<tr>
-<td className="px-6 py-4">
-<p className="text-sm font-bold text-[#111418] dark:text-white">Luxe Otel Grubu</p>
-</td>
-<td className="px-6 py-4">
-<div className="flex items-center gap-2 text-red-600 font-bold text-xs">
-<span className="material-symbols-outlined text-sm">trending_down</span>
-                                                -5%
-                                            </div>
-</td>
-<td className="px-6 py-4 text-xs font-bold text-red-600">
-                                            -12 Kelime
-                                        </td>
-<td className="px-6 py-4">
-<div className="flex items-center gap-2">
-<div className="w-20 bg-gray-200 rounded-full h-1.5">
-<div className="bg-yellow-500 h-1.5 rounded-full" style={{ "width": "68%" }}></div>
-</div>
-<span className="text-xs font-bold">68/100</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div className="space-y-6">
-<div className="space-y-3">
-<h3 className="text-[#111418] dark:text-white text-lg font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-primary">timer</span>
-                            Aktif SEO Görevlerim
-                        </h3>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-4 space-y-3 shadow-sm">
-<div className="p-3 rounded-lg border border-primary/20 bg-primary/5 dark:bg-primary/10">
-<div className="flex items-start justify-between mb-2">
-<div>
-<p className="text-[10px] font-bold text-primary uppercase tracking-wide">TEKNOVA E-TİCARET</p>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Meta Tag Optimizasyonu</p>
-</div>
-<span className="text-lg font-black text-primary active-timer">00:42:15</span>
-</div>
-<div className="flex gap-2">
-<button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-[11px] font-bold rounded-lg transition-colors">
-<span className="material-symbols-outlined text-[16px] font-bold">stop</span> DURDUR
-                                    </button>
-</div>
-</div>
-<div className="p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
-<div className="flex items-start justify-between mb-2">
-<div>
-<p className="text-[10px] font-bold text-[#617289] uppercase tracking-wide">LUXE OTEL GRUBU</p>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Backlink Profil Analizi</p>
-</div>
-<span className="text-lg font-black text-[#617289] active-timer">00:00:00</span>
-</div>
-<div className="flex gap-2">
-<button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary hover:bg-primary/90 text-white text-[11px] font-bold rounded-lg transition-colors">
-<span className="material-symbols-outlined text-[16px] font-bold">play_arrow</span> BAŞLAT
-                                    </button>
-</div>
-</div>
-</div>
-</div>
-<div className="space-y-3">
-<h3 className="text-[#111418] dark:text-white text-lg font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-primary">assessment</span>
-                            SEO Rapor Durumları
-                        </h3>
-<div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-4 space-y-3 shadow-sm">
-<div className="flex items-center justify-between p-2 rounded-lg bg-red-50 dark:bg-red-900/10 border border-red-100">
-<div className="flex items-center gap-3">
-<span className="material-symbols-outlined text-red-600">event_busy</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Luxe Otel Grubu</p>
-<p className="text-[11px] text-red-600 font-semibold">1 Gün Gecikti</p>
-</div>
-</div>
-<button className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold rounded-lg transition-colors">HAZIRLA</button>
-</div>
-<div className="flex items-center justify-between p-2 rounded-lg bg-blue-50 dark:bg-blue-900/10 border border-blue-100">
-<div className="flex items-center gap-3">
-<span className="material-symbols-outlined text-blue-600">schedule</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white">Global Lojistik</p>
-<p className="text-[11px] text-blue-600 font-semibold">3 Gün Kaldı</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className="space-y-3">
-<h3 className="text-[#111418] dark:text-white text-lg font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-red-500">priority_high</span>
-                            Kritik SEO Uyarıları
-                        </h3>
-<div className="space-y-3">
-<div className="bg-red-50 dark:bg-red-900/10 border border-red-200 rounded-xl p-4">
-<div className="flex gap-3">
-<span className="material-symbols-outlined text-red-600 text-xl">error</span>
-<div>
-<p className="text-xs font-bold text-red-800 dark:text-red-400">404 Hatası Artışı</p>
-<p className="text-[11px] text-red-700 dark:text-red-300">TechNova sitesinde 404 hataları %30 arttı.</p>
-</div>
-</div>
-</div>
-<div className="bg-orange-50 dark:bg-orange-900/10 border border-orange-200 rounded-xl p-4">
-<div className="flex gap-3">
-<span className="material-symbols-outlined text-orange-600 text-xl">warning</span>
-<div>
-<p className="text-xs font-bold text-orange-800 dark:text-orange-400">Sıralama Kaybı</p>
-<p className="text-[11px] text-orange-700 dark:text-orange-300">Luxe Otel Grubu 'butik otel' kelimesinde 5 sıra geriledi.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className="pt-4">
-<details className="group bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl shadow-sm overflow-hidden" open>
-<summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border-b border-[#dbe0e6]">
-<h3 className="text-[#111418] dark:text-white text-lg font-bold flex items-center gap-2">
-<span className="material-symbols-outlined text-green-500">check_circle</span>
-                            Tamamlanan Görevler (Son 5 İş)
-                        </h3>
-<span className="material-symbols-outlined transition-transform group-open:rotate-180 text-[#617289]">expand_more</span>
-</summary>
-<div className="divide-y divide-[#dbe0e6]">
-<div className="px-6 py-4 flex items-center justify-between bg-gray-50/30 dark:bg-gray-800/10">
-<div className="flex items-center gap-4">
-<span className="material-symbols-outlined text-green-500 text-xl">task_alt</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white line-through opacity-60">Anahtar Kelime Araştırması Tamamlandı</p>
-<p className="text-[11px] text-[#617289]">Global Lojistik A.Ş. • 12 Haz 2024</p>
-</div>
-</div>
-<span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">TAMAMLANDI</span>
-</div>
-<div className="px-6 py-4 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<span className="material-symbols-outlined text-green-500 text-xl">task_alt</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white line-through opacity-60">Sitemap.xml Güncellemesi</p>
-<p className="text-[11px] text-[#617289]">TechNova E-Ticaret • 11 Haz 2024</p>
-</div>
-</div>
-<span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">TAMAMLANDI</span>
-</div>
-<div className="px-6 py-4 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<span className="material-symbols-outlined text-green-500 text-xl">task_alt</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white line-through opacity-60">Görsel Alt Text Optimizasyonu</p>
-<p className="text-[11px] text-[#617289]">Luxe Otel Grubu • 10 Haz 2024</p>
-</div>
-</div>
-<span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">TAMAMLANDI</span>
-</div>
-<div className="px-6 py-4 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<span className="material-symbols-outlined text-green-500 text-xl">task_alt</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white line-through opacity-60">Robots.txt Düzenlemesi</p>
-<p className="text-[11px] text-[#617289]">Global Lojistik A.Ş. • 09 Haz 2024</p>
-</div>
-</div>
-<span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">TAMAMLANDI</span>
-</div>
-<div className="px-6 py-4 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<span className="material-symbols-outlined text-green-500 text-xl">task_alt</span>
-<div>
-<p className="text-sm font-bold text-[#111418] dark:text-white line-through opacity-60">404 Yönlendirme Kontrolü</p>
-<p className="text-[11px] text-[#617289]">TechNova E-Ticaret • 08 Haz 2024</p>
-</div>
-</div>
-<span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">TAMAMLANDI</span>
-</div>
-</div>
-</details>
-</div>
-</div>
+                            <div className="flex items-center gap-4 mb-5 relative z-10">
+                                <img src={accountManager.avatar} alt="Account Manager" className="w-14 h-14 rounded-full border-2 border-white shadow-sm" />
+                                <div>
+                                    <h4 className="font-bold text-gray-900 dark:text-gray-100">{accountManager.name}</h4>
+                                    <p className="text-xs text-primary font-medium">{accountManager.title}</p>
+                                </div>
+                            </div>
+                            <div className="space-y-3 relative z-10">
+                                <a href={`mailto:${accountManager.email}`} className="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-400 hover:text-primary transition-colors p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <span className="material-symbols-outlined text-lg">mail</span>
+                                    {accountManager.email}
+                                </a>
+                                <a href={`tel:${accountManager.phone}`} className="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-400 hover:text-primary transition-colors p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <span className="material-symbols-outlined text-lg">call</span>
+                                    {accountManager.phone}
+                                </a>
+                                <Button className="w-full mt-2 h-9 text-xs flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-sm">calendar_month</span> Toplantı Planla
+                                </Button>
+                            </div>
+                        </section>
 
-    </div>
-  );
+                        {/* Recent Reports Section */}
+                        <section className="bg-white dark:bg-[#1a2432] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-6">
+                            <div className="flex justify-between items-center mb-5">
+                                <h3 className="font-bold text-sm flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-primary text-xl">description</span>
+                                    Son Raporlar
+                                </h3>
+                            </div>
+                            <div className="space-y-3">
+                                <div className="group flex items-center justify-between p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 hover:border-primary/30 transition-colors cursor-pointer">
+                                    <div className="flex items-center gap-3">
+                                        <div className="bg-red-100 text-red-600 p-1.5 rounded-md">
+                                            <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-xs font-bold">10/2023 SEO Raporu</h4>
+                                            <p className="text-[10px] text-gray-500">2.4 MB • 01 Nısan 2023</p>
+                                        </div>
+                                    </div>
+                                    <span className="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors text-sm">download</span>
+                                </div>
+
+                                <div className="group flex items-center justify-between p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 hover:border-primary/30 transition-colors cursor-pointer">
+                                    <div className="flex items-center gap-3">
+                                        <div className="bg-blue-100 text-blue-600 p-1.5 rounded-md">
+                                            <span className="material-symbols-outlined text-sm">grid_on</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-xs font-bold">SEM Q3 Analizi</h4>
+                                            <p className="text-[10px] text-gray-500">1.1 MB • 15 Eyl 2023</p>
+                                        </div>
+                                    </div>
+                                    <span className="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors text-sm">download</span>
+                                </div>
+                            </div>
+                            <Button variant="outline" className="w-full mt-4 h-9 text-xs text-gray-600">
+                                Tüm Raporları Arşivde Gör
+                            </Button>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
