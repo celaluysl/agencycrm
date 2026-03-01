@@ -62,8 +62,9 @@ export function calculateClientHealthScore({
 /**
  * Determines the category of the client health based on the calculated score.
  */
-export function getClientHealthCategory(score: number): "VIP" | "Riskli" | "Yeni Kazanılan" | "Normal" {
+export function getClientHealthCategory(score: number, serviceDurationMonths: number = 12): "VIP" | "Riskli" | "Yeni Kazanılan" | "Normal" {
     if (score >= 85) return "VIP";
     if (score <= 45) return "Riskli";
+    if (serviceDurationMonths <= 3) return "Yeni Kazanılan";
     return "Normal";
 }
