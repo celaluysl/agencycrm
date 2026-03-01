@@ -5,8 +5,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+    <div className="flex-1 flex flex-col flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+      
+<div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
 <div className="flex flex-col gap-2">
 <h1 className="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">SEO Müşterilerim</h1>
 <p className="text-[#617289] dark:text-gray-400 text-base font-normal">SEO Departmanı için Müşteri Portföy Yönetim Paneli.</p>

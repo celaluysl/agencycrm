@@ -6,14 +6,19 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
     { name: "Genel Bakış", href: "/", icon: "dashboard" },
+    { name: "Ajans Yönetimi", href: "/admin/dashboard", icon: "admin_panel_settings" },
     { name: "Maaş & Personel", href: "/admin/payroll", icon: "payments" },
-    { name: "CRM Leads (Kanban)", href: "/crm/leads", icon: "view_kanban" },
+    { name: "Müşteri Dosyası", href: "/admin/accounts/1", icon: "person_search" },
+    { name: "CRM Leads", href: "/crm/leads", icon: "view_kanban" },
     { name: "SEM Portföy", href: "/sem/portfolio", icon: "campaign" },
+    { name: "SEM Projeler", href: "/sem/projects/1", icon: "checklist" },
     { name: "SEO Sıra Takibi", href: "/seo/rank-tracking", icon: "query_stats" },
-    { name: "Sosyal Medya Onay", href: "/social-media/approval-center", icon: "thumb_up" },
+    { name: "SEO Teknik Rapor", href: "/seo/technical-audit/1", icon: "summarize" },
+    { name: "SEO Teknik Analiz", href: "/seo/technical-analysis", icon: "analytics" },
+    { name: "Sosyal Medya Onay", href: "/social-media/approvals", icon: "thumb_up" },
     { name: "Kişisel Performans", href: "/performance", icon: "monitoring" },
     { name: "Müşteri Portalı", href: "/client-portal", icon: "person" },
-    { name: "Özel Müşteri Hesabı (Örnek)", href: "/admin/accounts/1", icon: "manage_accounts" },
+    { name: "Müşteri Onaylar", href: "/client-portal/approvals", icon: "fact_check" },
 ];
 
 export function Sidebar() {

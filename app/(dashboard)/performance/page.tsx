@@ -5,8 +5,10 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="flex-1 flex flex-col flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+      
+{/*  PageHeading  */}
+<div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
 <div className="flex flex-col gap-2">
 <h1 className="text-3xl font-black tracking-tight text-[#111418] dark:text-white">Kişisel Performans Paneli</h1>
 <p className="text-[#617289] dark:text-gray-400">Hoş geldin Caner! Bu ayki verimlilik skorun geçen aya göre <span className="text-green-600 font-bold">%12 daha yüksek.</span></p>

@@ -5,8 +5,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col flex-1 flex flex-col min-w-0 overflow-hidden">
       
+
 <div className="flex-1 overflow-y-auto custom-scrollbar p-8">
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 <div className="bg-white dark:bg-[#1f2937] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm">

@@ -5,8 +5,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <aside className="w-[320px] flex flex-col gap-6 shrink-0">
+    <div className="flex-1 flex flex-col max-w-[1440px] mx-auto flex gap-6 p-6">
+      
+<aside className="w-[320px] flex flex-col gap-6 shrink-0">
 <div className="bg-white dark:bg-[#1e293b] rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
 <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 mb-4 border-2 border-primary/10 shadow-inner" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQv0_Z67oPJvlr0XJBTB-0nrsdUYkDZqoM0Cs4FbJbNABKregQ7yP6-BLsB6OgexgGHfRlIYpke1yOIBBoZ3VwPJhHJbJdSB4eAmOIBvjF2iFxUl_Ag_nucCV75iRWKOiSMK4WZ2rzrTctQzH1-zh1GnU9dcQBLh5B46Hbm_-YrykanZo4C5QscvdjJF610-SW_araLRAOqbfQGiQe4r1nRZ-EFxbekG1F8cbSEYUuRXA1BMoElEpWrLmGqKPps5tDKJClHdQmWbaH')" }}></div>
 <h1 className="text-xl font-bold dark:text-white">Acme Corporation</h1>

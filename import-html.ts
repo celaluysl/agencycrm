@@ -3,16 +3,32 @@ import path from 'path';
 import * as cheerio from 'cheerio';
 
 const fileMap = {
+    // Admin & Main Dashboards
+    'e76159700fb246778cd690c5de4a9e13_Admin_Agency_Dashboard.html': 'app/(dashboard)/admin/dashboard/page.tsx',
     '86f2661c37764fe1beead2c45d1e4ffc_Client_Detail_Master_Page.html': 'app/(dashboard)/admin/accounts/[id]/page.tsx',
-    '0ab212f9aa314189855fde51abf893ae_SEM_Müşteri_Portföy_Yönetimi.html': 'app/(dashboard)/sem/portfolio/page.tsx',
-    'e3b92cb3b9784686af5faa9280ebd611_Task_Detail_&_SOP_Modal.html': 'components/tasks/task-modal.tsx',
-    '1da6c6e6397c49c8bc4bb6cb9cc4e12f_Client_Approval_Center.html': 'app/(dashboard)/social-media/approval-center/page.tsx',
-    '380cace07ac547fa88843017823fc990_SEO_Rank_Tracking_Center.html': 'app/(dashboard)/seo/rank-tracking/page.tsx',
-    '44c6594fb1ea4fb5aec530076ba7af35_Kişisel_Performans_ve_Verimlilik_Paneli.html': 'app/(dashboard)/performance/page.tsx',
+
+    // CRM
     '7356768a5e52481db26835175e414095_CRM_Leads_Kanban_Board.html': 'app/(dashboard)/crm/leads/page.tsx',
+
+    // SEM
+    '0ab212f9aa314189855fde51abf893ae_SEM_Müşteri_Portföy_Yönetimi.html': 'app/(dashboard)/sem/portfolio/page.tsx',
+    'fb5280147b0e46e3915d7853457f91f0_SEM_Proje_ve_Görev_Detayı_(Kanban).html': 'app/(dashboard)/sem/projects/[id]/page.tsx',
+
+    // SEO
+    '380cace07ac547fa88843017823fc990_SEO_Rank_Tracking_Center.html': 'app/(dashboard)/seo/rank-tracking/page.tsx',
     '727d3bb9ce654b5b8c1a54034b339f4b_Kapsamlı_SEO_Teknik_Denetim_Raporu.html': 'app/(dashboard)/seo/technical-audit/[clientId]/page.tsx',
+    'b27da638679b4f8f8f28077bbf71bcc1_Teknik_SEO_Analiz_ve_Sorgu_Paneli.html': 'app/(dashboard)/seo/technical-analysis/page.tsx',
+
+    // Social Media
+    '2b5e4f6f8c89489290d6323fa200f504_Sosyal_Medya_Onay_Merkezi.html': 'app/(dashboard)/social-media/approvals/page.tsx',
+
+    // Performance & Tasks
+    '44c6594fb1ea4fb5aec530076ba7af35_Kişisel_Performans_ve_Verimlilik_Paneli.html': 'app/(dashboard)/performance/page.tsx',
+    'e3b92cb3b9784686af5faa9280ebd611_Task_Detail_&_SOP_Modal.html': 'components/tasks/task-modal.tsx',
+
+    // Client Portal
     'f68001217e014f96baf5585f5841a227_Client_Portal_Dashboard.html': 'app/(dashboard)/client-portal/page.tsx',
-    'fb5280147b0e46e3915d7853457f91f0_SEM_Proje_ve_Görev_Detayı_(Kanban).html': 'app/(dashboard)/sem/projects/[id]/page.tsx'
+    '1da6c6e6397c49c8bc4bb6cb9cc4e12f_Client_Approval_Center.html': 'app/(dashboard)/client-portal/approvals/page.tsx',
 };
 
 function htmlToJsx(html: string): string {
@@ -82,15 +98,18 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
     const htmlContent = fs.readFileSync(filePath, 'utf-8');
     const $ = cheerio.load(htmlContent, { xmlMode: false });
 
-    let mainContent = $('main').html();
-    if (!mainContent) {
-        mainContent = $('body').html();
+    let mainEl = $('main');
+    if (!mainEl.length) {
+        mainEl = $('body');
     }
 
-    if (mainContent) {
-        const $main = cheerio.load(mainContent);
-        $main('header').first().remove();
-        mainContent = $main('body').html();
+    if (mainEl.length) {
+        mainEl.find('header').first().remove();
+        let mainContent = mainEl.html();
+        let mainClass = mainEl.attr('class') || '';
+
+        // Remove bg and text colors from main class so it doesn't conflict with layout
+        mainClass = mainClass.replace(/bg-[a-zA-Z0-9-\[\]]+/g, '').replace(/text-[a-zA-Z0-9-\[\]]+/g, '').replace(/dark:[a-zA-Z0-9-\[\]]+/g, '');
 
         let jsxContent = htmlToJsx(mainContent || '');
 
@@ -105,6 +124,8 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
         const componentName = isComponent ? path.basename(targetPath, '.tsx').split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('') : 'Page';
         const exportStatement = isComponent ? `export function ${componentName}() {` : `export default function Page() {`;
 
+        const wrapperClass = `flex-1 flex flex-col ${mainClass}`.trim().replace(/\s+/g, ' ');
+
         const finalCode = `
 "use client";
 
@@ -112,7 +133,7 @@ import React from "react";
 
 ${exportStatement}
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="${wrapperClass}">
       ${jsxContent}
     </div>
   );

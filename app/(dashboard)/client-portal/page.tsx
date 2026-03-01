@@ -5,8 +5,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="max-w-6xl mx-auto p-8 space-y-8 pb-20">
+    <div className="flex-1 flex flex-col flex-1 overflow-y-auto">
+      
+<div className="max-w-6xl mx-auto p-8 space-y-8 pb-20">
 
 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 <div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">

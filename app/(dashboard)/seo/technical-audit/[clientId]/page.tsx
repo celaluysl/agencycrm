@@ -5,8 +5,10 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
+    <div className="flex-1 flex flex-col max-w-[1200px] mx-auto px-4 py-8">
+      
+{/*  Breadcrumbs  */}
+<div className="flex items-center gap-2 mb-6">
 <a className="text-[#617289] text-sm font-medium" href="#">Dashboard</a>
 <span className="material-symbols-outlined text-[#617289] text-xs" >chevron_right</span>
 <a className="text-[#617289] text-sm font-medium" href="#">Raporlar</a>

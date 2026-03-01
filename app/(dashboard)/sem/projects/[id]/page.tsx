@@ -5,8 +5,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="flex gap-6 h-full overflow-x-auto pb-10 scrollbar-hide">
+    <div className="flex-1 flex flex-col h-full px-6 py-6">
+      
+<div className="flex gap-6 h-full overflow-x-auto pb-10 scrollbar-hide">
 <div className="flex-none w-[350px] flex flex-col kanban-column">
 <div className="flex items-center justify-between mb-4 px-2">
 <div className="flex items-center gap-2">

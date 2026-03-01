@@ -5,8 +5,9 @@ import React from "react";
 
 export function TaskModal() {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">
+    <div className="flex-1 flex flex-col flex-1 flex items-center justify-center p-6 overflow-hidden">
+      
+<div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">
 <div className="px-6 py-4 border-b border-[#e5e7eb] dark:border-[#2d3748] flex items-center justify-between shrink-0">
 <div className="flex items-center gap-3">
 <span className="material-symbols-outlined text-primary">search_insights</span>
