@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+    <div className="flex-1 flex flex-col max-w-7xl mx-auto px-6 py-8">
       
 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
 <div className="flex flex-col gap-2">

@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col max-w-[1440px] mx-auto flex gap-6 p-6 h-[calc(100vh-100px)]">
+    <div className="flex-1 flex flex-col max-w-[1440px] mx-auto gap-6 p-6 h-[calc(100vh-100px)]">
       
 <aside className="w-[380px] flex flex-col gap-4 shrink-0 bg-white dark:bg-[#1e293b] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-gray-800 overflow-hidden">
 <div className="p-4 border-b border-[#f0f2f4] dark:border-gray-700 flex justify-between items-center">

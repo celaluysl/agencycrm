@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col max-w-[1600px] mx-auto flex gap-6 p-6">
+    <div className="flex-1 flex flex-col max-w-[1600px] mx-auto gap-6 p-6">
       
 <aside className="w-80 flex flex-col gap-6 shrink-0">
 <div className="bg-white dark:bg-[#1e293b] rounded-xl p-5 shadow-sm border border-[#f0f2f4] dark:border-gray-800">

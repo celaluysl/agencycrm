@@ -137,6 +137,8 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
 
         // Remove bg and text colors from main class so it doesn't conflict with layout
         mainClass = mainClass.replace(/bg-[a-zA-Z0-9-\[\]]+/g, '').replace(/text-[a-zA-Z0-9-\[\]]+/g, '').replace(/dark:[a-zA-Z0-9-\[\]]+/g, '');
+        // Remove structural classes from main to avoid duplicating Dashboard layout flex/overflow logic
+        mainClass = mainClass.replace(/(?:^|\s)(flex-1|flex-col|flex|overflow-y-auto|overflow-x-hidden|overflow-hidden|h-screen|w-full|custom-scrollbar)(?=\s|$)/g, ' ');
 
         let jsxContent = htmlToJsx(mainContent || '');
 

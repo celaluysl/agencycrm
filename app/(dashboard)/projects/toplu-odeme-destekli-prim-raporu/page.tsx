@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col flex-1 flex flex-col overflow-y-auto custom-scrollbar relative">
+    <div className="flex-1 flex flex-col relative">
       
 
 <div className="p-8 space-y-6 pb-24">

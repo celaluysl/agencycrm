@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="flex-1 flex flex-col flex-1 flex flex-col min-w-0 overflow-hidden">
+    <div className="flex-1 flex flex-col min-w-0">
       
 
 <div className="px-6 py-4 bg-white dark:bg-[#111827] border-b border-[#dbe0e6] dark:border-gray-800 flex flex-wrap items-center justify-between gap-4">
