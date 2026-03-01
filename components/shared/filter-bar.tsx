@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 
 export interface FilterOption {
@@ -13,6 +13,7 @@ export interface FilterOption {
 }
 
 export interface FilterBarProps {
+    searchValue?: string;
     onSearchChange?: (value: string) => void;
     activeFilters?: FilterOption[];
     onRemoveFilter?: (id: string) => void;
@@ -22,6 +23,7 @@ export interface FilterBarProps {
 }
 
 export function FilterBar({
+    searchValue,
     onSearchChange,
     activeFilters = [],
     onRemoveFilter,
@@ -29,12 +31,24 @@ export function FilterBar({
     placeholder = "Ara...",
     children,
 }: FilterBarProps) {
-    const [searchValue, setSearchValue] = useState("");
+    const [internalSearch, setInternalSearch] = useState(searchValue || "");
+
+    useEffect(() => {
+        if (searchValue !== undefined) {
+            setInternalSearch(searchValue);
+        }
+    }, [searchValue]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
-        setSearchValue(val);
+        if (searchValue === undefined) setInternalSearch(val);
         if (onSearchChange) onSearchChange(val);
+    };
+
+    const handleClearAll = () => {
+        if (searchValue === undefined) setInternalSearch("");
+        if (onSearchChange) onSearchChange("");
+        if (onClearAll) onClearAll();
     };
 
     return (
@@ -43,7 +57,7 @@ export function FilterBar({
                 <div className="relative flex-1 min-w-[250px] max-w-sm">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                     <Input
-                        value={searchValue}
+                        value={searchValue !== undefined ? searchValue : internalSearch}
                         onChange={handleSearch}
                         placeholder={placeholder}
                         className="pl-9 bg-white dark:bg-[#1a2432] dark:border-gray-800"
@@ -83,7 +97,7 @@ export function FilterBar({
                         <Button
                             variant="ghost"
                             size="sm"
-                            onClick={onClearAll}
+                            onClick={handleClearAll}
                             className="h-7 px-2 text-xs text-red-500 hover:text-red-600 dark:hover:text-red-400"
                         >
                             Tümünü Temizle

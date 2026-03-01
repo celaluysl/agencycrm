@@ -43,7 +43,7 @@ interface StatusBadgeProps
 
 export function StatusBadge({
     className,
-    status,
+    status = "default",
     size,
     dot = true,
     label,

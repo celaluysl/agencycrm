@@ -1,0 +1,140 @@
+[
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869825777",
+    "pull_request_review_id": 3873399743,
+    "id": 2869825777,
+    "node_id": "PRRC_kwDORbYZPM6rDhDx",
+    "diff_hunk": "@@ -0,0 +1,73 @@\n+import { Badge } from \"@/components/ui/badge\";\n+import { cn } from \"@/lib/utils\";\n+import { VariantProps, cva } from \"class-variance-authority\";\n+\n+const badgeVariants = cva(\n+    \"inline-flex items-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n+    {\n+        variants: {\n+            status: {\n+                success:\n+                    \"bg-green-100 text-green-700 hover:bg-green-100/80 dark:bg-green-500/10 dark:text-green-400\",\n+                warning:\n+                    \"bg-orange-100 text-orange-700 hover:bg-orange-100/80 dark:bg-orange-500/10 dark:text-orange-400\",\n+                destructive:\n+                    \"bg-red-100 text-red-700 hover:bg-red-100/80 dark:bg-red-500/10 dark:text-red-400\",\n+                info: \"bg-blue-100 text-blue-700 hover:bg-blue-100/80 dark:bg-blue-500/10 dark:text-blue-400\",\n+                default:\n+                    \"bg-gray-100 text-gray-700 hover:bg-gray-100/80 dark:bg-gray-800 dark:text-gray-300\",\n+            },\n+            size: {\n+                sm: \"px-2 py-0.5 text-xs\",\n+                md: \"px-2.5 py-0.5 text-sm\",\n+                lg: \"px-3 py-1 text-base\",\n+            },\n+            dot: {\n+                true: \"pl-1.5\",\n+                false: \"\",\n+            },\n+        },\n+        defaultVariants: {\n+            status: \"default\",\n+            size: \"sm\",\n+            dot: false,\n+        },\n+    }\n+);\n+\n+interface StatusBadgeProps\n+    extends React.HTMLAttributes<HTMLDivElement>,\n+    VariantProps<typeof badgeVariants> {\n+    label: string;\n+}\n+\n+export function StatusBadge({\n+    className,\n+    status,\n+    size,\n+    dot = true,\n+    label,\n+    ...props",
+    "path": "components/shared/status-badge.tsx",
+    "commit_id": "06ac37255dcbc1f37633e7d9e22d83a114e964c4",
+    "original_commit_id": "06ac37255dcbc1f37633e7d9e22d83a114e964c4",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"BUG_pr-review-job-dada049c6ae74c3b85a0bec53e06c76f_0001\", \"file_path\": \"components/shared/status-badge.tsx\", \"start_line\": 44, \"end_line\": 50, \"side\": \"RIGHT\"} -->\n\n🟡 **StatusBadge dot has no background color when `status` prop is omitted**\n\nWhen the `status` prop is not explicitly passed to `StatusBadge`, it remains `undefined` (from `VariantProps`). The CVA `defaultVariants` correctly applies `\"default\"` styling to the outer container, but the dot color logic at lines 61–65 compares the raw `status` variable (which is `undefined`) against string literals like `\"default\"`. None of the conditions match, so the dot `<span>` renders with no `bg-*` class — producing an invisible circle.\n\n<details>\n<summary>Root Cause and Impact</summary>\n\nCVA's `defaultVariants` only affect the class string output of `badgeVariants()` — they do not change the actual value of the `status` variable in JavaScript. So when a caller writes `<StatusBadge label=\"Active\" />`, the `status` destructured prop is `undefined`, not `\"default\"`.\n\nThe dot color logic:\n```tsx\nstatus === \"success\" && \"bg-green-500\",\nstatus === \"warning\" && \"bg-orange-500\",\nstatus === \"destructive\" && \"bg-red-500\",\nstatus === \"info\" && \"bg-blue-500\",\nstatus === \"default\" && \"bg-gray-500\"\n```\nAll evaluate to `false` because `undefined !== \"default\"`. The dot renders as an empty 1.5×1.5 `<span>` with no background color.\n\n**Impact:** Any `StatusBadge` usage that omits the `status` prop (relying on the default) will show an invisible dot indicator, which is visually broken.\n\n</details>\n\n```suggestion\nexport function StatusBadge({\n    className,\n    status = \"default\",\n    size,\n    dot = true,\n    label,\n    ...props\n}: StatusBadgeProps) {\n```\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/5\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:26:58Z",
+    "updated_at": "2026-03-01T21:26:59Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/5#discussion_r2869825777",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/5",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869825777"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/5#discussion_r2869825777"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/5"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869825777/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 44,
+    "original_start_line": 44,
+    "start_side": "RIGHT",
+    "line": 50,
+    "original_line": 50,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 50,
+    "position": 50,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869826216",
+    "pull_request_review_id": 3873400053,
+    "id": 2869826216,
+    "node_id": "PRRC_kwDORbYZPM6rDhKo",
+    "diff_hunk": "@@ -0,0 +1,96 @@\n+\"use client\";\n+\n+import { Input } from \"@/components/ui/input\";\n+import { Button } from \"@/components/ui/button\";\n+import { Search, X } from \"lucide-react\";\n+import { useState } from \"react\";\n+import { Badge } from \"@/components/ui/badge\";\n+\n+export interface FilterOption {\n+    id: string;\n+    label: string;\n+    value: string;\n+}\n+\n+export interface FilterBarProps {\n+    onSearchChange?: (value: string) => void;\n+    activeFilters?: FilterOption[];\n+    onRemoveFilter?: (id: string) => void;\n+    onClearAll?: () => void;\n+    placeholder?: string;\n+    children?: React.ReactNode;\n+}\n+\n+export function FilterBar({\n+    onSearchChange,\n+    activeFilters = [],\n+    onRemoveFilter,\n+    onClearAll,\n+    placeholder = \"Ara...\",\n+    children,\n+}: FilterBarProps) {\n+    const [searchValue, setSearchValue] = useState(\"\");\n+\n+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {\n+        const val = e.target.value;\n+        setSearchValue(val);\n+        if (onSearchChange) onSearchChange(val);",
+    "path": "components/shared/filter-bar.tsx",
+    "commit_id": "06ac37255dcbc1f37633e7d9e22d83a114e964c4",
+    "original_commit_id": "06ac37255dcbc1f37633e7d9e22d83a114e964c4",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-dada049c6ae74c3b85a0bec53e06c76f_0004\", \"file_path\": \"components/shared/filter-bar.tsx\", \"start_line\": 32, \"end_line\": 37, \"side\": \"RIGHT\"} -->\n\n🚩 **FilterBar manages its own search state, potentially conflicting with parent control**\n\nThe `FilterBar` at `components/shared/filter-bar.tsx:32` manages `searchValue` via internal `useState`, while also calling `onSearchChange` to notify the parent. This makes the search input an uncontrolled-to-parent component — the parent cannot reset or externally set the search value (e.g., when clearing all filters via `onClearAll`). If a parent calls `onClearAll` and expects the search to also reset, it won't — the internal state at line 32 is never cleared externally. This is a design limitation rather than a bug, but worth noting if `onClearAll` is expected to reset search too.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/5\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:27:19Z",
+    "updated_at": "2026-03-01T21:27:20Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/5#discussion_r2869826216",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/5",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869826216"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/5#discussion_r2869826216"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/5"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869826216/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 32,
+    "original_start_line": 32,
+    "start_side": "RIGHT",
+    "line": 37,
+    "original_line": 37,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 37,
+    "position": 37,
+    "subject_type": "line"
+  }
+]
