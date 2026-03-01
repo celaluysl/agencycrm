@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body><div className="layout-content-container flex flex-col w-full max-w-[1100px] px-6">
+      <div className="layout-content-container flex flex-col w-full max-w-[1100px] px-6">
 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
 <div className="flex min-w-72 flex-col gap-1">
 <h1 className="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Müşteri Onay Merkezi</h1>
@@ -38,7 +38,7 @@ export default function Page() {
 <div className="flex flex-col gap-6">
 <div className="p-0 @container">
 <div className="flex flex-col lg:flex-row items-stretch overflow-hidden rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm bg-white dark:bg-[#1a232e]">
-<div className="w-full lg:w-1/3 min-h-[240px] bg-center bg-no-repeat bg-cover relative group" data-alt="Instagram Reel tasarım önizleme" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqa_G0SPCSYL8Ep2lYO2cHBXrmaR7EWmT9ravrXrrufp14_an3WsAarFSgaa_9hOMbuStYL_iwwsJBHu8U2VkuPmz0zNv9c1OAVJRGJc1xQW-iki4eSs8bXOqYyA4ct0uEp3GDKvRDrS35i_XsgAQ2URET8CItuZzmPQUBkZ0TwbYPUefkzMJuN2dtVCVtzmXnOTganojAtgjUvUjWta7CuQmGWGAKeG3JGrUTqKaPX3PNlGD3ivfR-MNJHlI9FbnCw35QNPFPhqPQ")' }}>
+<div className="w-full lg:w-1/3 min-h-[240px] bg-center bg-no-repeat bg-cover relative group" data-alt="Instagram Reel tasarım önizleme" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqa_G0SPCSYL8Ep2lYO2cHBXrmaR7EWmT9ravrXrrufp14_an3WsAarFSgaa_9hOMbuStYL_iwwsJBHu8U2VkuPmz0zNv9c1OAVJRGJc1xQW-iki4eSs8bXOqYyA4ct0uEp3GDKvRDrS35i_XsgAQ2URET8CItuZzmPQUBkZ0TwbYPUefkzMJuN2dtVCVtzmXnOTganojAtgjUvUjWta7CuQmGWGAKeG3JGrUTqKaPX3PNlGD3ivfR-MNJHlI9FbnCw35QNPFPhqPQ')" }}>
 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer">
 <div className="bg-white/90 p-2 rounded-full text-black">
 <span className="material-symbols-outlined">zoom_in</span>
@@ -130,7 +130,7 @@ export default function Page() {
 </div>
 <div className="p-0 @container">
 <div className="flex flex-col lg:flex-row items-stretch overflow-hidden rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm bg-white dark:bg-[#1a232e]">
-<div className="w-full lg:w-1/3 min-h-[240px] bg-center bg-no-repeat bg-cover relative group" data-alt="Facebook Reklam Tasarımı önizleme" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDppwPRzrKhB0Ls7PPYJ3vmPK8_gZby0MD_sZiPD7RuldaH4vxiWftXDo7CX2Z53sNtK2TWw2D2_DkShZPZCc2XAcePdh5aEQdea5D6oqbYmNxZ3opIhEaMu0wMaQTQazcuPrEQ8HYe2sT_Ks3NpO1lqvjtO2GyaoEmvaqpYOeKT8U72JgajYqMCzLjjdIqEAibBCWQBxe3jbGuxj-vSgMF8VSpzrM07p2ZK10TDxkg5WNsOHwN6UxhIYVGQspdglG660SiWkh0oiEC")' }}>
+<div className="w-full lg:w-1/3 min-h-[240px] bg-center bg-no-repeat bg-cover relative group" data-alt="Facebook Reklam Tasarımı önizleme" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDppwPRzrKhB0Ls7PPYJ3vmPK8_gZby0MD_sZiPD7RuldaH4vxiWftXDo7CX2Z53sNtK2TWw2D2_DkShZPZCc2XAcePdh5aEQdea5D6oqbYmNxZ3opIhEaMu0wMaQTQazcuPrEQ8HYe2sT_Ks3NpO1lqvjtO2GyaoEmvaqpYOeKT8U72JgajYqMCzLjjdIqEAibBCWQBxe3jbGuxj-vSgMF8VSpzrM07p2ZK10TDxkg5WNsOHwN6UxhIYVGQspdglG660SiWkh0oiEC')" }}>
 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer">
 <div className="bg-white/90 p-2 rounded-full text-black">
 <span className="material-symbols-outlined">zoom_in</span>
@@ -172,7 +172,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

@@ -6,9 +6,9 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body><aside className="w-[320px] flex flex-col gap-6 shrink-0">
+      <aside className="w-[320px] flex flex-col gap-6 shrink-0">
 <div className="bg-white dark:bg-[#1e293b] rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
-<div className="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 mb-4 border-2 border-primary/10 shadow-inner" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQv0_Z67oPJvlr0XJBTB-0nrsdUYkDZqoM0Cs4FbJbNABKregQ7yP6-BLsB6OgexgGHfRlIYpke1yOIBBoZ3VwPJhHJbJdSB4eAmOIBvjF2iFxUl_Ag_nucCV75iRWKOiSMK4WZ2rzrTctQzH1-zh1GnU9dcQBLh5B46Hbm_-YrykanZo4C5QscvdjJF610-SW_araLRAOqbfQGiQe4r1nRZ-EFxbekG1F8cbSEYUuRXA1BMoElEpWrLmGqKPps5tDKJClHdQmWbaH")' }}></div>
+<div className="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 mb-4 border-2 border-primary/10 shadow-inner" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQv0_Z67oPJvlr0XJBTB-0nrsdUYkDZqoM0Cs4FbJbNABKregQ7yP6-BLsB6OgexgGHfRlIYpke1yOIBBoZ3VwPJhHJbJdSB4eAmOIBvjF2iFxUl_Ag_nucCV75iRWKOiSMK4WZ2rzrTctQzH1-zh1GnU9dcQBLh5B46Hbm_-YrykanZo4C5QscvdjJF610-SW_araLRAOqbfQGiQe4r1nRZ-EFxbekG1F8cbSEYUuRXA1BMoElEpWrLmGqKPps5tDKJClHdQmWbaH')" }}></div>
 <h1 className="text-xl font-bold dark:text-white">Acme Corporation</h1>
 <p className="text-[#617289] text-sm font-medium mb-1">Global Lojistik Çözümleri</p>
 <div className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full mb-4">AKTİF MÜŞTERİ</div>
@@ -27,7 +27,7 @@ export default function Page() {
 <div className="bg-white dark:bg-[#1e293b] rounded-xl p-5 shadow-sm border border-[#f0f2f4] dark:border-gray-800">
 <p className="text-xs font-bold text-[#617289] uppercase tracking-wider mb-4">Müşteri Temsilcisi</p>
 <div className="flex items-center gap-4">
-<div className="size-12 rounded-full bg-center bg-cover bg-no-repeat border border-gray-100" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBa_AsOGDhMOAC6iu9Nbyvh8t85sowDEuf_xwL6hLln57uIvluylrhgxdLMe9iKVX4UoiihmCUnTk0sO4dARCtM_EbkHnjKvuTCweyLJJxJBbWJaj-RmOWPlsvG_wIsN8NjI0JgBKr-vLhxdpEr2qtmXlilKWQ27s23xmJjAOGor2JuBUnaB0sb4PIzkqJS1M7IF7updlm7UBkwp1lh7eO9joKv5GclIeJHFWyMre6r5BGHAU9R1kFlNiJwmvjfc4bNa09yVV0kih08")' }}></div>
+<div className="size-12 rounded-full bg-center bg-cover bg-no-repeat border border-gray-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBa_AsOGDhMOAC6iu9Nbyvh8t85sowDEuf_xwL6hLln57uIvluylrhgxdLMe9iKVX4UoiihmCUnTk0sO4dARCtM_EbkHnjKvuTCweyLJJxJBbWJaj-RmOWPlsvG_wIsN8NjI0JgBKr-vLhxdpEr2qtmXlilKWQ27s23xmJjAOGor2JuBUnaB0sb4PIzkqJS1M7IF7updlm7UBkwp1lh7eO9joKv5GclIeJHFWyMre6r5BGHAU9R1kFlNiJwmvjfc4bNa09yVV0kih08')" }}></div>
 <div className="flex flex-col">
 <p className="text-sm font-bold dark:text-white">John Smith</p>
 <p className="text-xs text-[#617289]">Kıdemli Müşteri Yöneticisi</p>
@@ -41,21 +41,21 @@ export default function Page() {
 <p className="text-xs font-bold text-[#617289] uppercase tracking-wider mb-4">Sorumlu Uzmanlar</p>
 <div className="flex flex-col gap-4">
 <div className="flex items-center gap-3">
-<div className="size-8 rounded-full bg-center bg-cover" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j")' }}></div>
+<div className="size-8 rounded-full bg-center bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j')" }}></div>
 <div>
 <p className="text-xs font-bold dark:text-white">Ahmet Yılmaz</p>
 <p className="text-[10px] text-[#617289]">SEO Uzmanı</p>
 </div>
 </div>
 <div className="flex items-center gap-3">
-<div className="size-8 rounded-full bg-center bg-cover" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCX887zJ9YhLcee7-VqVnqOC7NW2SHH4oLE65fnadwPYCwLRvqncaO2p8xC5uIwUoaKWfRNXEsxVU6px2-1weNhFw_ClT7SwxGQGvfDrfQ2VrbCxmPtgWCpVtxn0rHUeO-ptfEEVTQzc9b0-s-9wxrf1hYK8NdjPCrta8sWheLxkhSWHOUT9Ylt7prAmB5SUYdI-fDLEHfMlPUAi5008ha3FCPXjuCD3V6dbpUPh7lBhYueY8I9K0SzA25g5nHlTqYOSvGUpfjWKzOj")' }}></div>
+<div className="size-8 rounded-full bg-center bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX887zJ9YhLcee7-VqVnqOC7NW2SHH4oLE65fnadwPYCwLRvqncaO2p8xC5uIwUoaKWfRNXEsxVU6px2-1weNhFw_ClT7SwxGQGvfDrfQ2VrbCxmPtgWCpVtxn0rHUeO-ptfEEVTQzc9b0-s-9wxrf1hYK8NdjPCrta8sWheLxkhSWHOUT9Ylt7prAmB5SUYdI-fDLEHfMlPUAi5008ha3FCPXjuCD3V6dbpUPh7lBhYueY8I9K0SzA25g5nHlTqYOSvGUpfjWKzOj')" }}></div>
 <div>
 <p className="text-xs font-bold dark:text-white">Ayşe Kaya</p>
 <p className="text-[10px] text-[#617289]">SEM / Performance</p>
 </div>
 </div>
 <div className="flex items-center gap-3">
-<div className="size-8 rounded-full bg-center bg-cover" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYAiKh6HQ1PbFopJkI97XeLKUNZNKVJ9Om5a6rQL6_nnwZiWv6YZIRZRlV0b62tqCf6mm1Zax09gmMVgics8e8hoP_Buh9CLY1bEzloKa3HgEhbdlVifo2Ni01yvmft5e3jAnK98c6SSiSKaIF1-0fLF6WYkMFHudJ0LOyvL0XLgLaI1F8TkymeVwRPG_RDVqyPkMR_p_idjIGLb48JbdTqMADLtiCK2qXQeE2wfCajOUq_fqkxXDmzg-28H0cV-IrZI--_NqLqV")' }}></div>
+<div className="size-8 rounded-full bg-center bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYAiKh6HQ1PbFopJkI97XeLKUNZNKVJ9Om5a6rQL6_nnwZiWv6YZIRZRlV0b62tqCf6mm1Zax09gmMVgics8e8hoP_Buh9CLY1bEzloKa3HgEhbdlVifo2Ni01yvmft5e3jAnK98c6SSiSKaIF1-0fLF6WYkMFHudJ0LOyvL0XLgLaI1F8TkymeVwRPG_RDVqyPkMR_p_idjIGLb48JbdTqMADLtiCK2qXQeE2wfCajOUq_fqkxXDmzg-28H0cV-IrZI--_NqLqV')" }}></div>
 <div>
 <p className="text-xs font-bold dark:text-white">Mehmet Demir</p>
 <p className="text-[10px] text-[#617289]">Yazılım Geliştirici</p>
@@ -100,7 +100,7 @@ export default function Page() {
                         </p>
 </div>
 <div className="w-20 bg-[#f0f2f4] h-1.5 rounded-full overflow-hidden">
-<div className="bg-primary h-full" style={{ width: '78%' }}></div>
+<div className="bg-primary h-full" style={{ "width": "78%" }}></div>
 </div>
 </div>
 </div>
@@ -146,7 +146,7 @@ export default function Page() {
                         </span>
 </div>
 <div className="flex items-center gap-2 mb-4">
-<div className="size-6 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j")' }}></div>
+<div className="size-6 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j')" }}></div>
 <p className="text-xs text-[#617289]">Sorumlu: <span className="text-[#111418] dark:text-white font-medium">Ahmet Yılmaz</span></p>
 </div>
 <div className="space-y-1.5 mb-4">
@@ -155,7 +155,7 @@ export default function Page() {
 <span>65%</span>
 </div>
 <div className="w-full bg-[#f0f2f4] dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-<div className="bg-primary h-full" style={{ width: '65%' }}></div>
+<div className="bg-primary h-full" style={{ "width": "65%" }}></div>
 </div>
 </div>
 <div className="flex items-center justify-between">
@@ -177,7 +177,7 @@ export default function Page() {
                         </span>
 </div>
 <div className="flex items-center gap-2 mb-4">
-<div className="size-6 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCX887zJ9YhLcee7-VqVnqOC7NW2SHH4oLE65fnadwPYCwLRvqncaO2p8xC5uIwUoaKWfRNXEsxVU6px2-1weNhFw_ClT7SwxGQGvfDrfQ2VrbCxmPtgWCpVtxn0rHUeO-ptfEEVTQzc9b0-s-9wxrf1hYK8NdjPCrta8sWheLxkhSWHOUT9Ylt7prAmB5SUYdI-fDLEHfMlPUAi5008ha3FCPXjuCD3V6dbpUPh7lBhYueY8I9K0SzA25g5nHlTqYOSvGUpfjWKzOj")' }}></div>
+<div className="size-6 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX887zJ9YhLcee7-VqVnqOC7NW2SHH4oLE65fnadwPYCwLRvqncaO2p8xC5uIwUoaKWfRNXEsxVU6px2-1weNhFw_ClT7SwxGQGvfDrfQ2VrbCxmPtgWCpVtxn0rHUeO-ptfEEVTQzc9b0-s-9wxrf1hYK8NdjPCrta8sWheLxkhSWHOUT9Ylt7prAmB5SUYdI-fDLEHfMlPUAi5008ha3FCPXjuCD3V6dbpUPh7lBhYueY8I9K0SzA25g5nHlTqYOSvGUpfjWKzOj')" }}></div>
 <p className="text-xs text-[#617289]">Sorumlu: <span className="text-[#111418] dark:text-white font-medium">Ayşe Kaya</span></p>
 </div>
 <div className="space-y-1.5 mb-4">
@@ -186,7 +186,7 @@ export default function Page() {
 <span>90%</span>
 </div>
 <div className="w-full bg-[#f0f2f4] dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-<div className="bg-orange-500 h-full" style={{ width: '90%' }}></div>
+<div className="bg-orange-500 h-full" style={{ "width": "90%" }}></div>
 </div>
 </div>
 <div className="flex items-center justify-between">
@@ -208,7 +208,7 @@ export default function Page() {
                         </span>
 </div>
 <div className="flex items-center gap-2 mb-4">
-<div className="size-6 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j")' }}></div>
+<div className="size-6 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBp1bV71nBrlMhSFVgMsEXlGOZ7DUJcQj7p649-UTrknmS8pLWL4qEN75gk7cpbjCLWoZTr4Qt3-VdaJnCSXzc5x5b-iNHcTWz1WHhlUWo_ODSep4BCpwox290b5INtqy6cY9cBbSvOlju8UuPdhqknZZbzzpw4Py5xgqRHZZadfDRxhxeUbxe_Jz2hhAuqrgM_V_D50_KdSoamjb_y8OVwEPgxMAO9SOxwYM7dvF3FMDdVJiv4DBRwG5eFw737LPi9OJDV78ZM1z8j')" }}></div>
 <p className="text-xs text-[#617289]">Sorumlu: <span className="text-[#111418] dark:text-white font-medium">Ahmet Yılmaz</span></p>
 </div>
 <div className="space-y-1.5 mb-4">
@@ -217,7 +217,7 @@ export default function Page() {
 <span>40%</span>
 </div>
 <div className="w-full bg-[#f0f2f4] dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-<div className="bg-primary h-full" style={{ width: '40%' }}></div>
+<div className="bg-primary h-full" style={{ "width": "40%" }}></div>
 </div>
 </div>
 <div className="flex items-center justify-between">
@@ -239,7 +239,7 @@ export default function Page() {
                         </span>
 </div>
 <div className="flex items-center gap-2 mb-4">
-<div className="size-6 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYAiKh6HQ1PbFopJkI97XeLKUNZNKVJ9Om5a6rQL6_nnwZiWv6YZIRZRlV0b62tqCf6mm1Zax09gmMVgics8e8hoP_Buh9CLY1bEzloKa3HgEhbdlVifo2Ni01yvmft5e3jAnK98c6SSiSKaIF1-0fLF6WYkMFHudJ0LOyvL0XLgLaI1F8TkymeVwRPG_RDVqyPkMR_p_idjIGLb48JbdTqMADLtiCK2qXQeE2wfCajOUq_fqkxXDmzg-28H0cV-IrZI--_NqLqV")' }}></div>
+<div className="size-6 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYAiKh6HQ1PbFopJkI97XeLKUNZNKVJ9Om5a6rQL6_nnwZiWv6YZIRZRlV0b62tqCf6mm1Zax09gmMVgics8e8hoP_Buh9CLY1bEzloKa3HgEhbdlVifo2Ni01yvmft5e3jAnK98c6SSiSKaIF1-0fLF6WYkMFHudJ0LOyvL0XLgLaI1F8TkymeVwRPG_RDVqyPkMR_p_idjIGLb48JbdTqMADLtiCK2qXQeE2wfCajOUq_fqkxXDmzg-28H0cV-IrZI--_NqLqV')" }}></div>
 <p className="text-xs text-[#617289]">Sorumlu: <span className="text-[#111418] dark:text-white font-medium">Caner Öz</span></p>
 </div>
 <div className="space-y-1.5 mb-4">
@@ -248,7 +248,7 @@ export default function Page() {
 <span>85%</span>
 </div>
 <div className="w-full bg-[#f0f2f4] dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-<div className="bg-purple-600 h-full" style={{ width: '85%' }}></div>
+<div className="bg-purple-600 h-full" style={{ "width": "85%" }}></div>
 </div>
 </div>
 <div className="flex items-center justify-between">
@@ -315,7 +315,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

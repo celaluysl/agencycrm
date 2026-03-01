@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      {/*  PageHeading  */}<html><head></head><body><div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
 <div className="flex flex-col gap-2">
 <h1 className="text-3xl font-black tracking-tight text-[#111418] dark:text-white">Kişisel Performans Paneli</h1>
 <p className="text-[#617289] dark:text-gray-400">Hoş geldin Caner! Bu ayki verimlilik skorun geçen aya göre <span className="text-green-600 font-bold">%12 daha yüksek.</span></p>
@@ -77,8 +77,8 @@ export default function Page() {
 <path d="M0,150 L166,120 L332,160 L498,80 L664,100 L830,40 L1000,60 L1000,200 L0,200 Z" fill="url(#grad1)" opacity="0.1"></path>
 <defs>
 <linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" style={{}}></stop>
-<stop offset="100%" style={{}}></stop>
+<stop offset="0%" style={{ "stopColor": "#136dec", "stopOpacity": "1" }}></stop>
+<stop offset="100%" style={{ "stopColor": "#136dec", "stopOpacity": "0" }}></stop>
 </linearGradient>
 </defs>
 </svg>
@@ -260,7 +260,7 @@ export default function Page() {
 </table>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

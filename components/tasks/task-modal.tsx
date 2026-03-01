@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body><div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">
+      <div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">
 <div className="px-6 py-4 border-b border-[#e5e7eb] dark:border-[#2d3748] flex items-center justify-between shrink-0">
 <div className="flex items-center gap-3">
 <span className="material-symbols-outlined text-primary">search_insights</span>
@@ -57,7 +57,7 @@ export default function Page() {
 <div className="flex items-center gap-4">
 <p className="text-[#111418] dark:text-white text-sm font-bold">0/5</p>
 <div className="w-32 h-2 rounded-full bg-gray-200 dark:bg-gray-700">
-<div className="h-2 rounded-full bg-primary" style={{ width: '0%' }}></div>
+<div className="h-2 rounded-full bg-primary" style={{ "width": "0%" }}></div>
 </div>
 </div>
 </div>
@@ -88,7 +88,7 @@ export default function Page() {
 <h3 className="text-sm font-bold text-[#111418] dark:text-white">Aktivite ve Yorumlar</h3>
 <div className="space-y-4">
 <div className="flex gap-4">
-<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDvca6uENs1mszCQw1yI6tZEVAb1FuSvK2pWIj4MAhQNFxlpnrTXTKUdrWLp5VRh0OaoN5f1I9hCe9Aevn5y-OfjOXkEnIzHgqDLp0S8leDIJthsF5L7qW_AocMONXdMGOvEM8Qt3cQk3UMtUzjSJ-zcnr4PYkQmvc1mxyS-QZrg92tz_Cik5XsQtEObCZEGukJ9kBYZXAXbHVF9XspcTBwlB_PIqt3h2gdgwzpo2mpSB6iQ10cm7NHcdtrNmWXJ7VqyUFaUj2r7DuH")' }}></div>
+<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvca6uENs1mszCQw1yI6tZEVAb1FuSvK2pWIj4MAhQNFxlpnrTXTKUdrWLp5VRh0OaoN5f1I9hCe9Aevn5y-OfjOXkEnIzHgqDLp0S8leDIJthsF5L7qW_AocMONXdMGOvEM8Qt3cQk3UMtUzjSJ-zcnr4PYkQmvc1mxyS-QZrg92tz_Cik5XsQtEObCZEGukJ9kBYZXAXbHVF9XspcTBwlB_PIqt3h2gdgwzpo2mpSB6iQ10cm7NHcdtrNmWXJ7VqyUFaUj2r7DuH')" }}></div>
 <div className="flex-1 bg-background-light dark:bg-background-dark/50 p-3 rounded-lg">
 <div className="flex justify-between items-center mb-1">
 <span className="text-sm font-bold dark:text-white">Merve Aydın</span>
@@ -99,7 +99,7 @@ export default function Page() {
 </div>
 </div>
 <div className="mt-6 flex gap-3 items-start border-t border-[#e5e7eb] dark:border-[#2d3748] pt-4">
-<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbDYt-veoNWd5vFeMLccIQEPlgecEgXSPBrynUX67TCsVHv6VaP-nliee-Z7HGYFS1Yd382_yWRLMf-c8WmC32_UDk9MDbshY5ulx9EhVeqrurt0rd-GRkXtrk491z0FW0MY5KsdVtrz-7uKZO4J1BoEh-hYoHW5AHGbCzEKFeViw0bvYXYLaU5ZjJkrVxXXydGv_S_-JH_zZUQRZtopq-fgfPE9rXnyM5NRHbx2zX24cda6E0W3Z_jeEOdt3M1Lho77gHdssylLHS")' }}></div>
+<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbDYt-veoNWd5vFeMLccIQEPlgecEgXSPBrynUX67TCsVHv6VaP-nliee-Z7HGYFS1Yd382_yWRLMf-c8WmC32_UDk9MDbshY5ulx9EhVeqrurt0rd-GRkXtrk491z0FW0MY5KsdVtrz-7uKZO4J1BoEh-hYoHW5AHGbCzEKFeViw0bvYXYLaU5ZjJkrVxXXydGv_S_-JH_zZUQRZtopq-fgfPE9rXnyM5NRHbx2zX24cda6E0W3Z_jeEOdt3M1Lho77gHdssylLHS')" }}></div>
 <div className="flex-1 relative">
 <textarea className="w-full rounded-lg border-[#e5e7eb] dark:border-[#2d3748] dark:bg-background-dark dark:text-white text-sm focus:ring-primary focus:border-primary resize-none p-3" placeholder="Yorum ekle... Bahsetmek için @ kullanın" rows={3}></textarea>
 <div className="flex justify-between items-center mt-2">
@@ -139,7 +139,7 @@ export default function Page() {
 <div>
 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Atanan</h3>
 <div className="flex items-center gap-3 p-2 bg-white dark:bg-[#1a202c] rounded-lg border border-[#e5e7eb] dark:border-[#2d3748] cursor-pointer">
-<div className="size-8 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBy27oCekJQlcsbTAj_ArD3C0dn0MVyI77KeDXZmawTbWqCr51UecgjguvwHcsNYkIMdgfpsrcPnVgqLwkhaydsn7PVBeSbYOboFqSUD-2W1gXAdavlYy84Hq2asbkbc_tXq3vb5l_voPof6HHrLh_kfkhzS0_rCzHoeqDOoNC_tTTPRIJpOq_v0ucx7qR6AjDccBCga6rxk5uqzhK7Sb_PjsQJIPEonfMBFCVkI-F8pmBqIaho04qIMeJWsy7egGn8qDf0j8sNyC1m")' }}></div>
+<div className="size-8 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBy27oCekJQlcsbTAj_ArD3C0dn0MVyI77KeDXZmawTbWqCr51UecgjguvwHcsNYkIMdgfpsrcPnVgqLwkhaydsn7PVBeSbYOboFqSUD-2W1gXAdavlYy84Hq2asbkbc_tXq3vb5l_voPof6HHrLh_kfkhzS0_rCzHoeqDOoNC_tTTPRIJpOq_v0ucx7qR6AjDccBCga6rxk5uqzhK7Sb_PjsQJIPEonfMBFCVkI-F8pmBqIaho04qIMeJWsy7egGn8qDf0j8sNyC1m')" }}></div>
 <span className="text-sm font-medium dark:text-white">Can Özdemir</span>
 <span className="material-symbols-outlined ml-auto text-gray-400">expand_more</span>
 </div>
@@ -205,7 +205,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

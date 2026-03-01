@@ -20,7 +20,7 @@ function htmlToJsx(html: string): string {
     let jsx = html.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
 
     jsx = jsx.replace(/class=/g, 'className=');
-    jsx = jsx.replace(/for=/g, 'htmlFor=');
+    jsx = jsx.replace(/\bfor="/g, 'htmlFor="');
     jsx = jsx.replace(/disabled=""/g, 'disabled');
     jsx = jsx.replace(/checked=""/g, 'defaultChecked');
     jsx = jsx.replace(/open=""/g, 'open');
@@ -38,17 +38,21 @@ function htmlToJsx(html: string): string {
     });
     jsx = jsx.replace(/style=(['"])(.*?)\1/g, (m, quote, styleContent) => {
         let content = styleContent.replace(/&quot;/g, "'");
-        if (content.includes('background-image')) {
-            const urlMatch = content.match(/url\(['"]?(.*?)['"]?\)/);
-            if (urlMatch) {
-                return `style={{ backgroundImage: 'url("${urlMatch[1]}")' }}`;
+        const styles = content.split(';').reduce((acc: string[], rule: string) => {
+            const [key, ...valueParts] = rule.split(':');
+            if (key && valueParts.length > 0) {
+                const camelKey = key.trim().replace(/-([a-z])/g, (g: string) => g[1].toUpperCase());
+                let value = valueParts.join(':').trim();
+                if (value.includes('url(')) {
+                    value = value.replace(/"/g, "'");
+                }
+                acc.push(`"${camelKey}": "${value}"`);
             }
-        }
-        if (content.includes('width:')) {
-            const widthMatch = content.match(/width:\s*([^;]+)/);
-            if (widthMatch) {
-                return `style={{ width: '${widthMatch[1].trim()}' }}`;
-            }
+            return acc;
+        }, []);
+
+        if (styles.length > 0) {
+            return `style={{ ${styles.join(', ')} }}`;
         }
         return `style={{}}`;
     });
@@ -85,7 +89,7 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
     if (mainContent) {
         const $main = cheerio.load(mainContent);
         $main('header').first().remove();
-        mainContent = $main.html();
+        mainContent = $main('body').html();
 
         let jsxContent = htmlToJsx(mainContent || '');
 

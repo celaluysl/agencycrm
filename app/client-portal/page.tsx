@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body><div className="max-w-6xl mx-auto p-8 space-y-8 pb-20">
+      <div className="max-w-6xl mx-auto p-8 space-y-8 pb-20">
 
 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 <div className="bg-white dark:bg-background-dark border border-[#dbe0e6] rounded-xl p-6 shadow-sm">
@@ -166,7 +166,7 @@ export default function Page() {
 <td className="px-6 py-4">
 <div className="flex items-center gap-2">
 <div className="w-20 bg-gray-200 rounded-full h-1.5">
-<div className="bg-green-500 h-1.5 rounded-full" style={{ width: '95%' }}></div>
+<div className="bg-green-500 h-1.5 rounded-full" style={{ "width": "95%" }}></div>
 </div>
 <span className="text-xs font-bold">95/100</span>
 </div>
@@ -188,7 +188,7 @@ export default function Page() {
 <td className="px-6 py-4">
 <div className="flex items-center gap-2">
 <div className="w-20 bg-gray-200 rounded-full h-1.5">
-<div className="bg-yellow-500 h-1.5 rounded-full" style={{ width: '68%' }}></div>
+<div className="bg-yellow-500 h-1.5 rounded-full" style={{ "width": "68%" }}></div>
 </div>
 <span className="text-xs font-bold">68/100</span>
 </div>
@@ -355,7 +355,7 @@ export default function Page() {
 </details>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

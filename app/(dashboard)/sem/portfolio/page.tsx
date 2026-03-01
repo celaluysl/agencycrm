@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body><div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
 <div className="flex flex-col gap-2">
 <h1 className="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">SEO Müşterilerim</h1>
 <p className="text-[#617289] dark:text-gray-400 text-base font-normal">SEO Departmanı için Müşteri Portföy Yönetim Paneli.</p>
@@ -119,7 +119,7 @@ export default function Page() {
                                     </div>
 </div>
 <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
-<div className="bg-red-500 h-full" style={{ width: '45%' }}></div>
+<div className="bg-red-500 h-full" style={{ "width": "45%" }}></div>
 </div>
 <p className="text-[10px] text-[#617289]">234 Kritik Hata Mevcut</p>
 </div>
@@ -204,7 +204,7 @@ export default function Page() {
                                     </div>
 </div>
 <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
-<div className="bg-amber-500 h-full" style={{ width: '72%' }}></div>
+<div className="bg-amber-500 h-full" style={{ "width": "72%" }}></div>
 </div>
 <p className="text-[10px] text-[#617289]">45 Tarama Hatası</p>
 </div>
@@ -290,7 +290,7 @@ export default function Page() {
                                     </div>
 </div>
 <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
-<div className="bg-emerald-500 h-full" style={{ width: '94%' }}></div>
+<div className="bg-emerald-500 h-full" style={{ "width": "94%" }}></div>
 </div>
 <p className="text-[10px] text-[#617289]">Her şey yolunda</p>
 </div>
@@ -346,7 +346,7 @@ export default function Page() {
 </button>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

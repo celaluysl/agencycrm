@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body>
+      
 <div className="flex-1 overflow-y-auto custom-scrollbar p-8">
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 <div className="bg-white dark:bg-[#1f2937] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm">
@@ -177,8 +177,8 @@ export default function Page() {
 <span className="text-[11px] text-red-600 font-bold">45 / 30 (+15)</span>
 </div>
 <div className="relative w-full h-4 bg-[#f0f2f4] dark:bg-gray-800 rounded-full overflow-hidden">
-<div className="absolute top-0 left-0 h-full bg-red-500 rounded-full" style={{ width: '100%' }}></div>
-<div className="absolute top-0 left-0 h-full bg-primary/20 border-r border-primary/50" style={{ width: '66%' }}></div>
+<div className="absolute top-0 left-0 h-full bg-red-500 rounded-full" style={{ "width": "100%" }}></div>
+<div className="absolute top-0 left-0 h-full bg-primary/20 border-r border-primary/50" style={{ "width": "66%" }}></div>
 </div>
 </div>
 <div>
@@ -187,7 +187,7 @@ export default function Page() {
 <span className="text-[11px] text-green-600 font-bold">18 / 25</span>
 </div>
 <div className="relative w-full h-4 bg-[#f0f2f4] dark:bg-gray-800 rounded-full overflow-hidden">
-<div className="absolute top-0 left-0 h-full bg-primary rounded-full" style={{ width: '72%' }}></div>
+<div className="absolute top-0 left-0 h-full bg-primary rounded-full" style={{ "width": "72%" }}></div>
 </div>
 </div>
 <div>
@@ -196,7 +196,7 @@ export default function Page() {
 <span className="text-[11px] text-orange-500 font-bold">12 / 15</span>
 </div>
 <div className="relative w-full h-4 bg-[#f0f2f4] dark:bg-gray-800 rounded-full overflow-hidden">
-<div className="absolute top-0 left-0 h-full bg-orange-400 rounded-full" style={{ width: '80%' }}></div>
+<div className="absolute top-0 left-0 h-full bg-orange-400 rounded-full" style={{ "width": "80%" }}></div>
 </div>
 </div>
 </div>
@@ -330,7 +330,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-</body></html>
+
     </div>
   );
 }

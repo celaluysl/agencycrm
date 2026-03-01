@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      {/*  Breadcrumbs  */}<html><head></head><body><div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-6">
 <a className="text-[#617289] text-sm font-medium" href="#">Dashboard</a>
 <span className="material-symbols-outlined text-[#617289] text-xs" data-icon="chevron_right"></span>
 <a className="text-[#617289] text-sm font-medium" href="#">Raporlar</a>
@@ -93,7 +93,7 @@ export default function Page() {
 <div className="flex flex-col sm:flex-row items-center justify-between p-4 bg-gray-50 dark:bg-[#151d27] rounded-lg gap-4">
 <div className="flex items-center gap-4">
 <div className="size-12 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
-<div className="w-full h-full bg-cover bg-center" data-alt="Screenshot of data visualization dashboard" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCC4TEKvKLAb1w_6YKzxnT2_YkcxbX8AEr-RLxS6APAhN2_rp2Tk_N49DArMw8nDozUy3Ypn-U6ywvaNh5MURieHwpEoAPGUbb73OyjGlx6q3iXjfTea6G35YOv7BTCtki93bw2cg2NpraXMSqJJXdyJfGb4COV85FkBYtQs8b9QxztUAZOAC9DKOzjGSSmNBFvjro6y2fnbLkY0MmHrh7IhTvJjHv7uKNxjqgie9QMJhpiBc8lNok_9ixoL7hMplOMH73C3lZGar6K")' }}></div>
+<div className="w-full h-full bg-cover bg-center" data-alt="Screenshot of data visualization dashboard" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCC4TEKvKLAb1w_6YKzxnT2_YkcxbX8AEr-RLxS6APAhN2_rp2Tk_N49DArMw8nDozUy3Ypn-U6ywvaNh5MURieHwpEoAPGUbb73OyjGlx6q3iXjfTea6G35YOv7BTCtki93bw2cg2NpraXMSqJJXdyJfGb4COV85FkBYtQs8b9QxztUAZOAC9DKOzjGSSmNBFvjro6y2fnbLkY0MmHrh7IhTvJjHv7uKNxjqgie9QMJhpiBc8lNok_9ixoL7hMplOMH73C3lZGar6K')" }}></div>
 </div>
 <div>
 <p className="text-sm font-bold truncate max-w-[200px]">hero-banner-v2.png</p>
@@ -177,7 +177,7 @@ export default function Page() {
 <p className="text-3xl font-black mb-1">1.2 s</p>
 <p className="text-xs text-[#617289] mb-4">Largest Contentful Paint</p>
 <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
-<div className="bg-[#07883b] h-full" style={{ width: '85%' }}></div>
+<div className="bg-[#07883b] h-full" style={{ "width": "85%" }}></div>
 </div>
 </div>
 {/*  Metric 2: CLS  */}
@@ -189,7 +189,7 @@ export default function Page() {
 <p className="text-3xl font-black mb-1">0.15</p>
 <p className="text-xs text-[#617289] mb-4">Cumulative Layout Shift</p>
 <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
-<div className="bg-amber-500 h-full" style={{ width: '40%' }}></div>
+<div className="bg-amber-500 h-full" style={{ "width": "40%" }}></div>
 </div>
 </div>
 {/*  Metric 3: FID  */}
@@ -201,7 +201,7 @@ export default function Page() {
 <p className="text-3xl font-black mb-1">14 ms</p>
 <p className="text-xs text-[#617289] mb-4">First Input Delay</p>
 <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
-<div className="bg-[#07883b] h-full" style={{ width: '95%' }}></div>
+<div className="bg-[#07883b] h-full" style={{ "width": "95%" }}></div>
 </div>
 </div>
 </div>
@@ -251,7 +251,7 @@ export default function Page() {
 </div>
 </div>
 </section>
-</body></html>
+
     </div>
   );
 }

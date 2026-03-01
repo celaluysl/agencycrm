@@ -6,7 +6,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex-1 flex flex-col">
-      <html><head></head><body>
+      
 <div className="px-8 py-6 space-y-6">
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
@@ -291,7 +291,7 @@ export default function Page() {
 <footer className="mt-auto px-8 py-6 text-center text-gray-400 text-xs">
             © 2024 AgenciFlow ERP/CRM - SEO Departmanı Tanıtım Yazısı ve Yayıncı Envanter Yönetimi. Tüm veriler günlük olarak güncellenmektedir.
         </footer>
-</body></html>
+
     </div>
   );
 }
