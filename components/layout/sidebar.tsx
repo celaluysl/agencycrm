@@ -13,6 +13,9 @@ export const navigation = [
             { name: "İK Verimlilik", href: "/admin/ik-verimlilik-ve-kapasite-analizi" },
             { name: "Maaş & Personel", href: "/admin/payroll" },
             { name: "Sistem Logları", href: "/admin/sistem-loglari-ve-guvenlik-paneli" },
+            { name: "Cari Hesaplar", href: "/admin/accounts" },
+            { name: "Faturalar", href: "/admin/invoices" },
+            { name: "Prim Yönetimi", href: "/admin/commissions" },
             { name: "Site Hizmet Yönetimi", href: "/admin/site-bazli-hizmet-yonetim-paneli" },
         ]
     },

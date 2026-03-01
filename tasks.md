@@ -222,21 +222,21 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 6. Admin Dashboard - Cari Hesap ve Fatura Modülü
 
-- [ ] 6.1 Accounts sayfası oluştur
+- [x] 6.1 Accounts sayfası oluştur
   - `app/(dashboard)/admin/accounts/page.tsx` - Server Component
   - Müşteri cari hesap tablosu (borç, alacak, bakiye)
   - Filter bar (tarih aralığı, müşteri, durum)
   - Summary cards (toplam borç, alacak, bakiye)
   - _Gereksinimler: 2.6_
 
-- [ ] 6.2 Invoices sayfası oluştur
+- [x] 6.2 Invoices sayfası oluştur
   - `app/(dashboard)/admin/invoices/page.tsx` - Server Component
   - Fatura listesi tablosu
   - Status badges (paid, pending, overdue)
   - Otomatik ödeme hatırlatıcı butonu
   - _Gereksinimler: 2.7, 2.8_
 
-- [ ] 6.3 Commissions sayfası oluştur
+- [x] 6.3 Commissions sayfası oluştur
   - `app/(dashboard)/admin/commissions/page.tsx` - Server Component
   - Prim listesi tablosu (kazanılan, onaylanan, ödenen)
   - Ödeme tarihi gelenleri highlight et
