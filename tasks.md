@@ -260,7 +260,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 7. Client Portal Dashboard
 
-- [ ] 7.1 Client Portal ana sayfası oluştur
+- [x] 7.1 Client Portal ana sayfası oluştur
   - `app/client-portal/page.tsx` - Server Component
   - Welcome header (user bilgisi)
   - Project progress cards
@@ -271,14 +271,14 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 3.1, 3.2, 3.3, 3.4, 3.5_
 
 
-- [ ] 7.2 Project Progress Card component oluştur
+- [x] 7.2 Project Progress Card component oluştur
   - `components/client-portal/project-card.tsx` - Server Component
   - Progress bar animation (Framer Motion)
   - Status badge (active, completed, on_hold)
   - Start/end date display
   - _Gereksinimler: 3.1, 14.2_
 
-- [ ] 7.3 Service Card component oluştur
+- [x] 7.3 Service Card component oluştur
   - `components/client-portal/service-card.tsx` - Server Component
   - Service type icons (SEO, SEM, Social Media, Web Design)
   - Real-time metrics display
