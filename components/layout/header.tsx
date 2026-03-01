@@ -1,15 +1,17 @@
 "use client";
 
 import { ThemeToggle } from "./theme-toggle";
+import { MobileNav } from "./mobile-nav";
+import { Breadcrumbs } from "./breadcrumb";
 
 export function Header() {
     return (
-        <header className="sticky top-0 z-10 flex items-center justify-between bg-white/80 dark:bg-[#1a2432]/80 backdrop-blur-md border-b border-[#f0f2f4] dark:border-gray-800 px-8 py-4 transition-colors">
-            <div>
-                <h2 className="text-xl font-bold tracking-tight text-[#111418] dark:text-white">
-                    Maaş ve Personel Ödemeleri Paneli
-                </h2>
-                <p className="text-xs text-[#617289]">Personel Gider Yönetimi ve Bordro Takibi</p>
+        <header className="sticky top-0 z-10 flex items-center justify-between bg-white/80 dark:bg-[#1a2432]/80 backdrop-blur-md border-b border-[#f0f2f4] dark:border-gray-800 px-4 md:px-8 py-4 transition-colors">
+            <div className="flex items-center">
+                <MobileNav />
+                <div className="flex flex-col">
+                    <Breadcrumbs />
+                </div>
             </div>
 
             <div className="flex items-center gap-4">

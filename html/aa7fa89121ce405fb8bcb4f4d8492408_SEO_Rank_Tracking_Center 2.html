@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEO Sıralama Takip Merkezi - AgenciFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sparkline-path {
+            stroke: #136dec;
+            stroke-width: 2;
+            fill: none;
+        }
+        .sparkline-bg {
+            fill: rgba(19, 109, 236, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-tight">AgenciFlow</h1>
+<p class="text-gray-500 dark:text-gray-400 text-xs font-normal">Ajans Yönetimi</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">CRM</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">query_stats</span>
+<span class="text-sm font-medium">SEO Merkezi</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="text-sm font-medium">Projeler</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Faturalandırma</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ayarlar</span>
+</a>
+</div>
+</nav>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto">
+<header class="sticky top-0 z-10 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">SEO Sıralama Takip Merkezi</h2>
+<div class="h-6 w-px bg-gray-200 dark:bg-gray-700"></div>
+<div class="flex items-center gap-2 cursor-pointer text-gray-600 dark:text-gray-400">
+<span class="text-sm font-medium">Müşteri: GlobalTech Inc.</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-1.5 border border-gray-200 dark:border-gray-700">
+<span class="material-symbols-outlined text-gray-500 text-lg mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 p-0 text-sm text-gray-900 dark:text-white placeholder-gray-500 w-48" placeholder="Kelime ara..." type="text"/>
+</div>
+<button class="bg-primary text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Anahtar Kelime Ekle
+                </button>
+<button class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-bold px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                    CSV Dışa Aktar
+                </button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="User profile avatar image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBol4mxR-brCw3kISc_v4pdDyiKUp14hbYwWqoVjdiuPp1jshKc4wgsOgxpEHy7o79rhGGQovMAgYlnfo7lTKctjE3Sg0GlJfP7OzDbU3fUP4wHDMThxOgxV8TLH8mxPGSc9d4HNtGvvj7PkL5zc6Z8o04E-cpmC8g7Seq0OnhzAx2p4vylprPPo__asP4-vb5ks7EKreCZ84t_98bj7wtr8Ey_WHU1tI5ohbz1LYclUQ3lfGtPFBOUfEDy0PYYQAdB_LWSPJloSwvc')"></div>
+</div>
+</header>
+<div class="px-8 py-6 space-y-6">
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-gray-500 hover:text-primary transition-colors" href="#">SEO Merkezi</a>
+<span class="material-symbols-outlined text-gray-400 text-base">chevron_right</span>
+<span class="text-gray-900 dark:text-white font-medium">Sıralama Takibi</span>
+</nav>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Ortalama Sıra</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">14.2</span>
+<span class="text-green-600 dark:text-green-400 text-sm font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 1.2%
+                        </span>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">İlk 3 Anahtar Kelime</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">45</span>
+<span class="text-green-600 dark:text-green-400 text-sm font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 5%
+                        </span>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Yükselen</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">12</span>
+<span class="text-green-600 dark:text-green-400 text-sm font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 3%
+                        </span>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Düşen</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">5</span>
+<span class="text-red-600 dark:text-red-400 text-sm font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> 2%
+                        </span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+<div class="p-4 border-b border-gray-200 dark:border-gray-800 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<button class="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<div class="relative">
+<button class="px-4 py-2 flex items-center gap-2 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                Son 30 Gün
+                                <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="h-8 w-px bg-gray-200 dark:bg-gray-700"></div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Grup:</span>
+<select class="text-sm bg-transparent border-none focus:ring-0 p-0 pr-8 font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+<option>Tüm Kelimeler</option>
+<option>Marka Terimleri</option>
+<option>Ürün Sayfaları</option>
+<option>Blog Yazıları</option>
+</select>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        Verileri Yenile
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50">
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Anahtar Kelime &amp; Hedef URL</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Mevcut Sıra</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Günlük Değişim</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Aranma Hacmi</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Eğilim</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right">İşlemler</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-gray-900 dark:text-white">kurumsal erp yazılımı</span>
+<div class="flex items-center gap-1 text-xs text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-xs">link</span>
+<span class="truncate max-w-[200px]">agenciflow.com/solutions/enterprise</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-lg font-bold text-gray-900 dark:text-white">3</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined text-xs">arrow_upward</span> 2
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-gray-600 dark:text-gray-400 font-medium">12.5k</span>
+</td>
+<td class="px-6 py-4">
+<svg class="h-8 w-32" viewBox="0 0 100 25">
+<path class="sparkline-bg" d="M0 25 L0 15 L10 18 L20 12 L30 14 L40 8 L50 10 L60 5 L70 9 L80 4 L90 6 L100 2 L100 25 Z"></path>
+<path class="sparkline-path" d="M0 15 L10 18 L20 12 L30 14 L40 8 L50 10 L60 5 L70 9 L80 4 L90 6 L100 2"></path>
+</svg>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-gray-900 dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-gray-900 dark:text-white">ajans yönetim platformu</span>
+<div class="flex items-center gap-1 text-xs text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-xs">link</span>
+<span class="truncate max-w-[200px]">agenciflow.com/homepage</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-lg font-bold text-gray-900 dark:text-white">12</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
+<span class="material-symbols-outlined text-xs">arrow_downward</span> 4
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-gray-600 dark:text-gray-400 font-medium">8.4k</span>
+</td>
+<td class="px-6 py-4">
+<svg class="h-8 w-32" viewBox="0 0 100 25">
+<path class="sparkline-bg" d="M0 25 L0 5 L15 8 L30 6 L45 12 L60 18 L75 14 L100 20 L100 25 Z"></path>
+<path class="sparkline-path" d="M0 5 L15 8 L30 6 L45 12 L60 18 L75 14 L100 20" style="stroke: #ef4444;"></path>
+</svg>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-gray-900 dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-gray-900 dark:text-white">en iyi seo raporlama aracı 2024</span>
+<div class="flex items-center gap-1 text-xs text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-xs">link</span>
+<span class="truncate max-w-[200px]">agenciflow.com/blog/seo-reporting</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-lg font-bold text-gray-900 dark:text-white">7</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-gray-400 font-bold px-2 py-1">—</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-gray-600 dark:text-gray-400 font-medium">2.1k</span>
+</td>
+<td class="px-6 py-4">
+<svg class="h-8 w-32" viewBox="0 0 100 25">
+<path class="sparkline-bg" d="M0 25 L0 10 L25 10 L50 8 L75 12 L100 10 L100 25 Z"></path>
+<path class="sparkline-path" d="M0 10 L25 10 L50 8 L75 12 L100 10"></path>
+</svg>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-gray-900 dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-gray-900 dark:text-white">otomatik ajans faturalandırma</span>
+<div class="flex items-center gap-1 text-xs text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-xs">link</span>
+<span class="truncate max-w-[200px]">agenciflow.com/features/billing</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-lg font-bold text-gray-900 dark:text-white">1</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined text-xs">arrow_upward</span> 1
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-gray-600 dark:text-gray-400 font-medium">4.8k</span>
+</td>
+<td class="px-6 py-4">
+<svg class="h-8 w-32" viewBox="0 0 100 25">
+<path class="sparkline-bg" d="M0 25 L0 8 L20 10 L40 5 L60 7 L80 2 L100 2 L100 25 Z"></path>
+<path class="sparkline-path" d="M0 8 L20 10 L40 5 L60 7 L80 2 L100 2"></path>
+</svg>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-gray-900 dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-gray-50 dark:bg-gray-800/50 flex items-center justify-between border-t border-gray-200 dark:border-gray-800">
+<p class="text-sm text-gray-500 dark:text-gray-400"><span class="font-bold">148</span> sonuçtan <span class="font-bold">1</span> ile <span class="font-bold">10</span> arası gösteriliyor</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-900 text-gray-600 dark:text-gray-400 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="px-3 py-1 rounded-lg hover:bg-white dark:hover:bg-gray-900 text-sm font-medium text-gray-600 dark:text-gray-400">2</button>
+<button class="px-3 py-1 rounded-lg hover:bg-white dark:hover:bg-gray-900 text-sm font-medium text-gray-600 dark:text-gray-400">3</button>
+<span class="text-gray-400 px-1">...</span>
+<button class="px-3 py-1 rounded-lg hover:bg-white dark:hover:bg-gray-900 text-sm font-medium text-gray-600 dark:text-gray-400">15</button>
+<button class="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-900 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<footer class="mt-auto px-8 py-6 text-center text-gray-400 text-xs">
+            © 2024 AgenciFlow ERP/CRM. Tüm SEO verileri Google Search Console API aracılığıyla senkronize edilmiştir.
+        </footer>
+</main>
+</div>
+
+</body></html>

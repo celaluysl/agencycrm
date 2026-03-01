@@ -117,7 +117,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Dark mode toggle button
   - _Gereksinimler: 1.5, 19.1_
 
-- [ ] 3.3 Mobile navigation drawer oluştur
+- [x] 3.3 Mobile navigation drawer oluştur
   - `components/layout/mobile-nav.tsx` - Client Component olarak oluştur
   - Sheet component kullanarak drawer implementasyonu
   - 768px altında sidebar'ı drawer'a dönüştür
@@ -126,7 +126,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 1.7, 18.2, 18.3, 18.9_
 
 
-- [ ] 3.4 Breadcrumb navigation component oluştur
+- [x] 3.4 Breadcrumb navigation component oluştur
   - `components/layout/breadcrumb.tsx` - Server Component olarak oluştur
   - Dynamic breadcrumb generation (route params'a göre)
   - Hierarchical path display
@@ -138,7 +138,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Page transition animations (Framer Motion)
   - _Gereksinimler: 1.1, 14.5, 15.1_
 
-- [ ] 3.6 Dark mode provider ve theme management
+- [x] 3.6 Dark mode provider ve theme management
   - `components/providers/theme-provider.tsx` - Theme context provider
   - localStorage'da theme preference saklama
   - System preference detection (ilk ziyaret)
