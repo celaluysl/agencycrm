@@ -104,9 +104,8 @@ const columns: ColumnDef<PayrollPerson>[] = [
         cell: ({ row }) => {
             const val: number = row.getValue("bonus");
             return (
-                <span className="text-xs font-semibold text-green-600">
-                    +{val > 0 ? "₺" : ""}
-                    {val.toLocaleString("tr-TR")}
+                <span className={`text-xs font-semibold ${val > 0 ? "text-green-600" : "text-gray-500"}`}>
+                    {val > 0 ? `+₺${val.toLocaleString("tr-TR")}` : `₺${val.toLocaleString("tr-TR")}`}
                 </span>
             );
         },
@@ -117,9 +116,8 @@ const columns: ColumnDef<PayrollPerson>[] = [
         cell: ({ row }) => {
             const val: number = row.getValue("deductions");
             return (
-                <span className="text-xs font-semibold text-red-600">
-                    -{val > 0 ? "₺" : ""}
-                    {val.toLocaleString("tr-TR")}
+                <span className={`text-xs font-semibold ${val > 0 ? "text-red-600" : "text-gray-500"}`}>
+                    {val > 0 ? `-₺${val.toLocaleString("tr-TR")}` : `₺${val.toLocaleString("tr-TR")}`}
                 </span>
             );
         },

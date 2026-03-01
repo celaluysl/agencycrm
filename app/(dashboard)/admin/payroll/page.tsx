@@ -4,6 +4,8 @@ import { PayrollTable } from "@/components/admin/payroll-table";
 import { SalaryDistributionChart } from "@/components/admin/salary-distribution-chart";
 import { PayrollPerson } from "@/components/admin/payroll-table";
 
+export const metadata = { title: "Maaş ve Personel Ödemeleri | AgenciFlow" };
+
 const mockPayrollData: PayrollPerson[] = [
     {
         id: "1",
