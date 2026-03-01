@@ -24,19 +24,19 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 1. Proje Kurulumu ve Temel Konfigürasyon
 
-- [ ] 1.1 Next.js projesi oluştur ve temel yapılandırmayı yap
+- [x] 1.1 Next.js projesi oluştur ve temel yapılandırmayı yap
   - `npx create-next-app@latest` ile proje oluştur (App Router, TypeScript, Tailwind CSS, ESLint seçenekleri ile)
   - `next.config.js` dosyasını production optimizasyonları için yapılandır
   - `.env.local` dosyası oluştur ve environment variables tanımla
   - _Gereksinimler: 20.1, 20.2_
 
-- [ ] 1.2 Tailwind CSS özel konfigürasyonunu yap
+- [x] 1.2 Tailwind CSS özel konfigürasyonunu yap
   - `tailwind.config.ts` dosyasında özel renkleri tanımla (primary: #136dec, success: #07883b, vb.)
   - Dark mode için class stratejisi yapılandır
   - Responsive breakpoints ayarla (mobile: 640px, tablet: 768px, desktop: 1024px, xl: 1280px)
   - _Gereksinimler: 18.1, 19.4_
 
-- [ ] 1.3 shadcn/ui component library'yi entegre et
+- [x] 1.3 shadcn/ui component library'yi entegre et
   - `npx shadcn-ui@latest init` komutu ile kurulum yap
   - Temel componentleri ekle: Button, Input, Card, Dialog, Table, Badge, Avatar
   - `components/ui/` klasör yapısını oluştur
@@ -55,13 +55,13 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Pre-commit hooks için Husky kurulumu yap (opsiyonel)
   - _Gereksinimler: 20.12_
 
-- [ ] 1.6 Git repository kurulumu ve initial commit
+- [x] 1.6 Git repository kurulumu ve initial commit
   - `.gitignore` dosyasını kontrol et (.env.local, node_modules, .next dahil)
   - README.md dosyası oluştur (proje açıklaması, kurulum adımları)
   - İlk commit'i yap
   - _Gereksinimler: 20.11_
 
-- [ ] 1.7 Framer Motion kurulumu ve animasyon utilities oluştur
+- [x] 1.7 Framer Motion kurulumu ve animasyon utilities oluştur
   - `npm install framer-motion` komutu ile kurulum yap
   - `lib/animations.ts` dosyası oluştur ve temel animation variants tanımla
   - Staggered list, modal, page transition variants ekle
@@ -70,26 +70,20 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 2. Temel Mimari ve Type Definitions
 
-- [ ] 2.1 TypeScript type definitions oluştur
-  - `types/admin.ts` - Employee, ClientAccount, Commission, Invoice interface'leri
-  - `types/sem.ts` - SEMCampaign, SEMTask, SEMMetrics interface'leri
-  - `types/seo.ts` - KeywordRanking, Publisher, TechnicalAudit interface'leri
-  - `types/social-media.ts` - SocialMediaClient, ContentApproval interface'leri
-  - `types/crm.ts` - Lead interface'i
-  - `types/tasks.ts` - Task, SOPItem, Activity, TimeTracking interface'leri
-  - `types/client-portal.ts` - ClientProject, ClientService, SupportTicket interface'leri
-  - `types/common.ts` - User, TeamMember, UserRole type'ları
+- [x] 2.1 TypeScript type definitions oluştur
+  - `types/database.types.ts` - Supabase üzerinden generate edildi ve tüm proje için Database modelleme sağlandı
   - _Gereksinimler: 2.2, 4.1, 5.1, 6.2, 7.1, 9.3, 10.2_
 
-- [ ] 2.2 API client ve utilities oluştur
-  - `lib/api-client.ts` - Fetch wrapper ve error handling
-  - `lib/utils.ts` - Helper functions (cn, formatCurrency, formatDate)
-  - `lib/constants.ts` - Sabitler (API endpoints, status options)
-  - `lib/validations.ts` - Zod schemas (loginSchema, taskSchema, leadSchema)
+- [x] 2.2 API client ve utilities oluştur
+  - `lib/api-client.ts` - Fetch wrapper ve error handling eklendi
+  - `lib/supabase/client.ts` ve `server.ts` eklendi Supabase için
+  - `lib/utils.ts` - Helper functions (cn, formatCurrency, formatDate) eklendi
+  - `lib/constants.ts` - Sabitler (API endpoints, status options) eklendi
+  - `lib/validations.ts` - Zod schemas eklendi
   - _Gereksinimler: 15.4, 20.4_
 
 
-- [ ] 2.3 App Router klasör yapısını oluştur
+- [x] 2.3 App Router klasör yapısını oluştur
   - `app/(auth)/` - Login sayfası için route group
   - `app/(dashboard)/` - Dashboard sayfaları için route group
   - `app/client-portal/` - Müşteri portalı sayfaları
@@ -97,7 +91,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Her route için `page.tsx` ve `layout.tsx` placeholder dosyaları oluştur
   - _Gereksinimler: 1.1, 15.1_
 
-- [ ] 2.4 Root layout ve global styles oluştur
+- [x] 2.4 Root layout ve global styles oluştur
   - `app/layout.tsx` - Root layout component (metadata, fonts, providers)
   - `app/globals.css` - Global CSS ve Tailwind directives
   - Font optimization için `next/font` kullan (Inter font)
@@ -106,7 +100,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 3. Layout ve Navigation Sistemi
 
-- [ ] 3.1 Sidebar navigation component oluştur
+- [x] 3.1 Sidebar navigation component oluştur
   - `components/layout/sidebar.tsx` - Client Component olarak oluştur
   - Collapsible menu items implementasyonu
   - Rol bazlı navigation items (Admin, SEO, SEM, Social Media, CRM, Client)
@@ -114,7 +108,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Zustand ile sidebar state management (expanded/collapsed)
   - _Gereksinimler: 1.1, 1.2, 1.3, 1.4, 15.8_
 
-- [ ] 3.2 Header component oluştur
+- [x] 3.2 Header component oluştur
   - `components/layout/header.tsx` - Client Component olarak oluştur
   - Sticky header implementasyonu
   - User profile dropdown
@@ -138,7 +132,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Hierarchical path display
   - _Gereksinimler: 1.8_
 
-- [ ] 3.5 Dashboard layout oluştur
+- [x] 3.5 Dashboard layout oluştur
   - `app/(dashboard)/layout.tsx` - Sidebar ve Header'ı içeren layout
   - Responsive grid layout (sidebar + main content)
   - Page transition animations (Framer Motion)
