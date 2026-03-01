@@ -35,7 +35,7 @@ export const ROUTES = {
         home: "/",
     },
     admin: {
-        payroll: "/admin/maas-ve-personel-odemeleri-paneli",
+        payroll: "/admin/payroll",
         accounts: "/admin/departman-operasyon-detayi"
     },
 } as const;

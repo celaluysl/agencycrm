@@ -1,137 +1,172 @@
+import React from "react";
+import { KpiCard } from "@/components/shared/kpi-card";
 import { PayrollTable } from "@/components/admin/payroll-table";
 import { SalaryDistributionChart } from "@/components/admin/salary-distribution-chart";
-import { Card, CardContent } from "@/components/ui/card";
+import { PayrollPerson } from "@/components/admin/payroll-table";
 
-export const metadata = {
-    title: "Maaş ve Personel Ödemeleri | AgenciFlow",
-};
+export const metadata = { title: "Maaş ve Personel Ödemeleri | AgenciFlow" };
+
+const mockPayrollData: PayrollPerson[] = [
+    {
+        id: "1",
+        name: "Mert Aydın",
+        role: "Senior Developer",
+        department: "Yazılım",
+        initials: "MA",
+        colorClass: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400",
+        basicSalary: 42500,
+        bonus: 5000,
+        deductions: 1200,
+        netPay: 46300,
+        status: "paid",
+    },
+    {
+        id: "2",
+        name: "Selin Kaya",
+        role: "Art Director",
+        department: "Tasarım",
+        initials: "SK",
+        colorClass: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400",
+        basicSalary: 38000,
+        bonus: 0,
+        deductions: 850,
+        netPay: 37150,
+        status: "bank_ready",
+    },
+    {
+        id: "3",
+        name: "Can Özkan",
+        role: "Account Manager",
+        department: "Müşteri İlişkileri",
+        initials: "ÇÖ",
+        colorClass: "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400",
+        basicSalary: 32000,
+        bonus: 8500,
+        deductions: 0,
+        netPay: 40500,
+        status: "pending",
+    },
+    {
+        id: "4",
+        name: "Aslı Demir",
+        role: "SEO Specialist",
+        department: "Pazarlama",
+        initials: "AD",
+        colorClass: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400",
+        basicSalary: 28500,
+        bonus: 2000,
+        deductions: 400,
+        netPay: 30100,
+        status: "paid",
+    },
+    {
+        id: "5",
+        name: "Burak Koç",
+        role: "Copywriter",
+        department: "İçerik",
+        initials: "BK",
+        colorClass: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
+        basicSalary: 24000,
+        bonus: 0,
+        deductions: 0,
+        netPay: 24000,
+        status: "bank_ready",
+    },
+];
+
+const distributionData = [
+    { name: "Yazılım", value: 379125, color: "#3b82f6" }, // blue-500
+    { name: "Tasarım", value: 168500, color: "#a855f7" }, // purple-500
+    { name: "Müşteri İlişk.", value: 126375, color: "#f97316" }, // orange-500
+    { name: "Pazarlama", value: 84250, color: "#22c55e" }, // green-500
+    { name: "Diğer", value: 84250, color: "#d1d5db" }, // gray-300
+];
 
 export default function PayrollPage() {
     return (
-        <div className="p-8 space-y-6">
-            {/* KPI Cards */}
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="rounded-xl shadow-sm text-[#111418] dark:text-white">
-                    <CardContent className="p-6 flex flex-col gap-1">
-                        <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">
-                            Aylık Toplam Maaş Gideri
-                        </p>
-                        <p className="text-2xl font-bold">₺842.500,00</p>
-                        <div className="mt-2 flex items-center gap-1 text-[10px] text-success font-bold">
-                            <span className="material-symbols-outlined text-xs">trending_up</span>{" "}
-                            +3.2% geçen aya göre
-                        </div>
-                    </CardContent>
-                </Card>
+        <div className="flex-1 flex flex-col">
+            <div className="p-4 md:p-8 space-y-6">
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <KpiCard
+                        title="Aylık Toplam Maaş Gideri"
+                        value="₺842.500,00"
+                        changeText="+3.2% geçen aya göre"
+                        trend="up"
+                    />
+                    <KpiCard
+                        title="Prim ve Bonuslar"
+                        value="₺64.200,00"
+                        changeText="12 Personel hak kazandı"
+                        trend="up"
+                    />
+                    <KpiCard
+                        title="SGK ve Vergi Yükü"
+                        value="₺218.400,00"
+                        changeText="Son ödeme: 26 Ekim"
+                        trend="down"
+                    />
+                    <KpiCard
+                        title="Toplam Yan Haklar"
+                        value="₺42.150,00"
+                        changeText="Yemek, Yol ve Özel Sağlık"
+                        trend="neutral"
+                    />
+                </section>
 
-                <Card className="rounded-xl shadow-sm text-[#111418] dark:text-white">
-                    <CardContent className="p-6 flex flex-col gap-1">
-                        <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">
-                            Prim ve Bonuslar
-                        </p>
-                        <p className="text-2xl font-bold text-success">₺64.200,00</p>
-                        <div className="mt-2 flex items-center gap-1 text-[10px] text-[#617289] font-bold">
-                            <span className="material-symbols-outlined text-xs">emoji_events</span>{" "}
-                            12 Personel hak kazandı
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card className="rounded-xl shadow-sm text-[#111418] dark:text-white">
-                    <CardContent className="p-6 flex flex-col gap-1">
-                        <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">
-                            SGK ve Vergi Yükü
-                        </p>
-                        <p className="text-2xl font-bold text-danger">₺218.400,00</p>
-                        <div className="mt-2 flex items-center gap-1 text-[10px] text-danger font-bold">
-                            <span className="material-symbols-outlined text-xs">info</span> Son ödeme:
-                            26 Ekim
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card className="rounded-xl shadow-sm text-[#111418] dark:text-white">
-                    <CardContent className="p-6 flex flex-col gap-1">
-                        <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">
-                            Toplam Yan Haklar
-                        </p>
-                        <p className="text-2xl font-bold text-primary">₺42.150,00</p>
-                        <div className="mt-2 flex items-center gap-1 text-[10px] text-primary font-bold">
-                            <span className="material-symbols-outlined text-xs">add_home</span> Yemek,
-                            Yol ve Özel Sağlık
-                        </div>
-                    </CardContent>
-                </Card>
-            </section>
-
-            {/* Main Content Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-9 bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm">
-                    <div className="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
-                        <h3 className="font-bold text-base flex items-center gap-2">
-                            <span className="material-symbols-outlined text-primary">groups</span>
-                            Personel Ödeme Listesi (Ekim 2023)
-                        </h3>
-                        <div className="flex gap-2">
-                            <button className="flex items-center gap-1 text-xs font-bold text-[#617289] hover:text-primary transition-colors">
-                                <span className="material-symbols-outlined text-sm">filter_list</span>{" "}
-                                Filtrele
-                            </button>
-                            <button className="flex items-center gap-1 text-xs font-bold text-[#617289] hover:text-primary transition-colors ml-4">
-                                <span className="material-symbols-outlined text-sm">download</span> Excel
-                                İndir
-                            </button>
-                        </div>
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+                    <div className="xl:col-span-8 2xl:col-span-9">
+                        <PayrollTable data={mockPayrollData} />
                     </div>
-                    <PayrollTable />
-                </div>
 
-                <div className="lg:col-span-3 space-y-6">
-                    <div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm p-6">
-                        <h3 className="font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
-                            <span className="material-symbols-outlined text-primary text-xl">
-                                file_download
-                            </span>
-                            Hızlı İşlemler
-                        </h3>
-                        <div className="space-y-3">
-                            <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-primary hover:text-white transition-all text-[#111418] dark:text-white">
-                                <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-xl">description</span>
-                                    <span className="text-xs font-bold">Bordro İndir (Zip)</span>
-                                </div>
-                                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                                    chevron_right
+                    <div className="xl:col-span-4 2xl:col-span-3 space-y-6">
+                        <div className="bg-white dark:bg-[#1a2432] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-6">
+                            <h3 className="font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
+                                <span className="material-symbols-outlined text-primary text-xl">
+                                    file_download
                                 </span>
-                            </button>
-                            <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-success hover:text-white transition-all text-[#111418] dark:text-white">
-                                <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-xl">task_alt</span>
-                                    <span className="text-xs font-bold">Toplu Ödeme Onayı</span>
-                                </div>
-                                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                                    chevron_right
-                                </span>
-                            </button>
-                            <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-primary hover:text-white transition-all text-[#111418] dark:text-white">
-                                <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-xl">send</span>
-                                    <span className="text-xs font-bold">Bordroları Gönder</span>
-                                </div>
-                                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                                    chevron_right
-                                </span>
-                            </button>
+                                Hızlı İşlemler
+                            </h3>
+                            <div className="space-y-3">
+                                <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-primary hover:text-white transition-all">
+                                    <div className="flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-xl">
+                                            description
+                                        </span>
+                                        <span className="text-xs font-bold">Bordro İndir (Zip)</span>
+                                    </div>
+                                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                                        chevron_right
+                                    </span>
+                                </button>
+                                <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-success hover:text-white transition-all text-gray-700 dark:text-gray-300">
+                                    <div className="flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-xl">
+                                            task_alt
+                                        </span>
+                                        <span className="text-xs font-bold">Toplu Ödeme Onayı</span>
+                                    </div>
+                                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                                        chevron_right
+                                    </span>
+                                </button>
+                                <button className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg group hover:bg-primary hover:text-white transition-all text-gray-700 dark:text-gray-300">
+                                    <div className="flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-xl">
+                                            send
+                                        </span>
+                                        <span className="text-xs font-bold">Bordroları Gönder</span>
+                                    </div>
+                                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                                        chevron_right
+                                    </span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm p-6">
-                        <h3 className="font-bold text-sm mb-6 flex items-center gap-2 uppercase tracking-wide">
-                            <span className="material-symbols-outlined text-primary text-xl">
-                                pie_chart
-                            </span>
-                            Maaş Dağılımı
-                        </h3>
-                        <SalaryDistributionChart />
+
+                        <SalaryDistributionChart
+                            data={distributionData}
+                            totalAmountText="₺842k"
+                        />
                     </div>
                 </div>
             </div>

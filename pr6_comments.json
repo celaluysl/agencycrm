@@ -1,0 +1,278 @@
+[
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848243",
+    "pull_request_review_id": 3873418527,
+    "id": 2869848243,
+    "node_id": "PRRC_kwDORbYZPM6rDmiz",
+    "diff_hunk": "@@ -1,209 +1,198 @@\n \"use client\";\n \n-import React from \"react\";\n-import { cn } from \"@/lib/utils\";\n+import { ColumnDef } from \"@tanstack/react-table\";\n+import { DataTable } from \"@/components/shared/data-table\";\n+import { Badge } from \"@/components/ui/badge\";\n+import { StatusBadge } from \"@/components/shared/status-badge\";\n+import { Checkbox } from \"@/components/ui/checkbox\";\n+import { Button } from \"@/components/ui/button\";\n+import { FilterBar } from \"@/components/shared/filter-bar\";\n+import { useState } from \"react\";\n+import { ArrowUpDown } from \"lucide-react\";\n \n-const employees = [\n+export type PayrollPerson = {\n+    id: string;\n+    name: string;\n+    role: string;\n+    department: string;\n+    initials: string;\n+    colorClass: string;\n+    basicSalary: number;\n+    bonus: number;\n+    deductions: number;\n+    netPay: number;\n+    status: \"paid\" | \"pending\" | \"bank_ready\";\n+};\n+\n+const columns: ColumnDef<PayrollPerson>[] = [\n     {\n-        id: \"1\",\n-        name: \"Mert Aydın\",\n-        initials: \"MA\",\n-        role: \"Senior Developer\",\n-        department: \"Yazılım\",\n-        baseSalary: \"₺42.500,00\",\n-        bonus: \"+₺5.000,00\",\n-        deductions: \"-₺1.200,00\",\n-        netPay: \"₺46.300,00\",\n-        statusText: \"ÖDENDİ\",\n-        statusBadge: \"success\",\n-        departmentTheme: \"blue\",\n+        id: \"select\",\n+        header: ({ table }) => (\n+            <Checkbox\n+                checked={\n+                    table.getIsAllPageRowsSelected() ||\n+                    (table.getIsSomePageRowsSelected() && \"indeterminate\")\n+                }\n+                onCheckedChange={(value: boolean | \"indeterminate\") => table.toggleAllPageRowsSelected(!!value)}\n+                aria-label=\"Select all\"\n+            />\n+        ),\n+        cell: ({ row }) => (\n+            <Checkbox\n+                checked={row.getIsSelected()}\n+                onCheckedChange={(value: boolean | \"indeterminate\") => row.toggleSelected(!!value)}\n+                aria-label=\"Select row\"\n+            />\n+        ),\n+        enableSorting: false,\n+        enableHiding: false,\n     },\n     {\n-        id: \"2\",\n-        name: \"Selin Kaya\",\n-        initials: \"SK\",\n-        role: \"Art Director\",\n-        department: \"Tasarım\",\n-        baseSalary: \"₺38.000,00\",\n-        bonus: \"₺0,00\",\n-        deductions: \"-₺850,00\",\n-        netPay: \"₺37.150,00\",\n-        statusText: \"Banka Talimatı Hazırlandı\",\n-        statusBadge: \"primary\",\n-        departmentTheme: \"purple\",\n+        accessorKey: \"name\",\n+        header: ({ column }) => {\n+            return (\n+                <Button\n+                    variant=\"ghost\"\n+                    onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}\n+                    className=\"px-0 font-bold text-[#617289]\"\n+                >\n+                    Personel İsmi\n+                    <ArrowUpDown className=\"ml-2 h-4 w-4\" />\n+                </Button>\n+            );\n+        },\n+        cell: ({ row }) => {\n+            const person = row.original;\n+            return (\n+                <div className=\"flex items-center gap-3\">\n+                    <div\n+                        className={`size-8 rounded-full flex items-center justify-center font-bold text-xs ${person.colorClass}`}\n+                    >\n+                        {person.initials}\n+                    </div>\n+                    <div>\n+                        <p className=\"text-sm font-bold\">{person.name}</p>\n+                        <p className=\"text-[10px] text-gray-500\">{person.role}</p>\n+                    </div>\n+                </div>\n+            );\n+        },\n     },\n     {\n-        id: \"3\",\n-        name: \"Can Özkan\",\n-        initials: \"ÇÖ\",\n-        role: \"Account Manager\",\n-        department: \"Müşteri İlişkileri\",\n-        baseSalary: \"₺32.000,00\",\n-        bonus: \"+₺8.500,00\",\n-        deductions: \"₺0,00\",\n-        netPay: \"₺40.500,00\",\n-        statusText: \"BEKLEMEDE\",\n-        statusBadge: \"warning\",\n-        departmentTheme: \"orange\",\n+        accessorKey: \"department\",\n+        header: \"Departman\",\n+        cell: ({ row }) => {\n+            const val: string = row.getValue(\"department\");\n+            return (\n+                <Badge variant=\"secondary\" className=\"px-2 py-1 text-[10px] font-bold uppercase\">\n+                    {val}\n+                </Badge>\n+            );\n+        },\n     },\n     {\n-        id: \"4\",\n-        name: \"Aslı Demir\",\n-        initials: \"AD\",\n-        role: \"SEO Specialist\",\n-        department: \"Pazarlama\",\n-        baseSalary: \"₺28.500,00\",\n-        bonus: \"+₺2.000,00\",\n-        deductions: \"-₺400,00\",\n-        netPay: \"₺30.100,00\",\n-        statusText: \"ÖDENDİ\",\n-        statusBadge: \"success\",\n-        departmentTheme: \"green\",\n+        accessorKey: \"basicSalary\",\n+        header: \"Temel Maaş\",\n+        cell: ({ row }) => {\n+            const val: number = row.getValue(\"basicSalary\");\n+            return <span className=\"text-xs font-semibold\">₺{val.toLocaleString(\"tr-TR\")}</span>;\n+        },\n     },\n     {\n-        id: \"5\",\n-        name: \"Burak Koç\",\n-        initials: \"BK\",\n-        role: \"Copywriter\",\n-        department: \"İçerik\",\n-        baseSalary: \"₺24.000,00\",\n-        bonus: \"₺0,00\",\n-        deductions: \"₺0,00\",\n-        netPay: \"₺24.000,00\",\n-        statusText: \"Banka Talimatı Hazırlandı\",\n-        statusBadge: \"primary\",\n-        departmentTheme: \"gray\",\n+        accessorKey: \"bonus\",\n+        header: \"Prim / Bonus\",\n+        cell: ({ row }) => {\n+            const val: number = row.getValue(\"bonus\");\n+            return (\n+                <span className=\"text-xs font-semibold text-green-600\">\n+                    +{val > 0 ? \"₺\" : \"\"}\n+                    {val.toLocaleString(\"tr-TR\")}\n+                </span>\n+            );",
+    "path": "components/admin/payroll-table.tsx",
+    "commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "original_commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"BUG_pr-review-job-8f9d0f898ba64f5ea49c8937cd7358a4_0001\", \"file_path\": \"components/admin/payroll-table.tsx\", \"start_line\": 106, \"end_line\": 111, \"side\": \"RIGHT\"} -->\n\n🟡 **Bonus column shows \"+0\" in green with no currency symbol when bonus is zero**\n\nWhen a payroll person has `bonus: 0`, the bonus cell renders `+0` in green (`text-green-600`) instead of displaying a neutral-colored value with a currency symbol.\n\n<details>\n<summary>Root Cause</summary>\n\nThe conditional at line 108 `+{val > 0 ? \"₺\" : \"\"}` omits the currency symbol when `val` is `0`, producing `+0`. Additionally, the entire `<span>` always has `text-green-600` class regardless of the value.\n\nFor example, with `bonus: 0` (Selin Kaya, Burak Koç in mock data at `app/(dashboard)/admin/payroll/page.tsx:29` and `page.tsx:69`):\n- Renders: `+0` in green\n- Expected: `₺0` in a neutral/gray color (the old code at the deleted payroll-table.tsx:160-163 showed `₺0,00` in `text-[#617289]` gray when the value was zero)\n\n**Impact:** Zero bonus values appear visually misleading — showing a green \"+0\" suggests a positive bonus when there is none.\n\n</details>\n\n```suggestion\n            return (\n                <span className={`text-xs font-semibold ${val > 0 ? \"text-green-600\" : \"text-gray-500\"}`}>\n                    {val > 0 ? `+₺${val.toLocaleString(\"tr-TR\")}` : `₺${val.toLocaleString(\"tr-TR\")}`}\n                </span>\n            );\n```\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/6\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:45:47Z",
+    "updated_at": "2026-03-01T21:45:49Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848243",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848243"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848243"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848243/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 106,
+    "original_start_line": 106,
+    "start_side": "RIGHT",
+    "line": 111,
+    "original_line": 111,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 174,
+    "position": 174,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848258",
+    "pull_request_review_id": 3873418527,
+    "id": 2869848258,
+    "node_id": "PRRC_kwDORbYZPM6rDmjC",
+    "diff_hunk": "@@ -1,209 +1,198 @@\n \"use client\";\n \n-import React from \"react\";\n-import { cn } from \"@/lib/utils\";\n+import { ColumnDef } from \"@tanstack/react-table\";\n+import { DataTable } from \"@/components/shared/data-table\";\n+import { Badge } from \"@/components/ui/badge\";\n+import { StatusBadge } from \"@/components/shared/status-badge\";\n+import { Checkbox } from \"@/components/ui/checkbox\";\n+import { Button } from \"@/components/ui/button\";\n+import { FilterBar } from \"@/components/shared/filter-bar\";\n+import { useState } from \"react\";\n+import { ArrowUpDown } from \"lucide-react\";\n \n-const employees = [\n+export type PayrollPerson = {\n+    id: string;\n+    name: string;\n+    role: string;\n+    department: string;\n+    initials: string;\n+    colorClass: string;\n+    basicSalary: number;\n+    bonus: number;\n+    deductions: number;\n+    netPay: number;\n+    status: \"paid\" | \"pending\" | \"bank_ready\";\n+};\n+\n+const columns: ColumnDef<PayrollPerson>[] = [\n     {\n-        id: \"1\",\n-        name: \"Mert Aydın\",\n-        initials: \"MA\",\n-        role: \"Senior Developer\",\n-        department: \"Yazılım\",\n-        baseSalary: \"₺42.500,00\",\n-        bonus: \"+₺5.000,00\",\n-        deductions: \"-₺1.200,00\",\n-        netPay: \"₺46.300,00\",\n-        statusText: \"ÖDENDİ\",\n-        statusBadge: \"success\",\n-        departmentTheme: \"blue\",\n+        id: \"select\",\n+        header: ({ table }) => (\n+            <Checkbox\n+                checked={\n+                    table.getIsAllPageRowsSelected() ||\n+                    (table.getIsSomePageRowsSelected() && \"indeterminate\")\n+                }\n+                onCheckedChange={(value: boolean | \"indeterminate\") => table.toggleAllPageRowsSelected(!!value)}\n+                aria-label=\"Select all\"\n+            />\n+        ),\n+        cell: ({ row }) => (\n+            <Checkbox\n+                checked={row.getIsSelected()}\n+                onCheckedChange={(value: boolean | \"indeterminate\") => row.toggleSelected(!!value)}\n+                aria-label=\"Select row\"\n+            />\n+        ),\n+        enableSorting: false,\n+        enableHiding: false,\n     },\n     {\n-        id: \"2\",\n-        name: \"Selin Kaya\",\n-        initials: \"SK\",\n-        role: \"Art Director\",\n-        department: \"Tasarım\",\n-        baseSalary: \"₺38.000,00\",\n-        bonus: \"₺0,00\",\n-        deductions: \"-₺850,00\",\n-        netPay: \"₺37.150,00\",\n-        statusText: \"Banka Talimatı Hazırlandı\",\n-        statusBadge: \"primary\",\n-        departmentTheme: \"purple\",\n+        accessorKey: \"name\",\n+        header: ({ column }) => {\n+            return (\n+                <Button\n+                    variant=\"ghost\"\n+                    onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}\n+                    className=\"px-0 font-bold text-[#617289]\"\n+                >\n+                    Personel İsmi\n+                    <ArrowUpDown className=\"ml-2 h-4 w-4\" />\n+                </Button>\n+            );\n+        },\n+        cell: ({ row }) => {\n+            const person = row.original;\n+            return (\n+                <div className=\"flex items-center gap-3\">\n+                    <div\n+                        className={`size-8 rounded-full flex items-center justify-center font-bold text-xs ${person.colorClass}`}\n+                    >\n+                        {person.initials}\n+                    </div>\n+                    <div>\n+                        <p className=\"text-sm font-bold\">{person.name}</p>\n+                        <p className=\"text-[10px] text-gray-500\">{person.role}</p>\n+                    </div>\n+                </div>\n+            );\n+        },\n     },\n     {\n-        id: \"3\",\n-        name: \"Can Özkan\",\n-        initials: \"ÇÖ\",\n-        role: \"Account Manager\",\n-        department: \"Müşteri İlişkileri\",\n-        baseSalary: \"₺32.000,00\",\n-        bonus: \"+₺8.500,00\",\n-        deductions: \"₺0,00\",\n-        netPay: \"₺40.500,00\",\n-        statusText: \"BEKLEMEDE\",\n-        statusBadge: \"warning\",\n-        departmentTheme: \"orange\",\n+        accessorKey: \"department\",\n+        header: \"Departman\",\n+        cell: ({ row }) => {\n+            const val: string = row.getValue(\"department\");\n+            return (\n+                <Badge variant=\"secondary\" className=\"px-2 py-1 text-[10px] font-bold uppercase\">\n+                    {val}\n+                </Badge>\n+            );\n+        },\n     },\n     {\n-        id: \"4\",\n-        name: \"Aslı Demir\",\n-        initials: \"AD\",\n-        role: \"SEO Specialist\",\n-        department: \"Pazarlama\",\n-        baseSalary: \"₺28.500,00\",\n-        bonus: \"+₺2.000,00\",\n-        deductions: \"-₺400,00\",\n-        netPay: \"₺30.100,00\",\n-        statusText: \"ÖDENDİ\",\n-        statusBadge: \"success\",\n-        departmentTheme: \"green\",\n+        accessorKey: \"basicSalary\",\n+        header: \"Temel Maaş\",\n+        cell: ({ row }) => {\n+            const val: number = row.getValue(\"basicSalary\");\n+            return <span className=\"text-xs font-semibold\">₺{val.toLocaleString(\"tr-TR\")}</span>;\n+        },\n     },\n     {\n-        id: \"5\",\n-        name: \"Burak Koç\",\n-        initials: \"BK\",\n-        role: \"Copywriter\",\n-        department: \"İçerik\",\n-        baseSalary: \"₺24.000,00\",\n-        bonus: \"₺0,00\",\n-        deductions: \"₺0,00\",\n-        netPay: \"₺24.000,00\",\n-        statusText: \"Banka Talimatı Hazırlandı\",\n-        statusBadge: \"primary\",\n-        departmentTheme: \"gray\",\n+        accessorKey: \"bonus\",\n+        header: \"Prim / Bonus\",\n+        cell: ({ row }) => {\n+            const val: number = row.getValue(\"bonus\");\n+            return (\n+                <span className=\"text-xs font-semibold text-green-600\">\n+                    +{val > 0 ? \"₺\" : \"\"}\n+                    {val.toLocaleString(\"tr-TR\")}\n+                </span>\n+            );\n+        },\n+    },\n+    {\n+        accessorKey: \"deductions\",\n+        header: \"Kesintiler\",\n+        cell: ({ row }) => {\n+            const val: number = row.getValue(\"deductions\");\n+            return (\n+                <span className=\"text-xs font-semibold text-red-600\">\n+                    -{val > 0 ? \"₺\" : \"\"}\n+                    {val.toLocaleString(\"tr-TR\")}\n+                </span>\n+            );",
+    "path": "components/admin/payroll-table.tsx",
+    "commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "original_commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"BUG_pr-review-job-8f9d0f898ba64f5ea49c8937cd7358a4_0002\", \"file_path\": \"components/admin/payroll-table.tsx\", \"start_line\": 119, \"end_line\": 124, \"side\": \"RIGHT\"} -->\n\n🟡 **Deductions column shows \"-0\" in red with no currency symbol when deductions is zero**\n\nWhen a payroll person has `deductions: 0`, the deductions cell renders `-0` in red (`text-red-600`) instead of displaying a neutral-colored value with a currency symbol.\n\n<details>\n<summary>Root Cause</summary>\n\nThe conditional at line 121 `-{val > 0 ? \"₺\" : \"\"}` omits the currency symbol when `val` is `0`, producing `-0`. Additionally, the entire `<span>` always has `text-red-600` class regardless of the value.\n\nFor example, with `deductions: 0` (Can Özkan and Burak Koç in mock data at `app/(dashboard)/admin/payroll/page.tsx:44` and `page.tsx:70`):\n- Renders: `-0` in red\n- Expected: `₺0` in a neutral/gray color (the old code at the deleted payroll-table.tsx:166-169 showed `₺0,00` in `text-[#617289]` gray when the value was zero)\n\n**Impact:** Zero deduction values appear visually misleading — showing a red \"-0\" suggests a deduction when there is none.\n\n</details>\n\n```suggestion\n            return (\n                <span className={`text-xs font-semibold ${val > 0 ? \"text-red-600\" : \"text-gray-500\"}`}>\n                    {val > 0 ? `-₺${val.toLocaleString(\"tr-TR\")}` : `₺${val.toLocaleString(\"tr-TR\")}`}\n                </span>\n            );\n```\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/6\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:45:48Z",
+    "updated_at": "2026-03-01T21:45:49Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848258",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848258"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848258"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848258/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 119,
+    "original_start_line": 119,
+    "start_side": "RIGHT",
+    "line": 124,
+    "original_line": 124,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 187,
+    "position": 187,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848830",
+    "pull_request_review_id": 3873418955,
+    "id": 2869848830,
+    "node_id": "PRRC_kwDORbYZPM6rDmr-",
+    "diff_hunk": "",
+    "path": "app/(dashboard)/admin/payroll/page.tsx",
+    "commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "original_commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-8f9d0f898ba64f5ea49c8937cd7358a4_0001\", \"file_path\": \"app/(dashboard)/admin/payroll/page.tsx\", \"side\": \"RIGHT\"} -->\n\n🚩 **Page metadata export was removed in the rewrite**\n\nThe old version of this page (visible in the LEFT diff at lines 5-7) exported `export const metadata = { title: \"Maaş ve Personel Ödemeleri | AgenciFlow\" }`. The new Server Component page has no metadata export, meaning the browser tab title will fall back to whatever the layout provides (or the default). This is a feature regression rather than a bug, but it may be intentional if a parent layout sets the title.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/6\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:46:19Z",
+    "updated_at": "2026-03-01T21:46:20Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848830",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848830"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848830"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848830/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 1,
+    "original_line": 1,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 1,
+    "position": 1,
+    "subject_type": "file"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848990",
+    "pull_request_review_id": 3873419059,
+    "id": 2869848990,
+    "node_id": "PRRC_kwDORbYZPM6rDmue",
+    "diff_hunk": "@@ -10,7 +10,7 @@\n   },\n   \"dependencies\": {\n     \"@hookform/resolvers\": \"^5.2.2\",\n-    \"@supabase/ssr\": \"^0.8.0\",\n+    \"@supabase/ssr\": \"^0.5.2\",",
+    "path": "package.json",
+    "commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "original_commit_id": "26831abbf758c754f35485b2583c5808fbcd6b1c",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-8f9d0f898ba64f5ea49c8937cd7358a4_0005\", \"file_path\": \"package.json\", \"start_line\": 13, \"end_line\": 13, \"side\": \"RIGHT\"} -->\n\n🚩 **@supabase/ssr downgraded from ^0.8.0 to ^0.5.2**\n\nThe `@supabase/ssr` package was downgraded from `^0.8.0` to `^0.5.2` in package.json. The PR description mentions \"Re-synced dependencies and package-lock to fix Next.js build errors\", so this may have been intentional to resolve a compatibility issue with Next.js 16. However, downgrading a dependency can introduce subtle behavioral differences or miss security patches. Worth confirming this was intentional and that the lock file is consistent.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/6\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T21:46:26Z",
+    "updated_at": "2026-03-01T21:46:29Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848990",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848990"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/6#discussion_r2869848990"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/6"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869848990/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 13,
+    "original_line": 13,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 5,
+    "position": 5,
+    "subject_type": "line"
+  }
+]

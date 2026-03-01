@@ -11,7 +11,7 @@ export const navigation = [
         name: "Ajans Yönetimi", href: "#", icon: "admin_panel_settings", items: [
             { name: "Departman Operasyonu", href: "/admin/departman-operasyon-detayi" },
             { name: "İK Verimlilik", href: "/admin/ik-verimlilik-ve-kapasite-analizi" },
-            { name: "Maaş & Personel", href: "/admin/maas-ve-personel-odemeleri-paneli" },
+            { name: "Maaş & Personel", href: "/admin/payroll" },
             { name: "Sistem Logları", href: "/admin/sistem-loglari-ve-guvenlik-paneli" },
             { name: "Site Hizmet Yönetimi", href: "/admin/site-bazli-hizmet-yonetim-paneli" },
         ]

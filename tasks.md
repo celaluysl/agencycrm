@@ -197,14 +197,14 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 5. Admin Dashboard - Maaş ve Personel Modülü
 
-- [ ] 5.1 Payroll sayfası oluştur
+- [x] 5.1 Payroll sayfası oluştur
   - `app/(dashboard)/admin/payroll/page.tsx` - Server Component
   - KPI cards (Toplam Maaş, Primler, SGK/Vergi, Yan Haklar)
   - Personel listesi tablosu (isim, departman, maaş breakdown, durum)
   - Sidebar (hızlı işlemler, maaş dağılımı grafiği)
   - _Gereksinimler: 2.1, 2.2_
 
-- [ ] 5.2 Payroll Table component oluştur
+- [x] 5.2 Payroll Table component oluştur
   - `components/admin/payroll-table.tsx` - Client Component
   - Checkbox selection (toplu ödeme onayı için)
   - Departman bazlı filtreleme
@@ -212,7 +212,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Excel/CSV export butonu
   - _Gereksinimler: 2.3, 2.4_
 
-- [ ] 5.3 Salary Distribution Chart component oluştur
+- [x] 5.3 Salary Distribution Chart component oluştur
   - `components/admin/salary-distribution-chart.tsx` - Client Component
   - Pie chart (departman bazlı dağılım)
   - Recharts veya Chart.js kullan
