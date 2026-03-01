@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const navigation = [
+export const navigation = [
     { name: "Genel Bakış", href: "/", icon: "dashboard", items: [] },
     {
         name: "Ajans Yönetimi", href: "#", icon: "admin_panel_settings", items: [
@@ -108,7 +108,7 @@ export function Sidebar() {
     };
 
     return (
-        <aside className="w-64 flex-shrink-0 flex flex-col bg-white dark:bg-[#1a2432] border-r border-[#dbe0e6] dark:border-gray-800 transition-colors h-full overflow-hidden">
+        <aside className="w-64 flex-shrink-0 hidden md:flex flex-col bg-white dark:bg-[#1a2432] border-r border-[#dbe0e6] dark:border-gray-800 transition-colors h-full overflow-hidden">
             <div className="p-6 pb-2 shrink-0">
                 {/* Logo Section */}
                 <div className="flex items-center gap-3 mb-6">

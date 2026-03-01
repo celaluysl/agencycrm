@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atanan Müşteriler ve Durum Takibi - AgenciFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #374151;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100 antialiased h-screen overflow-hidden flex">
+<aside class="w-64 border-r border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-[#111827] flex flex-col justify-between shrink-0">
+<div class="flex flex-col gap-6 p-4">
+<div class="flex items-center gap-3 px-2">
+<div class="bg-primary rounded-lg size-10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-tight">AgenciFlow</h1>
+<p class="text-[#617289] dark:text-gray-400 text-xs font-normal">Ajans Yönetim Paneli</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#617289] dark:text-gray-400 hover:bg-[#f0f2f4] dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Genel Bakış</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">group</span>
+<span class="text-sm font-bold">Müşterilerim</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#617289] dark:text-gray-400 hover:bg-[#f0f2f4] dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span class="text-sm font-medium">Projeler</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#617289] dark:text-gray-400 hover:bg-[#f0f2f4] dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Teklifler</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#617289] dark:text-gray-400 hover:bg-[#f0f2f4] dark:hover:bg-gray-800 transition-colors mt-4" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ayarlar</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-[#dbe0e6] dark:border-gray-800">
+<div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/30 rounded-lg p-3">
+<div class="flex items-center gap-2 text-amber-700 dark:text-amber-400 mb-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Kısıtlı Erişim</span>
+</div>
+<p class="text-[11px] text-amber-600 dark:text-amber-500 leading-tight">Sadece size atanan müşterileri görüntüleyebilirsiniz.</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<header class="h-16 border-b border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-[#111827] flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-6 flex-1">
+<h2 class="text-[#111418] dark:text-white text-lg font-bold tracking-tight">Atanan Müşteriler ve Durum Takibi</h2>
+<div class="max-w-md w-full relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#617289] text-xl">search</span>
+<input class="w-full bg-[#f0f2f4] dark:bg-gray-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-[#617289] dark:text-white" placeholder="Müşteri veya uzman ara..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-blue-600 text-white rounded-lg h-10 px-5 flex items-center justify-center gap-2 font-bold text-sm transition-all">
+<span class="material-symbols-outlined text-xl">person_add</span>
+<span>Yeni Müşteri Ekle</span>
+</button>
+<div class="flex gap-2">
+<button class="p-2 text-[#111418] dark:text-gray-300 hover:bg-[#f0f2f4] dark:hover:bg-gray-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111827]"></span>
+</button>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border border-[#dbe0e6] dark:border-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6nhS6SNphzIbMVBOKhbVLnbI22iEjXnlcxfG4_wTVyXI_VXTWCfFsd8OMG6JUKOQjvFpT8zc2---Dnv77YBr_PnlOaHGNZhTrDj8Ds3zcQvfX5oLDn-I6XJBAHO4JIHoC3wooHvq1uLxe2_mKRu3xajwxNgqKypZRZeylPlRgZVKE53AtWEPYZXvyi257nKy9nHT2pVygGll5NF9R1cfc5LvCs_23S99QVdrNSUwKOIHJ6higJDl46XYbu3HRUYbBTUQv9mRzp2Ks");'></div>
+</div>
+</header>
+<div class="px-6 py-4 bg-white dark:bg-[#111827] border-b border-[#dbe0e6] dark:border-gray-800 flex flex-wrap items-center justify-between gap-4">
+<div class="flex gap-8">
+<a class="border-b-2 border-primary pb-2 text-primary font-bold text-sm" href="#">Tüm Aktif Müşteriler</a>
+<a class="border-b-2 border-transparent pb-2 text-[#617289] dark:text-gray-400 font-medium text-sm hover:text-[#111418] dark:hover:text-white" href="#">Bekleyen Onaylar</a>
+<a class="border-b-2 border-transparent pb-2 text-[#617289] dark:text-gray-400 font-medium text-sm hover:text-[#111418] dark:hover:text-white" href="#">Tamamlananlar</a>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-[#617289] uppercase tracking-wider">
+                Departman Filtresi:
+            </div>
+<button class="flex items-center gap-2 rounded-lg bg-[#f0f2f4] dark:bg-gray-800 px-3 py-1.5 text-sm font-medium text-[#111418] dark:text-gray-300 border border-transparent hover:border-primary/30">
+<span>SEO</span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-[#f0f2f4] dark:bg-gray-800 px-3 py-1.5 text-sm font-medium text-[#111418] dark:text-gray-300 border border-transparent hover:border-primary/30">
+<span>Tasarım</span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-[#f0f2f4] dark:bg-gray-800 px-3 py-1.5 text-sm font-medium text-[#111418] dark:text-gray-300 border border-transparent hover:border-primary/30">
+<span>Yazılım</span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary/10 text-primary px-3 py-1.5 text-sm font-bold border border-primary/20">
+<span>Hepsi</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar p-6">
+<div class="bg-white dark:bg-[#111827] rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-[#dbe0e6] dark:border-gray-800">
+<th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Müşteri Adı</th>
+<th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Departman</th>
+<th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Proje Durumu</th>
+<th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Son İletişim</th>
+<th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Atanan Uzman</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#f0f2f4] dark:divide-gray-800">
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
+                                    AT
+                                </div>
+<div>
+<div class="font-bold text-[#111418] dark:text-white">Acme Teknoloji</div>
+<div class="text-xs text-[#617289] dark:text-gray-500">E-Ticaret Dönüşümü</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 uppercase">Yazılım</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full max-w-[160px]">
+<div class="flex justify-between items-center mb-1 text-[11px] font-bold">
+<span class="text-primary">%60 Tamamlandı</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#111418] dark:text-white font-medium">Bugün, 14:30</div>
+<div class="text-[11px] text-[#617289] dark:text-gray-500 italic">E-posta gönderildi</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXaXuCh0iiV_X8hAryYYcgKj9YV-75CfzIohqrdio2bLvFiABZhiKPS8ylxde5KTsh3aSu67B5Xd1HnQz09gHVEenWJaHspTpTElDZbFu7i7UuncgAoC-VlrlKW8yQjVglnZo1GgZtLadew6X3kuYXGwNg3fJo-XNYr1ZuemwZev10TeF-hGzcnApHreuHR3i5NwiB6LpWOAhA-_8f1Dx81zdO3bIevFFDST40oHArb5xpHjRAk5ix91vhbiAsit8s8qww0z0KM53P')"></div>
+<span class="text-sm font-medium dark:text-gray-300">Can Yılmaz</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#617289] hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold">
+                                    GA
+                                </div>
+<div>
+<div class="font-bold text-[#111418] dark:text-white">Gökyüzü Ajans</div>
+<div class="text-xs text-[#617289] dark:text-gray-500">SEO Strateji Paketi</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 uppercase">SEO</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full max-w-[160px]">
+<div class="flex justify-between items-center mb-1 text-[11px] font-bold">
+<span class="text-green-500">%85 Tamamlandı</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#111418] dark:text-white font-medium">Dün, 09:15</div>
+<div class="text-[11px] text-[#617289] dark:text-gray-500 italic">WhatsApp araması</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGaGUQX-6yEvVO9sO7vu6tHurgR8JZPP9rNMu_cKH6jDKDfVhxq9IWFICK-Y2Bqqdd65KqcVW1CbHDKymF-4DMQJoWWPd1CxnOnas70XU6tmwtWzU2iED3KGTMW5PicJLXa4-mQtrmjxYUVyjJFZj7i12VHlVgNYfKNApoKtKlEtO3piTzHF9NiEqS3Od9fDsONFED94qD3TDMyVl2y6bw9ssso8ZY8WstTmuoM_hdHJ0b7dJ7fjSCt2EwFHvfU-QUjj46R7gAGAR2')"></div>
+<span class="text-sm font-medium dark:text-gray-300">Mert Demir</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#617289] hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold">
+                                    HL
+                                </div>
+<div>
+<div class="font-bold text-[#111418] dark:text-white">Hızlı Lojistik</div>
+<div class="text-xs text-[#617289] dark:text-gray-500">Logo &amp; Kurumsal Kimlik</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 uppercase">Tasarım</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full max-w-[160px]">
+<div class="flex justify-between items-center mb-1 text-[11px] font-bold">
+<span class="text-primary">%25 Tamamlandı</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#111418] dark:text-white font-medium">3 gün önce</div>
+<div class="text-[11px] text-[#617289] dark:text-gray-500 italic">Toplantı notları paylaşıldı</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACxbhqudTzPbZmfLo3DPa_yEoEwQhGjXFHh3PHglnXgi7DUfr6qPkTbblfNp-8dSoP-tjVX2iqP8nGDAaEkqr7c9eofKUe70vYDH0tMftXStyyzZblGhwu7bLEMk2fiI-1VUoVmPhiXrhApS0cuSUDSJMylXgTNVEJM345JR8TSVrk7SIfAkHga3aXqQltR6NXMGix3GO6aEHHE1zleLybfPcCdm0t6zS7A-ZAktXqRjb2frcd4P_ycWBrAl4jUPFCFu6AwmhoUM87')"></div>
+<span class="text-sm font-medium dark:text-gray-300">Aslı Akın</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#617289] hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold">
+                                    TF
+                                </div>
+<div>
+<div class="font-bold text-[#111418] dark:text-white">TechFlow Yazılım</div>
+<div class="text-xs text-[#617289] dark:text-gray-500">Mobil Uygulama Arayüzü</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 uppercase">Tasarım</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full max-w-[160px]">
+<div class="flex justify-between items-center mb-1 text-[11px] font-bold">
+<span class="text-green-500">%100 Tamamlandı</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#111418] dark:text-white font-medium">1 saat önce</div>
+<div class="text-[11px] text-green-600 dark:text-green-500 font-bold">Onaylandı</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAHqrf3nhEPZV9emALCp2ksTPyOVG6LKqByG1kRIhDr9v-aCSQFB4jbzo2mEBhLG0k-KBNxqdbJkerkzhdDs5EmgTMg7JdJCwtv2rmndWTYBd_9vrBIuhp7mRs7310ILeTjou1xSQXuqlGxCo3xz9uMItRbZ-14csDugssBy6yP3N30JxvT_LY-Vklsnw0ECwTmgfTay3e9PimCvvTF3YqP9JN6RoNLe48hrsR6sE5VSVbEZfUs3K18aZx4OCW-X4DyDtVtgGR2i6k')"></div>
+<span class="text-sm font-medium dark:text-gray-300">Aslı Akın</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#617289] hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 border-t border-[#f0f2f4] dark:border-gray-800 flex items-center justify-between">
+<span class="text-sm text-[#617289] dark:text-gray-500 font-medium">Toplam 14 müşteriden 4 tanesi gösteriliyor</span>
+<div class="flex gap-1">
+<button class="px-3 py-1 rounded border border-[#dbe0e6] dark:border-gray-700 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50" disabled="">Önceki</button>
+<button class="px-3 py-1 rounded bg-primary text-white text-sm font-bold">1</button>
+<button class="px-3 py-1 rounded border border-[#dbe0e6] dark:border-gray-700 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">2</button>
+<button class="px-3 py-1 rounded border border-[#dbe0e6] dark:border-gray-700 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">Sonraki</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>
