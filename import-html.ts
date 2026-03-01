@@ -139,6 +139,8 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
         mainClass = mainClass.replace(/bg-[a-zA-Z0-9-\[\]]+/g, '').replace(/text-[a-zA-Z0-9-\[\]]+/g, '').replace(/dark:[a-zA-Z0-9-\[\]]+/g, '');
         // Remove structural classes from main to avoid duplicating Dashboard layout flex/overflow logic
         mainClass = mainClass.replace(/(?:^|\s)(flex-1|flex-col|flex|overflow-y-auto|overflow-x-hidden|overflow-hidden|h-screen|w-full|custom-scrollbar)(?=\s|$)/g, ' ');
+        // Remove hardcoded left margins (like ml-64, md:ml-64, lg:ml-72) that create double offsets in dashboard layout
+        mainClass = mainClass.replace(/(?:^|\s)((?:md:|lg:|xl:|sm:)?ml-\d+|ml-\[\d+(?:px|rem)?\])(?=\s|$)/g, ' ');
 
         let jsxContent = htmlToJsx(mainContent || '');
 
