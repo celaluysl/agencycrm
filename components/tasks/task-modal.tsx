@@ -3,7 +3,7 @@
 
 import React from "react";
 
-export default function Page() {
+export function TaskModal() {
   return (
     <div className="flex-1 flex flex-col">
       <div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">

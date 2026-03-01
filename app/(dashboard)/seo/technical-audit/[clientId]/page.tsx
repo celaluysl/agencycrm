@@ -8,9 +8,9 @@ export default function Page() {
     <div className="flex-1 flex flex-col">
       <div className="flex items-center gap-2 mb-6">
 <a className="text-[#617289] text-sm font-medium" href="#">Dashboard</a>
-<span className="material-symbols-outlined text-[#617289] text-xs" data-icon="chevron_right"></span>
+<span className="material-symbols-outlined text-[#617289] text-xs" >chevron_right</span>
 <a className="text-[#617289] text-sm font-medium" href="#">Raporlar</a>
-<span className="material-symbols-outlined text-[#617289] text-xs" data-icon="chevron_right"></span>
+<span className="material-symbols-outlined text-[#617289] text-xs" >chevron_right</span>
 <span className="text-primary text-sm font-bold">Teknik Denetim</span>
 </div>
 {/*  Page Heading  */}
@@ -20,7 +20,7 @@ export default function Page() {
 <p className="text-[#617289] dark:text-gray-400 text-lg">AgenciFlow - SEO Departmanı Detaylı Teknik Analiz Raporu v2.0</p>
 </div>
 <button className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-[#1e2732] border border-[#dbe0e6] dark:border-[#2a2f35] rounded-xl font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
-<span className="material-symbols-outlined" data-icon="refresh"></span>
+<span className="material-symbols-outlined" >refresh</span>
 <span>Yeniden Analiz Et</span>
 </button>
 </div>
@@ -31,11 +31,11 @@ export default function Page() {
 <div className="bg-white dark:bg-[#1e2732] p-6 rounded-xl border border-[#dbe0e6] dark:border-[#2a2f35] shadow-sm">
 <div className="flex justify-between items-start mb-2">
 <p className="text-[#617289] dark:text-gray-400 text-sm font-semibold uppercase tracking-wider">Sorgulanan Kelime</p>
-<span className="material-symbols-outlined text-primary" data-icon="search"></span>
+<span className="material-symbols-outlined text-primary" >search</span>
 </div>
 <p className="text-2xl font-bold">Dijital Pazarlama</p>
 <div className="flex items-center gap-1 mt-2 text-[#07883b]">
-<span className="material-symbols-outlined text-sm" data-icon="trending_up"></span>
+<span className="material-symbols-outlined text-sm" >trending_up</span>
 <span className="text-xs font-bold">+2% Arama Hacmi</span>
 </div>
 </div>
@@ -43,7 +43,7 @@ export default function Page() {
 <div className="bg-white dark:bg-[#1e2732] p-6 rounded-xl border border-[#dbe0e6] dark:border-[#2a2f35] shadow-sm">
 <div className="flex justify-between items-start mb-2">
 <p className="text-[#617289] dark:text-gray-400 text-sm font-semibold uppercase tracking-wider">Analiz Edilen URL</p>
-<span className="material-symbols-outlined text-primary" data-icon="link"></span>
+<span className="material-symbols-outlined text-primary" >link</span>
 </div>
 <p className="text-sm font-medium truncate text-primary underline">https://agenciflow.com/seo-servisleri</p>
 <p className="text-xs text-[#617289] mt-2 italic">Son tarama: 2 saat önce</p>
@@ -85,7 +85,7 @@ export default function Page() {
 </div>
 <div className="p-6">
 <h3 className="font-bold mb-4 flex items-center gap-2">
-<span className="material-symbols-outlined text-amber-500" data-icon="warning"></span>
+<span className="material-symbols-outlined text-amber-500" >warning</span>
                         Hatalı Görseller ve Çözüm Önerileri
                     </h3>
 <div className="space-y-4">
@@ -101,7 +101,7 @@ export default function Page() {
 </div>
 </div>
 <button className="px-4 py-2 bg-primary/10 text-primary text-xs font-bold rounded hover:bg-primary/20 transition-all flex items-center gap-2">
-<span className="material-symbols-outlined text-[16px]" data-icon="lightbulb"></span>
+<span className="material-symbols-outlined text-[16px]" >lightbulb</span>
                                 Düzeltme Önerisi
                             </button>
 </div>
@@ -216,11 +216,11 @@ export default function Page() {
 <div className="p-6 bg-gray-50 dark:bg-[#151d27] border-b border-[#f0f2f4] dark:border-[#2a2f35]">
 <div className="flex flex-wrap justify-between items-center gap-4">
 <div className="flex items-center gap-2">
-<span className="material-symbols-outlined text-green-500" data-icon="check_circle"></span>
+<span className="material-symbols-outlined text-green-500" >check_circle</span>
 <span className="font-bold">JSON-LD Yapısı Doğrulandı</span>
 </div>
 <div className="flex items-center gap-2 text-primary font-bold text-sm cursor-pointer hover:underline">
-<span className="material-symbols-outlined" data-icon="terminal"></span>
+<span className="material-symbols-outlined" >terminal</span>
                             Tam Kodu Görüntüle
                         </div>
 </div>
@@ -240,7 +240,7 @@ export default function Page() {
 <span className="text-[#c678dd]">&#125;</span></pre>
 <div className="mt-6 flex items-center justify-between p-4 bg-primary/5 border border-primary/20 rounded-lg">
 <div className="flex items-center gap-3">
-<span className="material-symbols-outlined text-primary" data-icon="account_tree"></span>
+<span className="material-symbols-outlined text-primary" >account_tree</span>
 <div>
 <p className="text-sm font-bold">Hiyerarşi Uygunluğu</p>
 <p className="text-xs text-[#617289]">Google Rich Results uyumlu breadcrumb yapısı tespit edildi.</p>

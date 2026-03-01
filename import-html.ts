@@ -11,7 +11,7 @@ const fileMap = {
     '44c6594fb1ea4fb5aec530076ba7af35_Kişisel_Performans_ve_Verimlilik_Paneli.html': 'app/(dashboard)/performance/page.tsx',
     '7356768a5e52481db26835175e414095_CRM_Leads_Kanban_Board.html': 'app/(dashboard)/crm/leads/page.tsx',
     '727d3bb9ce654b5b8c1a54034b339f4b_Kapsamlı_SEO_Teknik_Denetim_Raporu.html': 'app/(dashboard)/seo/technical-audit/[clientId]/page.tsx',
-    'f68001217e014f96baf5585f5841a227_Client_Portal_Dashboard.html': 'app/client-portal/page.tsx',
+    'f68001217e014f96baf5585f5841a227_Client_Portal_Dashboard.html': 'app/(dashboard)/client-portal/page.tsx',
     'fb5280147b0e46e3915d7853457f91f0_SEM_Proje_ve_Görev_Detayı_(Kanban).html': 'app/(dashboard)/sem/projects/[id]/page.tsx'
 };
 
@@ -26,6 +26,7 @@ function htmlToJsx(html: string): string {
     jsx = jsx.replace(/open=""/g, 'open');
     jsx = jsx.replace(/rows="(\d+)"/g, 'rows={$1}');
     jsx = jsx.replace(/<!--([\s\S]*?)-->/g, '{/* $1 */}');
+    jsx = jsx.replace(/<span([^>]*)data-icon="([^"]+)"([^>]*)>([\s\S]*?)<\/span>/g, '<span$1$3>$2</span>');
     jsx = jsx.replace(/<br>/g, '<br />');
     jsx = jsx.replace(/<hr(.*?)>/g, '<hr$1 />');
     jsx = jsx.replace(/<img(.*?)>/g, (match) => {
@@ -100,12 +101,16 @@ for (const [filename, targetPath] of Object.entries(fileMap)) {
             fs.mkdirSync(targetDir, { recursive: true });
         }
 
+        const isComponent = targetPath.startsWith('components/');
+        const componentName = isComponent ? path.basename(targetPath, '.tsx').split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('') : 'Page';
+        const exportStatement = isComponent ? `export function ${componentName}() {` : `export default function Page() {`;
+
         const finalCode = `
 "use client";
 
 import React from "react";
 
-export default function Page() {
+${exportStatement}
   return (
     <div className="flex-1 flex flex-col">
       ${jsxContent}
