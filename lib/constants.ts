@@ -39,5 +39,6 @@ export const ROUTES = {
         accounts: "/admin/accounts",
         invoices: "/admin/invoices",
         commissions: "/admin/commissions",
+        analytics: "/admin/analytics",
     },
 } as const;

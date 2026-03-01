@@ -16,6 +16,7 @@ export const navigation = [
             { name: "Cari Hesaplar", href: "/admin/accounts" },
             { name: "Faturalar", href: "/admin/invoices" },
             { name: "Prim Yönetimi", href: "/admin/commissions" },
+            { name: "Müşteri Analitiği", href: "/admin/analytics" },
             { name: "Site Hizmet Yönetimi", href: "/admin/site-bazli-hizmet-yonetim-paneli" },
         ]
     },
