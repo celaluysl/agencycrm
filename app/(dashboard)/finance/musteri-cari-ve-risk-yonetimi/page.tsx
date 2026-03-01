@@ -10,21 +10,21 @@ export default function Page() {
 
 <div className="p-8 space-y-6">
 <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-l-primary">
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-primary">
 <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Toplam Ajans Alacağı</p>
 <p className="text-2xl font-bold">₺2.845.200</p>
 <div className="mt-2 flex items-center gap-1 text-[10px] text-success font-bold">
 <span className="material-symbols-outlined text-xs">trending_up</span> %8.5 Tahsilat artışı (v.s. Geçen Ay)
                     </div>
 </div>
-<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-l-success">
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-success">
 <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Aktif Sözleşme Değeri</p>
 <p className="text-2xl font-bold">₺14.120.000</p>
 <div className="mt-2 flex items-center gap-1 text-[10px] text-[#617289] font-bold">
 <span className="material-symbols-outlined text-xs">info</span> 24 Aktif Müşteri Sözleşmesi
                     </div>
 </div>
-<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-l-warning">
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1 border-l-4 border-l-warning">
 <p className="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Ortalama Tahsilat Süresi</p>
 <p className="text-2xl font-bold">18.5 Gün</p>
 <div className="mt-2 flex items-center gap-1 text-[10px] text-danger font-bold">

@@ -129,7 +129,10 @@ export function Sidebar() {
             {/* Navigation (Scrollable) */}
             <nav className="flex-1 overflow-y-auto px-4 pb-4 space-y-4 relative custom-scrollbar">
                 {navigation.map((group) => {
-                    const isGroupActive = group.items.some(i => i.href === '/' ? pathname === '/' : (pathname === i.href || pathname.startsWith(`${i.href}/`)));
+                    const isGroupActive = group.items.length > 0
+                        ? group.items.some(i => i.href === '/' ? pathname === '/' : (pathname === i.href || pathname.startsWith(`${i.href}/`)))
+                        : pathname === group.href;
+
                     const isOpen = openGroups[group.name] === undefined ? isGroupActive : openGroups[group.name];
 
                     if (group.name === "Genel Bakış" || group.items.length === 0) {

@@ -10,7 +10,7 @@ export default function Page() {
 
 <div className="p-8 space-y-6">
 <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div className="segment-card border-l-4 border-l-l-vip">
+<div className="segment-card border-l-4 border-l-vip">
 <div className="flex justify-between items-center mb-4">
 <span className="material-symbols-outlined text-vip bg-vip/10 p-2 rounded-lg">star</span>
 <span className="text-vip text-xs font-bold bg-vip/10 px-2 py-1 rounded">24 Müşteri</span>
@@ -24,7 +24,7 @@ export default function Page() {
 <div className="size-7 rounded-full border-2 border-white dark:border-[#1a2432] bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold">+21</div>
 </div>
 </div>
-<div className="segment-card border-l-4 border-l-l-risk">
+<div className="segment-card border-l-4 border-l-risk">
 <div className="flex justify-between items-center mb-4">
 <span className="material-symbols-outlined text-risk bg-risk/10 p-2 rounded-lg">warning</span>
 <span className="text-risk text-xs font-bold bg-risk/10 px-2 py-1 rounded">8 Müşteri</span>
@@ -35,7 +35,7 @@ export default function Page() {
 <span className="text-[10px] font-bold text-risk uppercase">Düşük Performans / Ödeme Sorunu</span>
 </div>
 </div>
-<div className="segment-card border-l-4 border-l-l-success">
+<div className="segment-card border-l-4 border-l-success">
 <div className="flex justify-between items-center mb-4">
 <span className="material-symbols-outlined text-success bg-success/10 p-2 rounded-lg">new_releases</span>
 <span className="text-success text-xs font-bold bg-success/10 px-2 py-1 rounded">12 Müşteri</span>

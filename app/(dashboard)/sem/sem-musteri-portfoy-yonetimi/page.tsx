@@ -38,7 +38,7 @@ export default function Page() {
                     Bu ayki toplam limit
                 </div>
 </div>
-<div className="flex flex-col gap-2 rounded-xl p-6 border border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-[#1a2432] shadow-sm border-l-4 border-l-l-primary">
+<div className="flex flex-col gap-2 rounded-xl p-6 border border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-[#1a2432] shadow-sm border-l-4 border-l-primary">
 <div className="flex items-center gap-3 text-[#617289] dark:text-gray-400">
 <span className="material-symbols-outlined">query_stats</span>
 <p className="text-sm font-medium">Portföy ROAS</p>
@@ -75,7 +75,7 @@ export default function Page() {
 </div>
 </div>
 <div className="flex flex-col gap-6">
-<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-l-red-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-red-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
 <div className="p-6">
 <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
 <div className="flex items-center gap-4 min-w-[300px]">
@@ -135,7 +135,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-l-amber-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-amber-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
 <div className="p-6">
 <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
 <div className="flex items-center gap-4 min-w-[300px]">
@@ -194,7 +194,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-l-emerald-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-emerald-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
 <div className="p-6">
 <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
 <div className="flex items-center gap-4 min-w-[300px]">
@@ -255,7 +255,7 @@ export default function Page() {
 </div>
 </div>
 </div>
-<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-l-emerald-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border-l-4 border-l-emerald-500 border-y border-r border-[#dbe0e6] dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
 <div className="p-6">
 <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
 <div className="flex items-center gap-4 min-w-[300px]">
