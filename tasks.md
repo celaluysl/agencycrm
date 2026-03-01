@@ -244,7 +244,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 2.9, 2.10_
 
 
-- [ ] 6.4 Client Analytics sayfası oluştur
+- [x] 6.4 Client Analytics sayfası oluştur
   - `app/(dashboard)/admin/analytics/page.tsx` - Server Component
   - Müşteri segmentleri (VIP, Riskli, Yeni Kazanılan)
   - Müşteri sağlık skoru tablosu
@@ -252,7 +252,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Proje bazlı kar/zarar analizi
   - _Gereksinimler: 2.11, 13.1, 13.2, 13.3, 13.4, 13.6_
 
-- [ ] 6.5 Client Health Score hesaplama logic'i
+- [x] 6.5 Client Health Score hesaplama logic'i
   - `lib/calculations/client-health.ts` - Utility function
   - Payment regularity, operational success, service duration faktörleri
   - 0-100 arası skor hesaplama
