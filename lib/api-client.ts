@@ -23,8 +23,14 @@ export async function fetchApi<T>(
 
     let data;
     try {
+        if (response.status === 204) {
+            return null as unknown as T;
+        }
         data = await response.json();
     } catch (error) {
+        if (response.ok) {
+            throw new ApiError(response.status, 'Yanıt JSON olarak ayrıştırılamadı');
+        }
         data = null;
     }
 

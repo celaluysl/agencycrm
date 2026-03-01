@@ -18,5 +18,7 @@ export function formatCurrency(value: number): string {
 
 export function formatDate(date: string | Date | null | undefined): string {
   if (!date) return "-"
-  return format(new Date(date), "dd MMM yyyy", { locale: tr })
+  const parsedDate = new Date(date)
+  if (isNaN(parsedDate.getTime())) return "-"
+  return format(parsedDate, "dd MMM yyyy", { locale: tr })
 }
