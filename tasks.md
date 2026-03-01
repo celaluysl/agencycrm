@@ -149,13 +149,13 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 4. Shared Components ve UI Elements
 
-- [ ] 4.1 KPI Card component oluştur
+- [x] 4.1 KPI Card component oluştur
   - `components/shared/kpi-card.tsx` - Server Component olarak oluştur
   - Value, label, change percentage, trend indicator props
   - Responsive design (mobile'da stack layout)
   - _Gereksinimler: 2.1, 4.1, 12.1_
 
-- [ ] 4.2 Data Table component oluştur
+- [x] 4.2 Data Table component oluştur
   - `components/shared/data-table.tsx` - Client Component olarak oluştur
   - Sorting, filtering, pagination support
   - shadcn/ui Table component kullan
@@ -163,7 +163,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Empty state ve loading skeleton
   - _Gereksinimler: 2.2, 5.1, 7.1, 15.3_
 
-- [ ] 4.3 Filter Bar component oluştur
+- [x] 4.3 Filter Bar component oluştur
   - `components/shared/filter-bar.tsx` - Client Component olarak oluştur
   - Multiple filter types (select, date range, search)
   - Filter chips display
@@ -171,29 +171,27 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 5.7, 7.2, 9.9_
 
 
-- [ ] 4.4 Status Badge component oluştur
+- [x] 4.4 Status Badge component oluştur
   - `components/shared/status-badge.tsx` - Server Component olarak oluştur
   - Renk kodlu status variants (success, warning, danger, info)
   - Size variants (sm, md, lg)
   - _Gereksinimler: 2.7, 3.2, 4.4, 5.4_
 
-- [ ] 4.5 Loading Skeleton component oluştur
+- [x] 4.5 Loading Skeleton component oluştur
   - `components/shared/loading-skeleton.tsx` - Server Component olarak oluştur
   - Shimmer animation effect
   - Multiple variants (card, table, list)
   - _Gereksinimler: 14.10, 17.10_
 
-- [ ] 4.6 Empty State component oluştur
+- [x] 4.6 Empty State component oluştur
   - `components/shared/empty-state.tsx` - Server Component olarak oluştur
   - Icon, title, description, action button props
   - Illustrative placeholders
   - _Gereksinimler: 2.2_
 
-- [ ] 4.7 Toast Notification component oluştur
-  - `components/ui/toast.tsx` - shadcn/ui toast kullan
-  - Success, error, warning, info variants
-  - Auto-dismiss timer
-  - Framer Motion animation (slide-in from bottom)
+- [x] 4.7 Toast Notification component oluştur
+  - Yeni versiyona uygun olarak shadcn *sonner* (toaster) kullanıldı.
+  - Toaster global layout`a veya sayfalara eklenebilir.
   - _Gereksinimler: 14.4, 20.4_
 
 
