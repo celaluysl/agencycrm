@@ -247,28 +247,28 @@ export default function Page() {
                         Düzeltilmesi Gerekenler
                     </h3>
 <div className="space-y-4">
-<div className="p-3 border-l-4 border-error bg-error/5 rounded-r-lg">
+<div className="p-3 border-l-4 border-l-error bg-error/5 rounded-r-lg">
 <div className="flex justify-between items-start mb-1">
 <span className="text-[10px] font-bold bg-error text-white px-2 py-0.5 rounded">KRİTİK</span>
 <span className="text-xs text-gray-500">#1</span>
 </div>
 <p className="text-sm font-semibold">Meta description etiketi bulunamadı veya çok kısa.</p>
 </div>
-<div className="p-3 border-l-4 border-error bg-error/5 rounded-r-lg">
+<div className="p-3 border-l-4 border-l-error bg-error/5 rounded-r-lg">
 <div className="flex justify-between items-start mb-1">
 <span className="text-[10px] font-bold bg-error text-white px-2 py-0.5 rounded">KRİTİK</span>
 <span className="text-xs text-gray-500">#2</span>
 </div>
 <p className="text-sm font-semibold">6 adet görselde 'alt' etiketi eksik.</p>
 </div>
-<div className="p-3 border-l-4 border-yellow-500 bg-yellow-500/5 rounded-r-lg">
+<div className="p-3 border-l-4 border-l-yellow-500 bg-yellow-500/5 rounded-r-lg">
 <div className="flex justify-between items-start mb-1">
 <span className="text-[10px] font-bold bg-yellow-500 text-white px-2 py-0.5 rounded">ORTA</span>
 <span className="text-xs text-gray-500">#3</span>
 </div>
 <p className="text-sm font-semibold">Mobil performans skoru 50'nin altında (Core Web Vitals).</p>
 </div>
-<div className="p-3 border-l-4 border-yellow-500 bg-yellow-500/5 rounded-r-lg">
+<div className="p-3 border-l-4 border-l-yellow-500 bg-yellow-500/5 rounded-r-lg">
 <div className="flex justify-between items-start mb-1">
 <span className="text-[10px] font-bold bg-yellow-500 text-white px-2 py-0.5 rounded">ORTA</span>
 <span className="text-xs text-gray-500">#4</span>

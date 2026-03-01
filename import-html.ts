@@ -41,6 +41,7 @@ function htmlToJsx(html: string): string {
     jsx = jsx.replace(/checked=""/g, 'defaultChecked');
     jsx = jsx.replace(/open=""/g, 'open');
     jsx = jsx.replace(/rows="(\d+)"/g, 'rows={$1}');
+    jsx = jsx.replace(/border-l-(\d+)\s+border-([a-zA-Z]+(?:-\d+)?)/g, 'border-l-$1 border-l-$2');
     jsx = jsx.replace(/<!--([\s\S]*?)-->/g, '{/* $1 */}');
     jsx = jsx.replace(/<span([^>]*)data-icon="([^"]+)"([^>]*)>([\s\S]*?)<\/span>/g, '<span$1$3>$2</span>');
     jsx = jsx.replace(/<br>/g, '<br />');

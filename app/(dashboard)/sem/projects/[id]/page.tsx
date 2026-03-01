@@ -67,7 +67,7 @@ export default function Page() {
 </div>
 </div>
 <div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border-l-4 border-primary border-t border-r border-b border-slate-200 dark:border-slate-700 transition-all cursor-pointer">
+<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border-l-4 border-l-primary border-t border-r border-b border-slate-200 dark:border-slate-700 transition-all cursor-pointer">
 <div className="flex justify-between items-start mb-3">
 <span className="bg-blue-100 text-blue-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Yüksek</span>
 <div className="flex items-center gap-1.5 text-primary text-[10px] font-bold">
@@ -120,7 +120,7 @@ export default function Page() {
 </div>
 </div>
 <div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 border-l-4 border-amber-400 transition-all cursor-pointer">
+<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 border-l-4 border-l-amber-400 transition-all cursor-pointer">
 <div className="flex justify-between items-start mb-3">
 <span className="bg-emerald-100 text-emerald-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Haftalık</span>
 <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">

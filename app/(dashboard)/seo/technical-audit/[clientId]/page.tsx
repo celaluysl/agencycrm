@@ -131,7 +131,7 @@ export default function Page() {
 {/*  H1  */}
 <div className="flex items-center gap-4 group">
 <span className="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded w-10 text-center">H1</span>
-<div className="flex-1 p-3 border-l-4 border-primary bg-gray-50 dark:bg-[#151d27] rounded-r-lg">
+<div className="flex-1 p-3 border-l-4 border-l-primary bg-gray-50 dark:bg-[#151d27] rounded-r-lg">
 <p className="font-bold">AgenciFlow SEO Teknik Denetim Servisleri</p>
 <p className="text-[10px] text-[#617289] mt-1">42 Karakter | Optimal (20-70)</p>
 </div>
@@ -139,21 +139,21 @@ export default function Page() {
 {/*  H2  */}
 <div className="ml-8 flex items-center gap-4">
 <span className="text-xs font-black text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded w-10 text-center">H2</span>
-<div className="flex-1 p-3 border-l-4 border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1e2732] rounded-r-lg border border-gray-100 dark:border-gray-800">
+<div className="flex-1 p-3 border-l-4 border-l-gray-300 dark:border-gray-700 bg-white dark:bg-[#1e2732] rounded-r-lg border border-gray-100 dark:border-gray-800">
 <p className="font-semibold text-sm">Teknik SEO Neden Önemlidir?</p>
 </div>
 </div>
 {/*  H3 (Nested)  */}
 <div className="ml-16 flex items-center gap-4">
 <span className="text-xs font-black text-gray-400 bg-gray-50 dark:bg-gray-900 px-2 py-1 rounded w-10 text-center">H3</span>
-<div className="flex-1 p-3 border-l-4 border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1e2732] rounded-r-lg border border-gray-100 dark:border-gray-800">
+<div className="flex-1 p-3 border-l-4 border-l-gray-200 dark:border-gray-700 bg-white dark:bg-[#1e2732] rounded-r-lg border border-gray-100 dark:border-gray-800">
 <p className="text-sm italic">Site Hızı ve Kullanıcı Deneyimi</p>
 </div>
 </div>
 {/*  H2 Alert  */}
 <div className="ml-8 flex items-center gap-4">
 <span className="text-xs font-black text-red-500 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded w-10 text-center">H2</span>
-<div className="flex-1 p-3 border-l-4 border-red-500 bg-red-50 dark:bg-red-900/10 rounded-r-lg">
+<div className="flex-1 p-3 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-900/10 rounded-r-lg">
 <div className="flex justify-between items-center">
 <p className="font-semibold text-sm">Dijital Pazarlama ve SEO</p>
 <span className="text-[10px] font-bold text-red-600 bg-white px-2 py-0.5 rounded shadow-sm">H2 Çift Kullanımı!</span>

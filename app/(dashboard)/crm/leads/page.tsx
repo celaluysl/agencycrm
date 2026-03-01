@@ -139,7 +139,7 @@ export default function Page() {
 </button>
 </div>
 <div className="p-4 flex gap-4 hover:bg-[#f9fafb] dark:hover:bg-gray-800/50 transition-colors group">
-<div className="flex flex-col items-center justify-center min-w-16 bg-[#f0f2f4] dark:bg-gray-800 rounded-lg py-2 border-l-4 border-primary">
+<div className="flex flex-col items-center justify-center min-w-16 bg-[#f0f2f4] dark:bg-gray-800 rounded-lg py-2 border-l-4 border-l-primary">
 <span className="text-xs font-bold text-primary uppercase">14:00</span>
 <span className="text-[10px] text-primary font-medium">Şu an</span>
 </div>
@@ -294,7 +294,7 @@ export default function Page() {
 <span className="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-full">3 Bekliyor</span>
 </div>
 <div className="flex flex-col gap-3">
-<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-red-500">
+<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-l-red-500">
 <div className="flex justify-between items-start mb-2">
 <h4 className="font-bold text-sm">Zirve Ltd.</h4>
 <span className="text-[10px] text-red-500 font-bold uppercase tracking-tight">Gecikmiş</span>
@@ -305,7 +305,7 @@ export default function Page() {
                             Hemen Ara
                         </button>
 </div>
-<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-orange-400">
+<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-l-orange-400">
 <div className="flex justify-between items-start mb-2">
 <h4 className="font-bold text-sm">Hızlı Lojistik</h4>
 <span className="text-[10px] text-orange-500 font-bold uppercase tracking-tight">Takip</span>
@@ -316,7 +316,7 @@ export default function Page() {
                             Hatırlatma Gönder
                         </button>
 </div>
-<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-primary">
+<div className="bg-white dark:bg-[#1f2937] p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 shadow-sm border-l-4 border-l-primary">
 <div className="flex justify-between items-start mb-2">
 <h4 className="font-bold text-sm">Gökyüzü Ajans</h4>
 <span className="text-[10px] text-primary font-bold uppercase tracking-tight">Yeni</span>

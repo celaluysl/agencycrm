@@ -58,7 +58,7 @@ export default function Page() {
 <span className="text-xs font-medium text-amber-600 bg-amber-50 dark:bg-amber-900/30 dark:text-amber-400 px-2 py-1 rounded">Yüksek Öncelik</span>
 </div>
 </div>
-<div className="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg border-l-4 border-primary">
+<div className="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg border-l-4 border-l-primary">
 <p className="text-[#111418] dark:text-gray-200 text-sm italic">"Önceki revize talebiniz doğrultusunda marka logosu boyutu güncellendi ve geçiş hızları ayarlandı."</p>
 </div>
 <div className="flex flex-col gap-3">

@@ -91,7 +91,7 @@ export default function Page() {
 </div>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-l-primary">
 <p className="text-xs font-bold text-[#617289] uppercase mb-2">Genel İlerleme</p>
 <div className="flex items-end justify-between">
 <div>
@@ -105,14 +105,14 @@ export default function Page() {
 </div>
 </div>
 </div>
-<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-orange-500">
+<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-l-orange-500">
 <p className="text-xs font-bold text-[#617289] uppercase mb-2">Kalan Bütçe</p>
 <div className="flex flex-col">
 <h4 className="text-2xl font-bold dark:text-white">₺14.250</h4>
 <p className="text-[10px] text-[#617289] mt-1">Toplam: ₺45.000 / Dönemlik</p>
 </div>
 </div>
-<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+<div className="bg-white dark:bg-[#1e293b] p-6 rounded-xl shadow-sm border-l-4 border-l-green-500">
 <p className="text-xs font-bold text-[#617289] uppercase mb-2">Raporlama Durumu</p>
 <div className="flex items-center gap-3">
 <div className="size-10 rounded-full bg-green-50 flex items-center justify-center text-green-600">
