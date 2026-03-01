@@ -2,33 +2,58 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 
-const fileMap = {
-    // Admin & Main Dashboards
-    'e76159700fb246778cd690c5de4a9e13_Admin_Agency_Dashboard.html': 'app/(dashboard)/admin/dashboard/page.tsx',
-    '86f2661c37764fe1beead2c45d1e4ffc_Client_Detail_Master_Page.html': 'app/(dashboard)/admin/accounts/[id]/page.tsx',
-
-    // CRM
-    '7356768a5e52481db26835175e414095_CRM_Leads_Kanban_Board.html': 'app/(dashboard)/crm/leads/page.tsx',
-
-    // SEM
-    '0ab212f9aa314189855fde51abf893ae_SEM_Müşteri_Portföy_Yönetimi.html': 'app/(dashboard)/sem/portfolio/page.tsx',
-    'fb5280147b0e46e3915d7853457f91f0_SEM_Proje_ve_Görev_Detayı_(Kanban).html': 'app/(dashboard)/sem/projects/[id]/page.tsx',
-
-    // SEO
-    '380cace07ac547fa88843017823fc990_SEO_Rank_Tracking_Center.html': 'app/(dashboard)/seo/rank-tracking/page.tsx',
-    '727d3bb9ce654b5b8c1a54034b339f4b_Kapsamlı_SEO_Teknik_Denetim_Raporu.html': 'app/(dashboard)/seo/technical-audit/[clientId]/page.tsx',
-    'b27da638679b4f8f8f28077bbf71bcc1_Teknik_SEO_Analiz_ve_Sorgu_Paneli.html': 'app/(dashboard)/seo/technical-analysis/page.tsx',
-
-    // Social Media
-    '2b5e4f6f8c89489290d6323fa200f504_Sosyal_Medya_Onay_Merkezi.html': 'app/(dashboard)/social-media/approvals/page.tsx',
-
-    // Performance & Tasks
-    '44c6594fb1ea4fb5aec530076ba7af35_Kişisel_Performans_ve_Verimlilik_Paneli.html': 'app/(dashboard)/performance/page.tsx',
-    'e3b92cb3b9784686af5faa9280ebd611_Task_Detail_&_SOP_Modal.html': 'components/tasks/task-modal.tsx',
-
-    // Client Portal
-    'f68001217e014f96baf5585f5841a227_Client_Portal_Dashboard.html': 'app/(dashboard)/client-portal/page.tsx',
-    '1da6c6e6397c49c8bc4bb6cb9cc4e12f_Client_Approval_Center.html': 'app/(dashboard)/client-portal/approvals/page.tsx',
+const fileMap: Record<string, string> = {
+    'aday-musteri-detay-sayfasi.html': 'app/(dashboard)/crm/aday-musteri-detay-sayfasi/page.tsx',
+    'ai-kategori-icerigi-olusturma-paneli.html': 'app/(dashboard)/projects/ai-kategori-icerigi-olusturma-paneli/page.tsx',
+    'atanan-musteriler-ve-durum-takibi.html': 'app/(dashboard)/projects/atanan-musteriler-ve-durum-takibi/page.tsx',
+    'banka-ve-kasa-yonetim-merkezi.html': 'app/(dashboard)/finance/banka-ve-kasa-yonetim-merkezi/page.tsx',
+    'banka-ve-kasa-yonetimi.html': 'app/(dashboard)/finance/banka-ve-kasa-yonetimi/page.tsx',
+    'departman-operasyon-detayi.html': 'app/(dashboard)/admin/departman-operasyon-detayi/page.tsx',
+    'destek-talebi-yonetimi.html': 'app/(dashboard)/projects/destek-talebi-yonetimi/page.tsx',
+    'fatura-ve-tahsilat-takip-merkezi.html': 'app/(dashboard)/finance/fatura-ve-tahsilat-takip-merkezi/page.tsx',
+    'fatura-ve-tahsilat-yonetimi.html': 'app/(dashboard)/finance/fatura-ve-tahsilat-yonetimi/page.tsx',
+    'finans-ve-muhasebe-kontrol-paneli.html': 'app/(dashboard)/finance/finans-ve-muhasebe-kontrol-paneli/page.tsx',
+    'gelir-ve-gider-yonetim-merkezi.html': 'app/(dashboard)/finance/gelir-ve-gider-yonetim-merkezi/page.tsx',
+    'gelismis-gorev-yonetimli-sem-paneli.html': 'app/(dashboard)/sem/gelismis-gorev-yonetimli-sem-paneli/page.tsx',
+    'gorev-odakli-calisma-alani.html': 'app/(dashboard)/performance/gorev-odakli-calisma-alani/page.tsx',
+    'hizmet-detayli-ortak-musteri-yonetim-merkezi.html': 'app/(dashboard)/crm/hizmet-detayli-ortak-musteri-yonetim-merkezi/page.tsx',
+    'ik-verimlilik-ve-kapasite-analizi.html': 'app/(dashboard)/admin/ik-verimlilik-ve-kapasite-analizi/page.tsx',
+    'kapasite-analizli-akilli-satis-paneli.html': 'app/(dashboard)/crm/kapasite-analizli-akilli-satis-paneli/page.tsx',
+    'kapsamli-seo-teknik-denetim-raporu.html': 'app/(dashboard)/seo/kapsamli-seo-teknik-denetim-raporu/page.tsx',
+    'karlilik-ve-butce-analiz-raporu.html': 'app/(dashboard)/finance/karlilik-ve-butce-analiz-raporu/page.tsx',
+    'kelime-odakli-backlink-satin-alma-paneli.html': 'app/(dashboard)/seo/kelime-odakli-backlink-satin-alma-paneli/page.tsx',
+    'maas-ve-personel-odemeleri-paneli.html': 'app/(dashboard)/admin/maas-ve-personel-odemeleri-paneli/page.tsx',
+    'musteri-cari-hesap-takibi.html': 'app/(dashboard)/finance/musteri-cari-hesap-takibi/page.tsx',
+    'musteri-cari-ve-risk-yonetimi.html': 'app/(dashboard)/finance/musteri-cari-ve-risk-yonetimi/page.tsx',
+    'musteri-onay-merkezi.html': 'app/(dashboard)/client-portal/musteri-onay-merkezi/page.tsx',
+    'musteri-portali-kontrol-paneli.html': 'app/(dashboard)/client-portal/musteri-portali-kontrol-paneli/page.tsx',
+    'musteri-proje-detay-ekrani.html': 'app/(dashboard)/projects/musteri-proje-detay-ekrani/page.tsx',
+    'musteri-rapor-arsivi.html': 'app/(dashboard)/client-portal/musteri-rapor-arsivi/page.tsx',
+    'musteri-saglik-ve-karlilik-analizi.html': 'app/(dashboard)/finance/musteri-saglik-ve-karlilik-analizi/page.tsx',
+    'raporlama-destekli-sosyal-medya-paneli.html': 'app/(dashboard)/social-media/raporlama-destekli-sosyal-medya-paneli/page.tsx',
+    'satis-ekibi-detayli-kokpit-paneli.html': 'app/(dashboard)/crm/satis-ekibi-detayli-kokpit-paneli/page.tsx',
+    'satisci-aylik-prim-hakedis-raporu-onaylananlar.html': 'app/(dashboard)/crm/satisci-aylik-prim-hakedis-raporu-onaylananlar/page.tsx',
+    'satisci-hakedis-ve-prim-paneli.html': 'app/(dashboard)/crm/satisci-hakedis-ve-prim-paneli/page.tsx',
+    'sem-gorev-detay-ve-sop-paneli.html': 'app/(dashboard)/sem/sem-gorev-detay-ve-sop-paneli/page.tsx',
+    'sem-musteri-portfoy-yonetimi.html': 'app/(dashboard)/sem/sem-musteri-portfoy-yonetimi/page.tsx',
+    'seo-gorev-detay-ve-sop-paneli.html': 'app/(dashboard)/seo/seo-gorev-detay-ve-sop-paneli/page.tsx',
+    'seo-musteri-portfoy-takibi.html': 'app/(dashboard)/seo/seo-musteri-portfoy-takibi/page.tsx',
+    'seo-operasyon-paneli.html': 'app/(dashboard)/seo/seo-operasyon-paneli/page.tsx',
+    'seo-proje-ve-teknik-kanban-panosu.html': 'app/(dashboard)/seo/seo-proje-ve-teknik-kanban-panosu/page.tsx',
+    'seo-siralama-takip-merkezi.html': 'app/(dashboard)/seo/seo-siralama-takip-merkezi/page.tsx',
+    'sistem-loglari-ve-guvenlik-paneli.html': 'app/(dashboard)/admin/sistem-loglari-ve-guvenlik-paneli/page.tsx',
+    'site-bazli-hizmet-yonetim-paneli.html': 'app/(dashboard)/admin/site-bazli-hizmet-yonetim-paneli/page.tsx',
+    'sosyal-medya-gorev-detay-ve-sop-paneli.html': 'app/(dashboard)/social-media/sosyal-medya-gorev-detay-ve-sop-paneli/page.tsx',
+    'sosyal-medya-musteri-portfoyu.html': 'app/(dashboard)/social-media/sosyal-medya-musteri-portfoyu/page.tsx',
+    'sosyal-medya-onay-merkezi.html': 'app/(dashboard)/social-media/sosyal-medya-onay-merkezi/page.tsx',
+    'sosyal-medya-proje-ve-icerik-panosu.html': 'app/(dashboard)/social-media/sosyal-medya-proje-ve-icerik-panosu/page.tsx',
+    'super-admin-finansal-kokpit.html': 'app/(dashboard)/finance/super-admin-finansal-kokpit/page.tsx',
+    'tanitim-yazisi-yayinci-envanteri.html': 'app/(dashboard)/seo/tanitim-yazisi-yayinci-envanteri/page.tsx',
+    'tedarikci-bilgili-backlink-paneli.html': 'app/(dashboard)/seo/tedarikci-bilgili-backlink-paneli/page.tsx',
+    'teknik-seo-analiz-ve-sorgu-paneli.html': 'app/(dashboard)/seo/teknik-seo-analiz-ve-sorgu-paneli/page.tsx',
+    'toplu-odeme-destekli-prim-raporu.html': 'app/(dashboard)/projects/toplu-odeme-destekli-prim-raporu/page.tsx',
+    'uzman-performans-paneli.html': 'app/(dashboard)/performance/uzman-performans-paneli/page.tsx',
+    'yuksek-deger-odakli-kanban-panosu.html': 'app/(dashboard)/crm/yuksek-deger-odakli-kanban-panosu/page.tsx',
 };
 
 function htmlToJsx(html: string): string {
@@ -40,6 +65,7 @@ function htmlToJsx(html: string): string {
     jsx = jsx.replace(/disabled=""/g, 'disabled');
     jsx = jsx.replace(/checked=""/g, 'defaultChecked');
     jsx = jsx.replace(/open=""/g, 'open');
+    jsx = jsx.replace(/contenteditable=/g, 'contentEditable=');
     jsx = jsx.replace(/rows="(\d+)"/g, 'rows={$1}');
     jsx = jsx.replace(/border-l-(\d+)\s+border-([a-zA-Z]+(?:-\d+)?)/g, 'border-l-$1 border-l-$2');
     jsx = jsx.replace(/<!--([\s\S]*?)-->/g, '{/* $1 */}');

@@ -1,3 +1,7 @@
+const fs = require('fs');
+const nav = fs.readFileSync('generated-nav.txt', 'utf8');
+
+const base = `// components/layout/sidebar.tsx
 "use client";
 
 import Link from "next/link";
@@ -5,96 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const navigation = [
-    { name: "Genel Bakış", href: "/", icon: "dashboard", items: [] },
-    {
-        name: "Ajans Yönetimi", href: "#", icon: "admin_panel_settings", items: [
-            { name: "Departman Operasyon Detayi", href: "/admin/departman-operasyon-detayi" },
-            { name: "Ik Verimlilik Ve Kapasite Analizi", href: "/admin/ik-verimlilik-ve-kapasite-analizi" },
-            { name: "Maas Ve Personel Odemeleri Paneli", href: "/admin/maas-ve-personel-odemeleri-paneli" },
-            { name: "Sistem Loglari Ve Guvenlik Paneli", href: "/admin/sistem-loglari-ve-guvenlik-paneli" },
-            { name: "Site Bazli Hizmet Yonetim Paneli", href: "/admin/site-bazli-hizmet-yonetim-paneli" },
-        ]
-    },
-    {
-        name: "CRM & Satış", href: "#", icon: "view_kanban", items: [
-            { name: "Aday Musteri Detay Sayfasi", href: "/crm/aday-musteri-detay-sayfasi" },
-            { name: "Hizmet Detayli Ortak Musteri Yonetim Merkezi", href: "/crm/hizmet-detayli-ortak-musteri-yonetim-merkezi" },
-            { name: "Kapasite Analizli Akilli Satis Paneli", href: "/crm/kapasite-analizli-akilli-satis-paneli" },
-            { name: "Satis Ekibi Detayli Kokpit Paneli", href: "/crm/satis-ekibi-detayli-kokpit-paneli" },
-            { name: "Satisci Aylik Prim Hakedis Raporu Onaylananlar", href: "/crm/satisci-aylik-prim-hakedis-raporu-onaylananlar" },
-            { name: "Satisci Hakedis Ve Prim Paneli", href: "/crm/satisci-hakedis-ve-prim-paneli" },
-            { name: "Yuksek Deger Odakli Kanban Panosu", href: "/crm/yuksek-deger-odakli-kanban-panosu" },
-        ]
-    },
-    {
-        name: "Finans & Muhasebe", href: "#", icon: "account_balance", items: [
-            { name: "Banka Ve Kasa Yonetim Merkezi", href: "/finance/banka-ve-kasa-yonetim-merkezi" },
-            { name: "Banka Ve Kasa Yonetimi", href: "/finance/banka-ve-kasa-yonetimi" },
-            { name: "Fatura Ve Tahsilat Takip Merkezi", href: "/finance/fatura-ve-tahsilat-takip-merkezi" },
-            { name: "Fatura Ve Tahsilat Yonetimi", href: "/finance/fatura-ve-tahsilat-yonetimi" },
-            { name: "Finans Ve Muhasebe Kontrol Paneli", href: "/finance/finans-ve-muhasebe-kontrol-paneli" },
-            { name: "Gelir Ve Gider Yonetim Merkezi", href: "/finance/gelir-ve-gider-yonetim-merkezi" },
-            { name: "Karlilik Ve Butce Analiz Raporu", href: "/finance/karlilik-ve-butce-analiz-raporu" },
-            { name: "Musteri Cari Hesap Takibi", href: "/finance/musteri-cari-hesap-takibi" },
-            { name: "Musteri Cari Ve Risk Yonetimi", href: "/finance/musteri-cari-ve-risk-yonetimi" },
-            { name: "Musteri Saglik Ve Karlilik Analizi", href: "/finance/musteri-saglik-ve-karlilik-analizi" },
-            { name: "Super Admin Finansal Kokpit", href: "/finance/super-admin-finansal-kokpit" },
-        ]
-    },
-    {
-        name: "SEO Merkezi", href: "#", icon: "query_stats", items: [
-            { name: "Kapsamli Seo Teknik Denetim Raporu", href: "/seo/kapsamli-seo-teknik-denetim-raporu" },
-            { name: "Kelime Odakli Backlink Satin Alma Paneli", href: "/seo/kelime-odakli-backlink-satin-alma-paneli" },
-            { name: "Seo Gorev Detay Ve Sop Paneli", href: "/seo/seo-gorev-detay-ve-sop-paneli" },
-            { name: "Seo Musteri Portfoy Takibi", href: "/seo/seo-musteri-portfoy-takibi" },
-            { name: "Seo Operasyon Paneli", href: "/seo/seo-operasyon-paneli" },
-            { name: "Seo Proje Ve Teknik Kanban Panosu", href: "/seo/seo-proje-ve-teknik-kanban-panosu" },
-            { name: "Seo Siralama Takip Merkezi", href: "/seo/seo-siralama-takip-merkezi" },
-            { name: "Tanitim Yazisi Yayinci Envanteri", href: "/seo/tanitim-yazisi-yayinci-envanteri" },
-            { name: "Tedarikci Bilgili Backlink Paneli", href: "/seo/tedarikci-bilgili-backlink-paneli" },
-            { name: "Teknik Seo Analiz Ve Sorgu Paneli", href: "/seo/teknik-seo-analiz-ve-sorgu-paneli" },
-        ]
-    },
-    {
-        name: "SEM Merkezi", href: "#", icon: "campaign", items: [
-            { name: "Gelismis Gorev Yonetimli Sem Paneli", href: "/sem/gelismis-gorev-yonetimli-sem-paneli" },
-            { name: "Sem Gorev Detay Ve Sop Paneli", href: "/sem/sem-gorev-detay-ve-sop-paneli" },
-            { name: "Sem Musteri Portfoy Yonetimi", href: "/sem/sem-musteri-portfoy-yonetimi" },
-        ]
-    },
-    {
-        name: "Sosyal Medya", href: "#", icon: "thumb_up", items: [
-            { name: "Raporlama Destekli Sosyal Medya Paneli", href: "/social-media/raporlama-destekli-sosyal-medya-paneli" },
-            { name: "Sosyal Medya Gorev Detay Ve Sop Paneli", href: "/social-media/sosyal-medya-gorev-detay-ve-sop-paneli" },
-            { name: "Sosyal Medya Musteri Portfoyu", href: "/social-media/sosyal-medya-musteri-portfoyu" },
-            { name: "Sosyal Medya Onay Merkezi", href: "/social-media/sosyal-medya-onay-merkezi" },
-            { name: "Sosyal Medya Proje Ve Icerik Panosu", href: "/social-media/sosyal-medya-proje-ve-icerik-panosu" },
-        ]
-    },
-    {
-        name: "Müşteri Portalı", href: "#", icon: "person", items: [
-            { name: "Musteri Onay Merkezi", href: "/client-portal/musteri-onay-merkezi" },
-            { name: "Musteri Portali Kontrol Paneli", href: "/client-portal/musteri-portali-kontrol-paneli" },
-            { name: "Musteri Rapor Arsivi", href: "/client-portal/musteri-rapor-arsivi" },
-        ]
-    },
-    {
-        name: "Performans", href: "#", icon: "monitoring", items: [
-            { name: "Gorev Odakli Calisma Alani", href: "/performance/gorev-odakli-calisma-alani" },
-            { name: "Uzman Performans Paneli", href: "/performance/uzman-performans-paneli" },
-        ]
-    },
-    {
-        name: "Proje Yönetimi", href: "#", icon: "business_center", items: [
-            { name: "Ai Kategori Icerigi Olusturma Paneli", href: "/projects/ai-kategori-icerigi-olusturma-paneli" },
-            { name: "Atanan Musteriler Ve Durum Takibi", href: "/projects/atanan-musteriler-ve-durum-takibi" },
-            { name: "Destek Talebi Yonetimi", href: "/projects/destek-talebi-yonetimi" },
-            { name: "Musteri Proje Detay Ekrani", href: "/projects/musteri-proje-detay-ekrani" },
-            { name: "Toplu Odeme Destekli Prim Raporu", href: "/projects/toplu-odeme-destekli-prim-raporu" },
-        ]
-    },
-];
+${nav}
 
 export function Sidebar() {
     const pathname = usePathname();
@@ -132,7 +47,7 @@ export function Sidebar() {
                     const isGroupActive = group.items.some(i => i.href === '/' ? pathname === '/' : (pathname === i.href || pathname.startsWith(`${i.href}/`)));
                     const isOpen = openGroups[group.name] === undefined ? isGroupActive : openGroups[group.name];
 
-                    if (group.name === "Genel Bakış" || group.items.length === 0) {
+                    if (group.name === "Genel Bakış") {
                         const isActive = pathname === '/';
                         return (
                             <Link
@@ -157,7 +72,7 @@ export function Sidebar() {
 
                     return (
                         <div key={group.name} className="flex flex-col gap-1">
-                            <button
+                            <button 
                                 onClick={() => toggleGroup(group.name)}
                                 className={cn(
                                     "flex items-center justify-between w-full px-2 py-1.5 rounded-lg transition-colors group",
@@ -176,7 +91,7 @@ export function Sidebar() {
                                     expand_more
                                 </span>
                             </button>
-
+                            
                             {isOpen && (
                                 <div className="flex flex-col gap-0.5 ml-2 pl-3 border-l border-gray-100 dark:border-gray-800 py-1">
                                     {group.items.map((item) => {
@@ -195,7 +110,7 @@ export function Sidebar() {
                                                 {isActive && (
                                                     <div className="absolute left-[-13px] top-1/2 -translate-y-1/2 w-[3px] h-4 bg-primary rounded-r-md" />
                                                 )}
-                                                <span className="truncate block w-full">{item.name}</span>
+                                                <span className="truncate">{item.name}</span>
                                             </Link>
                                         );
                                     })}
@@ -213,8 +128,8 @@ export function Sidebar() {
                     Hızlı İşlem
                 </button>
             </div>
-
-            <style jsx global>{`
+            
+            <style jsx global>{\`
                 .custom-scrollbar::-webkit-scrollbar {
                     width: 4px;
                 }
@@ -228,7 +143,10 @@ export function Sidebar() {
                 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
                     background: #374151;
                 }
-            `}</style>
+            \`}</style>
         </aside>
     );
 }
+
+`;
+fs.writeFileSync('components/layout/sidebar.tsx', base);
