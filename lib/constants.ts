@@ -36,6 +36,8 @@ export const ROUTES = {
     },
     admin: {
         payroll: "/admin/payroll",
-        accounts: "/admin/departman-operasyon-detayi"
+        accounts: "/admin/accounts",
+        invoices: "/admin/invoices",
+        commissions: "/admin/commissions",
     },
 } as const;
