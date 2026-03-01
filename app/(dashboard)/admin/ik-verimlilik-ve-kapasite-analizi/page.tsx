@@ -1,0 +1,347 @@
+
+"use client";
+
+import React from "react";
+
+export default function Page() {
+  return (
+    <div className="flex-1 flex flex-col">
+      
+
+<div className="p-8 space-y-6">
+<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<div className="flex justify-between items-start mb-2">
+<span className="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">groups</span>
+<span className="text-[#07883b] text-xs font-bold bg-[#07883b]/10 px-2 py-1 rounded">+3</span>
+</div>
+<p className="text-[#617289] text-xs font-semibold uppercase tracking-wider">Toplam Personel Sayısı</p>
+<p className="text-2xl font-bold">48</p>
+</div>
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<div className="flex justify-between items-start mb-2">
+<span className="material-symbols-outlined text-orange-500 bg-orange-500/10 p-2 rounded-lg">payments</span>
+<span className="text-[#07883b] text-xs font-bold bg-[#07883b]/10 px-2 py-1 rounded">+8.2%</span>
+</div>
+<p className="text-[#617289] text-xs font-semibold uppercase tracking-wider">Kişi Başı Ortalama Ciro</p>
+<p className="text-2xl font-bold">₺112.400</p>
+</div>
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<div className="flex justify-between items-start mb-2">
+<span className="material-symbols-outlined text-blue-500 bg-blue-500/10 p-2 rounded-lg">pie_chart</span>
+<span className="text-[#e73908] text-xs font-bold bg-[#e73908]/10 px-2 py-1 rounded">+12%</span>
+</div>
+<p className="text-[#617289] text-xs font-semibold uppercase tracking-wider">Genel Kapasite Doluluğu %</p>
+<p className="text-2xl font-bold">84%</p>
+</div>
+<div className="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<div className="flex justify-between items-start mb-2">
+<span className="material-symbols-outlined text-green-500 bg-green-500/10 p-2 rounded-lg">mood</span>
+<span className="text-[#07883b] text-xs font-bold bg-[#07883b]/10 px-2 py-1 rounded">4.2/5</span>
+</div>
+<p className="text-[#617289] text-xs font-semibold uppercase tracking-wider">Personel Memnuniyet Skoru</p>
+<p className="text-2xl font-bold">88%</p>
+</div>
+</section>
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div className="lg:col-span-8 bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div className="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 className="font-bold text-base flex items-center gap-2">
+<span className="material-symbols-outlined text-primary">analytics</span>
+                            Verimlilik Matrisi (İş Sayısı / Zaman Korelasyonu)
+                        </h3>
+<div className="flex gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+<button className="px-3 py-1 text-[10px] font-bold bg-white dark:bg-gray-700 rounded-md shadow-sm">Haftalık</button>
+<button className="px-3 py-1 text-[10px] font-bold text-[#617289]">Aylık</button>
+</div>
+</div>
+<div className="p-6">
+<div className="overflow-x-auto">
+<table className="w-full text-left border-collapse">
+<thead>
+<tr className="bg-gray-50/50 dark:bg-gray-800/50">
+<th className="px-4 py-3 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Personel</th>
+<th className="px-4 py-3 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">Tamamlanan İş</th>
+<th className="px-4 py-3 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">Harcanan Zaman</th>
+<th className="px-4 py-3 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-right">Verimlilik Skoru</th>
+</tr>
+</thead>
+<tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+<tr>
+<td className="px-4 py-3">
+<div className="flex items-center gap-3">
+<div className="size-8 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuApd7wABpyDAoZ2wYREosRUOP7paHPK49i7HH3a4SnOhyfoS08h6nV9dseWo0cC5iuLq6RnNBv7WRNN0EtJBvM1fPi41rjSrJIUy8dM-LX8KMW8QRqS45WLtuTAxvWionLl-Pp1PW243Sm9JJPUySg1l2WxFjfdaVJkjVvGmQ5NRTu8MpWHCYajAZSj2dnMYwUgygaBR67swbqV_4dQ2hbOGYTZ3ZaBMwH0b9NVw3swqVI2mhN03g3zXNOPBz6nWX-4PxKn4ON4ERYw')" }}></div>
+<div>
+<p className="text-sm font-bold">Burak Yılmaz</p>
+<p className="text-[10px] text-[#617289]">SEO Uzmanı</p>
+</div>
+</div>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold">42</span>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold text-primary">164 Saat</span>
+</td>
+<td className="px-4 py-3 text-right">
+<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Yüksek (%94)</span>
+</td>
+</tr>
+<tr>
+<td className="px-4 py-3">
+<div className="flex items-center gap-3">
+<div className="size-8 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsJqcdiXpE0AqS-1hBrgBufEKFz5H0Ac37geitBCue3FKT6B1S4CZwuYCPlrRrMKzNsrpSC0k1vtVg1XMzaFAZuVHvCAtG8uXdQnbyCB7apB1lH5oczpJG4EEkBan6RhEZA2rRfgC6yi5z1v3dZFwhlzX3l_iPXd9wGyvFxJs59Rqhfym7zPO769HtUg-enTpXXWLez66PLyh9DxDRl1VQC5xojOrwl4LBZHV6gUsUNVlfgHXvVvi_xmqoD1BH_rsNJEgZEByWCZbE')" }}></div>
+<div>
+<p className="text-sm font-bold">Zeynep Aras</p>
+<p className="text-[10px] text-[#617289]">SEM Uzmanı</p>
+</div>
+</div>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold">28</span>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold text-primary">142 Saat</span>
+</td>
+<td className="px-4 py-3 text-right">
+<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Normal (%78)</span>
+</td>
+</tr>
+<tr>
+<td className="px-4 py-3">
+<div className="flex items-center gap-3">
+<div className="size-8 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU0acflHbID_sUaaDqV291O4iAg1TS1jPNRR1uYI5wH4kWRsHp4ElsuAoeuQrsKzwuMc5uFgt6WeYPE1cx5a07sLIDKMrs9dTaHcTqtskKM5dvohBagM9q1mQyDoD_7R16Q81fZ5GaeTaJ45NloPf2QQ22qvZiCxT7XgU97d94Au2MhZKM-qPe_lyAAZFixECEaJNoNCTGRxdWZeunhfmck1tBC91lOW1Sa6-dqwFT1l4OHKxwtIl_GIwDplpZBFy4IqmBE9nrP9iA')" }}></div>
+<div>
+<p className="text-sm font-bold">Caner Demir</p>
+<p className="text-[10px] text-[#617289]">Yazılım Geliştirici</p>
+</div>
+</div>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold">18</span>
+</td>
+<td className="px-4 py-3 text-center">
+<span className="text-sm font-semibold text-primary">188 Saat</span>
+</td>
+<td className="px-4 py-3 text-right">
+<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">Düşük (%62)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className="mt-4 text-center">
+<button className="text-xs font-bold text-primary hover:underline">Tüm Personel Matrisini Gör</button>
+</div>
+</div>
+</div>
+<div className="lg:col-span-4 bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div className="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex items-center justify-between">
+<h3 className="font-bold text-base flex items-center gap-2 text-red-600">
+<span className="material-symbols-outlined">warning</span>
+                            Kritik İK Uyarıları
+                        </h3>
+<span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase">4 Aktif</span>
+</div>
+<div className="p-4 space-y-4 flex-1">
+<div className="p-3 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-lg flex gap-3">
+<span className="material-symbols-outlined text-red-600 text-[20px]">psychology</span>
+<div className="flex-1">
+<p className="text-xs font-bold text-red-700 dark:text-red-400">Burnout Riski: Yazılım Ekibi</p>
+<p className="text-[10px] text-red-600/70">3 personel (Caner, Elif, Mert) son 15 gündür %95+ kapasite ile çalışıyor.</p>
+</div>
+</div>
+<div className="p-3 bg-orange-50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-900/20 rounded-lg flex gap-3">
+<span className="material-symbols-outlined text-orange-600 text-[20px]">trending_down</span>
+<div className="flex-1">
+<p className="text-xs font-bold text-orange-700 dark:text-orange-400">Düşük Verimli Proje: CyberCore</p>
+<p className="text-[10px] text-orange-600/70">Harcanan süre bütçelenen sürenin %40 üzerine çıktı.</p>
+</div>
+</div>
+<div className="p-3 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/20 rounded-lg flex gap-3">
+<span className="material-symbols-outlined text-blue-600 text-[20px]">feedback</span>
+<div className="flex-1">
+<p className="text-xs font-bold text-blue-700 dark:text-blue-400">Düşük Memnuniyet: Tasarım</p>
+<p className="text-[10px] text-blue-600/70">Tasarım departmanında memnuniyet skoru 3.2'ye düştü.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 p-6 shadow-sm flex flex-col">
+<div className="flex justify-between items-center mb-6">
+<div className="flex items-center gap-3">
+<div className="size-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
+<span className="material-symbols-outlined">search</span>
+</div>
+<div>
+<h4 className="font-bold text-sm">SEO Departmanı</h4>
+<p className="text-[10px] text-[#617289] font-medium uppercase">8 Personel</p>
+</div>
+</div>
+<span className="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">Müsait</span>
+</div>
+<div className="space-y-4">
+<div>
+<div className="flex justify-between mb-1 text-[10px] font-bold uppercase text-[#617289]">
+<span>Aktif İş Yükü</span>
+<span>68%</span>
+</div>
+<div className="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div className="bg-primary h-full w-[68%]"></div>
+</div>
+</div>
+<div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<p className="text-[10px] font-bold text-[#617289] uppercase">En Verimli Uzman</p>
+<div className="flex items-center gap-2">
+<span className="text-xs font-bold">Ayşe T.</span>
+<div className="size-6 rounded-full bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBetpMAViHItMGnpjPNucEA0es-uKScwaUzEbDIoN1oq8PkfyYyRi4ShQKGcSo48rTnlbZglMmgET1ygmk0gS1oGW4LZJPmfZ9nSz5CJxPXyQpFNSnEBvVXwZMiKmYI6iE2w2Q__YQjm1BgH4YZFLbidU9HMLqHSBopuwM51EpPztHNc-7hyQFPGKw7AOOysMi3v7pMfRAANxCcMt1V6IQODhi2fJs4twXnNYUt8cLgwJjq_3D7eU16ycymc7I-QojOQDBMBtw7Og3r')" }}></div>
+</div>
+</div>
+</div>
+</div>
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 p-6 shadow-sm flex flex-col">
+<div className="flex justify-between items-center mb-6">
+<div className="flex items-center gap-3">
+<div className="size-10 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600">
+<span className="material-symbols-outlined">ads_click</span>
+</div>
+<div>
+<h4 className="font-bold text-sm">SEM (Ads) Departmanı</h4>
+<p className="text-[10px] text-[#617289] font-medium uppercase">6 Personel</p>
+</div>
+</div>
+<span className="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">Müsait</span>
+</div>
+<div className="space-y-4">
+<div>
+<div className="flex justify-between mb-1 text-[10px] font-bold uppercase text-[#617289]">
+<span>Aktif İş Yükü</span>
+<span>42%</span>
+</div>
+<div className="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div className="bg-purple-500 h-full w-[42%]"></div>
+</div>
+</div>
+<div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<p className="text-[10px] font-bold text-[#617289] uppercase">En Verimli Uzman</p>
+<div className="flex items-center gap-2">
+<span className="text-xs font-bold">Mehmet C.</span>
+<div className="size-6 rounded-full bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsJqcdiXpE0AqS-1hBrgBufEKFz5H0Ac37geitBCue3FKT6B1S4CZwuYCPlrRrMKzNsrpSC0k1vtVg1XMzaFAZuVHvCAtG8uXdQnbyCB7apB1lH5oczpJG4EEkBan6RhEZA2rRfgC6yi5z1v3dZFwhlzX3l_iPXd9wGyvFxJs59Rqhfym7zPO769HtUg-enTpXXWLez66PLyh9DxDRl1VQC5xojOrwl4LBZHV6gUsUNVlfgHXvVvi_xmqoD1BH_rsNJEgZEByWCZbE')" }}></div>
+</div>
+</div>
+</div>
+</div>
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 p-6 shadow-sm flex flex-col">
+<div className="flex justify-between items-center mb-6">
+<div className="flex items-center gap-3">
+<div className="size-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600">
+<span className="material-symbols-outlined">code</span>
+</div>
+<div>
+<h4 className="font-bold text-sm">Yazılım Departmanı</h4>
+<p className="text-[10px] text-[#617289] font-medium uppercase">12 Personel</p>
+</div>
+</div>
+<span className="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded">Kritik</span>
+</div>
+<div className="space-y-4">
+<div>
+<div className="flex justify-between mb-1 text-[10px] font-bold uppercase text-[#617289]">
+<span>Aktif İş Yükü</span>
+<span>92%</span>
+</div>
+<div className="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div className="bg-red-500 h-full w-[92%]"></div>
+</div>
+</div>
+<div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<p className="text-[10px] font-bold text-[#617289] uppercase">En Verimli Uzman</p>
+<div className="flex items-center gap-2">
+<span className="text-xs font-bold">Caner D.</span>
+<div className="size-6 rounded-full bg-cover" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU0acflHbID_sUaaDqV291O4iAg1TS1jPNRR1uYI5wH4kWRsHp4ElsuAoeuQrsKzwuMc5uFgt6WeYPE1cx5a07sLIDKMrs9dTaHcTqtskKM5dvohBagM9q1mQyDoD_7R16Q81fZ5GaeTaJ45NloPf2QQ22qvZiCxT7XgU97d94Au2MhZKM-qPe_lyAAZFixECEaJNoNCTGRxdWZeunhfmck1tBC91lOW1Sa6-dqwFT1l4OHKxwtIl_GIwDplpZBFy4IqmBE9nrP9iA')" }}></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div className="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div className="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 className="font-bold text-base flex items-center gap-2">
+<span className="material-symbols-outlined text-primary">groups</span>
+                            Personel Performans Detayları
+                        </h3>
+<button className="text-xs font-bold text-primary hover:underline">Tüm Listeyi Gör</button>
+</div>
+<div className="overflow-x-auto">
+<table className="w-full text-left border-collapse">
+<thead>
+<tr className="bg-gray-50/50 dark:bg-gray-800/50">
+<th className="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Uzman</th>
+<th className="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">Aktif Proje</th>
+<th className="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Üretilen Değer</th>
+<th className="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">İş Teslim Oranı</th>
+<th className="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Kapasite Kullanımı</th>
+</tr>
+</thead>
+<tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+<tr>
+<td className="px-6 py-4">
+<div className="flex items-center gap-3">
+<div className="size-8 rounded-full bg-cover bg-center border border-gray-100 dark:border-gray-700" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuApd7wABpyDAoZ2wYREosRUOP7paHPK49i7HH3a4SnOhyfoS08h6nV9dseWo0cC5iuLq6RnNBv7WRNN0EtJBvM1fPi41rjSrJIUy8dM-LX8KMW8QRqS45WLtuTAxvWionLl-Pp1PW243Sm9JJPUySg1l2WxFjfdaVJkjVvGmQ5NRTu8MpWHCYajAZSj2dnMYwUgygaBR67swbqV_4dQ2hbOGYTZ3ZaBMwH0b9NVw3swqVI2mhN03g3zXNOPBz6nWX-4PxKn4ON4ERYw')" }}></div>
+<span className="text-sm font-bold">Burak Yılmaz</span>
+</div>
+</td>
+<td className="px-6 py-4 text-center">
+<span className="text-sm font-semibold">5</span>
+</td>
+<td className="px-6 py-4">
+<span className="text-sm font-bold text-[#111418] dark:text-white">₺420.000</span>
+</td>
+<td className="px-6 py-4 text-center">
+<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">%98</span>
+</td>
+<td className="px-6 py-4">
+<div className="flex items-center gap-3">
+<div className="flex-1 bg-gray-100 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+<div className="bg-primary h-full w-[82%]"></div>
+</div>
+<span className="text-[11px] font-bold min-w-[30px]">%82</span>
+</div>
+</td>
+</tr>
+<tr>
+<td className="px-6 py-4">
+<div className="flex items-center gap-3">
+<div className="size-8 rounded-full bg-cover bg-center border border-gray-100 dark:border-gray-700" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsJqcdiXpE0AqS-1hBrgBufEKFz5H0Ac37geitBCue3FKT6B1S4CZwuYCPlrRrMKzNsrpSC0k1vtVg1XMzaFAZuVHvCAtG8uXdQnbyCB7apB1lH5oczpJG4EEkBan6RhEZA2rRfgC6yi5z1v3dZFwhlzX3l_iPXd9wGyvFxJs59Rqhfym7zPO769HtUg-enTpXXWLez66PLyh9DxDRl1VQC5xojOrwl4LBZHV6gUsUNVlfgHXvVvi_xmqoD1BH_rsNJEgZEByWCZbE')" }}></div>
+<span className="text-sm font-bold">Zeynep Aras</span>
+</div>
+</td>
+<td className="px-6 py-4 text-center">
+<span className="text-sm font-semibold">3</span>
+</td>
+<td className="px-6 py-4">
+<span className="text-sm font-bold text-[#111418] dark:text-white">₺315.500</span>
+</td>
+<td className="px-6 py-4 text-center">
+<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">%92</span>
+</td>
+<td className="px-6 py-4">
+<div className="flex items-center gap-3">
+<div className="flex-1 bg-gray-100 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+<div className="bg-primary h-full w-[65%]"></div>
+</div>
+<span className="text-[11px] font-bold min-w-[30px]">%65</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+    </div>
+  );
+}
