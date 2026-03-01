@@ -1,0 +1,628 @@
+[
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869753746",
+    "pull_request_review_id": 3873343701,
+    "id": 2869753746,
+    "node_id": "PRRC_kwDORbYZPM6rDPeS",
+    "diff_hunk": "@@ -0,0 +1,40 @@\n+export class ApiError extends Error {\n+    constructor(public status: number, message: string, public data?: any) {\n+        super(message);\n+        this.name = 'ApiError';\n+    }\n+}\n+\n+export async function fetchApi<T>(\n+    endpoint: string,\n+    options: RequestInit = {}\n+): Promise<T> {\n+    const defaultHeaders = {\n+        'Content-Type': 'application/json',\n+    };\n+\n+    const response = await fetch(endpoint, {\n+        ...options,\n+        headers: {\n+            ...defaultHeaders,\n+            ...options.headers,\n+        },\n+    });\n+\n+    let data;\n+    try {\n+        data = await response.json();\n+    } catch (error) {\n+        data = null;\n+    }",
+    "path": "lib/api-client.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"BUG_pr-review-job-7fb63ea0faef423bbf98674b4bd79ae8_0001\", \"file_path\": \"lib/api-client.ts\", \"start_line\": 27, \"end_line\": 29, \"side\": \"RIGHT\"} -->\n\n🔴 **`fetchApi` silently returns `null` typed as `T` when a successful response has a non-JSON body**\n\nWhen the HTTP response is successful (2xx) but the body cannot be parsed as JSON (e.g., 204 No Content, or a plain text response), the `try/catch` block at lines 25-29 catches the parse error and sets `data = null`. The `!response.ok` check at line 31 passes since the response IS ok, so the function proceeds to line 39 and returns `null as T`.\n\n<details>\n<summary>Root Cause and Impact</summary>\n\nThe function signature `Promise<T>` guarantees a non-null `T` to callers, but `null` can actually be returned. Any caller that destructures or accesses properties on the result will get a runtime `TypeError`:\n\n```ts\nconst user = await fetchApi<{ name: string }>('/api/create-user', { method: 'POST', body: ... });\nconsole.log(user.name); // TypeError: Cannot read properties of null\n```\n\nThis would occur for any API endpoint that returns a 2xx status with an empty or non-JSON body. The fix should either throw an error when JSON parsing fails on a successful response, or change the return type to `T | null`.\n\n</details>\n\n```suggestion\n    } catch (error) {\n        if (response.ok) {\n            throw new ApiError(response.status, 'Yanıt JSON olarak ayrıştırılamadı');\n        }\n        data = null;\n    }\n```\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/3\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T20:18:18Z",
+    "updated_at": "2026-03-01T20:18:19Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869753746",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869753746"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869753746"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869753746/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 30,
+    "original_start_line": 27,
+    "start_side": "RIGHT",
+    "line": 35,
+    "original_line": 29,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 29,
+    "position": 35,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869759959",
+    "pull_request_review_id": 3873347935,
+    "id": 2869759959,
+    "node_id": "PRRC_kwDORbYZPM6rDQ_X",
+    "diff_hunk": "@@ -1,6 +1,22 @@\n import { clsx, type ClassValue } from \"clsx\"\n import { twMerge } from \"tailwind-merge\"\n+import { format } from \"date-fns\"\n+import { tr } from \"date-fns/locale\"\n \n export function cn(...inputs: ClassValue[]) {\n   return twMerge(clsx(inputs))\n }\n+\n+export function formatCurrency(value: number): string {\n+  return new Intl.NumberFormat(\"tr-TR\", {\n+    style: \"currency\",\n+    currency: \"TRY\",\n+    minimumFractionDigits: 0,\n+    maximumFractionDigits: 2,\n+  }).format(value)\n+}\n+\n+export function formatDate(date: string | Date | null | undefined): string {\n+  if (!date) return \"-\"\n+  return format(new Date(date), \"dd MMM yyyy\", { locale: tr })",
+    "path": "lib/utils.ts",
+    "commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-7fb63ea0faef423bbf98674b4bd79ae8_0001\", \"file_path\": \"lib/utils.ts\", \"start_line\": 19, \"end_line\": 21, \"side\": \"RIGHT\"} -->\n\n🚩 **`formatDate` will throw on invalid date strings rather than returning a fallback**\n\nThe `formatDate` function at `lib/utils.ts:19-21` guards against `null` and `undefined` but not against invalid date strings. If a malformed string like `\"not-a-date\"` is passed, `new Date(\"not-a-date\")` produces an `Invalid Date` object, and `format()` from date-fns v4 will throw a `RangeError`. Since the function already returns `\"-\"` as a fallback for missing values, it seems like the intent is graceful degradation — but invalid strings won't get that treatment. This isn't flagged as a bug because the function isn't consumed yet and the type signature accepting `string` may be intended for only well-formed ISO date strings from Supabase. However, if this utility is used with user input or untrusted data, it will crash.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/3\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T20:23:48Z",
+    "updated_at": "2026-03-01T20:23:51Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869759959",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869759959"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869759959"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869759959/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": 19,
+    "start_side": "RIGHT",
+    "line": null,
+    "original_line": 21,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 21,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869760031",
+    "pull_request_review_id": 3873347989,
+    "id": 2869760031,
+    "node_id": "PRRC_kwDORbYZPM6rDRAf",
+    "diff_hunk": "@@ -0,0 +1,34 @@\n+import { z } from \"zod\";",
+    "path": "lib/validations.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-7fb63ea0faef423bbf98674b4bd79ae8_0003\", \"file_path\": \"lib/validations.ts\", \"start_line\": 1, \"end_line\": 1, \"side\": \"RIGHT\"} -->\n\n🚩 **Zod v4 import pattern: `import { z } from 'zod'` is compatible but `@hookform/resolvers` compatibility should be verified**\n\nThe project uses `zod: ^4.3.6` and `@hookform/resolvers: ^5.2.2`. Zod v4 is a major version change from v3 with some API differences. The schemas in `lib/validations.ts` use basic Zod APIs (`z.object`, `z.string`, `z.enum`, `.default()`, `.optional()`, `.min()`, `.email()`, `.uuid()`) which are all present in Zod v4. However, the `@hookform/resolvers` package at v5.x was specifically built for Zod v4 compatibility via `@hookform/resolvers/zod`. I was not able to verify the installed versions from a lockfile (none exists), so the exact resolver used at runtime depends on npm resolution. This is worth confirming during CI/build.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/3\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T20:23:52Z",
+    "updated_at": "2026-03-01T20:23:53Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869760031",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869760031"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869760031"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869760031/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 1,
+    "original_line": 1,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 1,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762088",
+    "pull_request_review_id": 3873349672,
+    "id": 2869762088,
+    "node_id": "PRRC_kwDORbYZPM6rDRgo",
+    "diff_hunk": "@@ -0,0 +1,34 @@\n+import { z } from \"zod\";",
+    "path": "lib/validations.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "celaluysl",
+      "id": 12674749,
+      "node_id": "MDQ6VXNlcjEyNjc0NzQ5",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12674749?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/celaluysl",
+      "html_url": "https://github.com/celaluysl",
+      "followers_url": "https://api.github.com/users/celaluysl/followers",
+      "following_url": "https://api.github.com/users/celaluysl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/celaluysl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/celaluysl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/celaluysl/subscriptions",
+      "organizations_url": "https://api.github.com/users/celaluysl/orgs",
+      "repos_url": "https://api.github.com/users/celaluysl/repos",
+      "events_url": "https://api.github.com/users/celaluysl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/celaluysl/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "✅ Kontrol Edildi: Paket dependency ağacımız (npm list) üzerinde Zod sürümü `v4.3.6` olarak ve hookform resolver `v5.2.2` olarak doğrudan uyumlu versiyonlar şeklinde kurulduğu doğrulandı. Run-time sorunu yaşanmayacaktır.",
+    "created_at": "2026-03-01T20:26:07Z",
+    "updated_at": "2026-03-01T20:26:08Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762088",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762088"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762088"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762088/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 1,
+    "original_line": 1,
+    "side": "RIGHT",
+    "in_reply_to_id": 2869760031,
+    "author_association": "OWNER",
+    "original_position": 1,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762089",
+    "pull_request_review_id": 3873349673,
+    "id": 2869762089,
+    "node_id": "PRRC_kwDORbYZPM6rDRgp",
+    "diff_hunk": "@@ -0,0 +1,40 @@\n+export class ApiError extends Error {\n+    constructor(public status: number, message: string, public data?: any) {\n+        super(message);\n+        this.name = 'ApiError';\n+    }\n+}\n+\n+export async function fetchApi<T>(\n+    endpoint: string,\n+    options: RequestInit = {}\n+): Promise<T> {\n+    const defaultHeaders = {\n+        'Content-Type': 'application/json',\n+    };\n+\n+    const response = await fetch(endpoint, {\n+        ...options,\n+        headers: {\n+            ...defaultHeaders,\n+            ...options.headers,\n+        },\n+    });\n+\n+    let data;\n+    try {\n+        data = await response.json();\n+    } catch (error) {\n+        data = null;\n+    }",
+    "path": "lib/api-client.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "celaluysl",
+      "id": 12674749,
+      "node_id": "MDQ6VXNlcjEyNjc0NzQ5",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12674749?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/celaluysl",
+      "html_url": "https://github.com/celaluysl",
+      "followers_url": "https://api.github.com/users/celaluysl/followers",
+      "following_url": "https://api.github.com/users/celaluysl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/celaluysl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/celaluysl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/celaluysl/subscriptions",
+      "organizations_url": "https://api.github.com/users/celaluysl/orgs",
+      "repos_url": "https://api.github.com/users/celaluysl/repos",
+      "events_url": "https://api.github.com/users/celaluysl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/celaluysl/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "✅ Çözüldü:  içerisindeki JSON parçalama bloğuna Status 204 durumu için istisna eklendi. Ayrıca başarılı bir yanıt alınıp JSON parse edilemediği durumlarda (unexpected format) sessizce null döndürmek yerine fırlatılacak bir  kurgulandı.",
+    "created_at": "2026-03-01T20:26:07Z",
+    "updated_at": "2026-03-01T20:26:08Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762089",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762089"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762089"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762089/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 30,
+    "original_start_line": 27,
+    "start_side": "RIGHT",
+    "line": 35,
+    "original_line": 29,
+    "side": "RIGHT",
+    "in_reply_to_id": 2869753746,
+    "author_association": "OWNER",
+    "original_position": 29,
+    "position": 35,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762090",
+    "pull_request_review_id": 3873349674,
+    "id": 2869762090,
+    "node_id": "PRRC_kwDORbYZPM6rDRgq",
+    "diff_hunk": "@@ -1,6 +1,22 @@\n import { clsx, type ClassValue } from \"clsx\"\n import { twMerge } from \"tailwind-merge\"\n+import { format } from \"date-fns\"\n+import { tr } from \"date-fns/locale\"\n \n export function cn(...inputs: ClassValue[]) {\n   return twMerge(clsx(inputs))\n }\n+\n+export function formatCurrency(value: number): string {\n+  return new Intl.NumberFormat(\"tr-TR\", {\n+    style: \"currency\",\n+    currency: \"TRY\",\n+    minimumFractionDigits: 0,\n+    maximumFractionDigits: 2,\n+  }).format(value)\n+}\n+\n+export function formatDate(date: string | Date | null | undefined): string {\n+  if (!date) return \"-\"\n+  return format(new Date(date), \"dd MMM yyyy\", { locale: tr })",
+    "path": "lib/utils.ts",
+    "commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "celaluysl",
+      "id": 12674749,
+      "node_id": "MDQ6VXNlcjEyNjc0NzQ5",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12674749?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/celaluysl",
+      "html_url": "https://github.com/celaluysl",
+      "followers_url": "https://api.github.com/users/celaluysl/followers",
+      "following_url": "https://api.github.com/users/celaluysl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/celaluysl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/celaluysl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/celaluysl/subscriptions",
+      "organizations_url": "https://api.github.com/users/celaluysl/orgs",
+      "repos_url": "https://api.github.com/users/celaluysl/repos",
+      "events_url": "https://api.github.com/users/celaluysl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/celaluysl/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "✅ Çözüldü:  fonksiyonunun Date dönüştürmesinde çökmelere (crash) yol açmaması için  filtresi ile Invalid Date kontrolü yapıldı.",
+    "created_at": "2026-03-01T20:26:07Z",
+    "updated_at": "2026-03-01T20:26:08Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762090",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762090"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869762090"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869762090/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": 19,
+    "start_side": "RIGHT",
+    "line": null,
+    "original_line": 21,
+    "side": "RIGHT",
+    "in_reply_to_id": 2869759959,
+    "author_association": "OWNER",
+    "original_position": 21,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766466",
+    "pull_request_review_id": 3873354772,
+    "id": 2869766466,
+    "node_id": "PRRC_kwDORbYZPM6rDSlC",
+    "diff_hunk": "@@ -0,0 +1,40 @@\n+export class ApiError extends Error {\n+    constructor(public status: number, message: string, public data?: any) {\n+        super(message);\n+        this.name = 'ApiError';\n+    }\n+}\n+\n+export async function fetchApi<T>(\n+    endpoint: string,\n+    options: RequestInit = {}\n+): Promise<T> {\n+    const defaultHeaders = {\n+        'Content-Type': 'application/json',\n+    };\n+\n+    const response = await fetch(endpoint, {\n+        ...options,\n+        headers: {\n+            ...defaultHeaders,\n+            ...options.headers,\n+        },\n+    });\n+\n+    let data;\n+    try {\n+        data = await response.json();\n+    } catch (error) {\n+        data = null;\n+    }",
+    "path": "lib/api-client.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "✅ **Resolved**: The fix suggested in the bug report has been applied. The current code now handles 204 with an early return, throws ApiError when response.ok but JSON parsing fails, and only sets data=null for non-ok responses with unparseable bodies.",
+    "created_at": "2026-03-01T20:30:10Z",
+    "updated_at": "2026-03-01T20:30:11Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869766466",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766466"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869766466"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766466/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 30,
+    "original_start_line": 27,
+    "start_side": "RIGHT",
+    "line": 35,
+    "original_line": 29,
+    "side": "RIGHT",
+    "in_reply_to_id": 2869753746,
+    "author_association": "NONE",
+    "original_position": 29,
+    "position": 35,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766489",
+    "pull_request_review_id": 3873354799,
+    "id": 2869766489,
+    "node_id": "PRRC_kwDORbYZPM6rDSlZ",
+    "diff_hunk": "@@ -1,6 +1,22 @@\n import { clsx, type ClassValue } from \"clsx\"\n import { twMerge } from \"tailwind-merge\"\n+import { format } from \"date-fns\"\n+import { tr } from \"date-fns/locale\"\n \n export function cn(...inputs: ClassValue[]) {\n   return twMerge(clsx(inputs))\n }\n+\n+export function formatCurrency(value: number): string {\n+  return new Intl.NumberFormat(\"tr-TR\", {\n+    style: \"currency\",\n+    currency: \"TRY\",\n+    minimumFractionDigits: 0,\n+    maximumFractionDigits: 2,\n+  }).format(value)\n+}\n+\n+export function formatDate(date: string | Date | null | undefined): string {\n+  if (!date) return \"-\"\n+  return format(new Date(date), \"dd MMM yyyy\", { locale: tr })",
+    "path": "lib/utils.ts",
+    "commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "original_commit_id": "3733b929e867d08b6b4d0b82c928d53a6dfb855f",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "✅ **Resolved**: The formatDate function now includes an explicit `isNaN(parsedDate.getTime())` check at lib/utils.ts:22 that returns \"-\" for invalid date strings, preventing the RangeError that date-fns format() would throw on Invalid Date objects.",
+    "created_at": "2026-03-01T20:30:13Z",
+    "updated_at": "2026-03-01T20:30:15Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869766489",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766489"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869766489"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869766489/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": 19,
+    "start_side": "RIGHT",
+    "line": null,
+    "original_line": 21,
+    "side": "RIGHT",
+    "in_reply_to_id": 2869759959,
+    "author_association": "NONE",
+    "original_position": 21,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869768330",
+    "pull_request_review_id": 3873356828,
+    "id": 2869768330,
+    "node_id": "PRRC_kwDORbYZPM6rDTCK",
+    "diff_hunk": "@@ -0,0 +1,9 @@\n+import { createBrowserClient } from '@supabase/ssr'\n+import { Database } from '@/types/database.types'\n+\n+export function createClient() {\n+    return createBrowserClient<Database>(\n+        process.env.NEXT_PUBLIC_SUPABASE_URL!,\n+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n+    )",
+    "path": "lib/supabase/client.ts",
+    "commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "original_commit_id": "8e95ca699a7bd690fc7f52c722b7d27711e82f34",
+    "user": {
+      "login": "devin-ai-integration[bot]",
+      "id": 158243242,
+      "node_id": "BOT_kgDOCW6Zqg",
+      "avatar_url": "https://avatars.githubusercontent.com/in/811515?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D",
+      "html_url": "https://github.com/apps/devin-ai-integration",
+      "followers_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devin-ai-integration%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "<!-- devin-review-comment {\"id\": \"ANALYSIS_pr-review-job-0f3cf82bf82b4b4b8c83c409014bdc08_0006\", \"file_path\": \"lib/supabase/client.ts\", \"start_line\": 4, \"end_line\": 8, \"side\": \"RIGHT\"} -->\n\n🚩 **Supabase browser client is created per-call without singleton pattern**\n\nAt `lib/supabase/client.ts:4-8`, `createClient()` creates a new Supabase browser client on every invocation. The Supabase docs recommend creating a singleton for browser clients to avoid redundant auth state management and WebSocket connections. If multiple components call `createClient()` independently, each gets a separate client instance with its own auth listener and realtime subscription handling. The `@supabase/ssr` `createBrowserClient` may handle deduplication internally (it uses a global store), but this should be verified to avoid unnecessary resource overhead.\n\n<!-- devin-review-badge-begin -->\n<a href=\"https://app.devin.ai/review/celaluysl/agencycrm/pull/3\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-open-in-devin-review-dark.svg?v=1\">\n    <img src=\"https://static.devin.ai/assets/gh-open-in-devin-review-light.svg?v=1\" alt=\"Open in Devin Review\">\n  </picture>\n</a>\n<!-- devin-review-badge-end -->\n\n---\n*Was this helpful? React with 👍 or 👎 to provide feedback.*",
+    "created_at": "2026-03-01T20:31:42Z",
+    "updated_at": "2026-03-01T20:31:43Z",
+    "html_url": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869768330",
+    "pull_request_url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869768330"
+      },
+      "html": {
+        "href": "https://github.com/celaluysl/agencycrm/pull/3#discussion_r2869768330"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/celaluysl/agencycrm/pulls/3"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/celaluysl/agencycrm/pulls/comments/2869768330/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": 4,
+    "original_start_line": 4,
+    "start_side": "RIGHT",
+    "line": 8,
+    "original_line": 8,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 8,
+    "position": 8,
+    "subject_type": "line"
+  }
+]
