@@ -7,9 +7,13 @@ import { cn } from "@/lib/utils";
 const navigation = [
     { name: "Genel Bakış", href: "/", icon: "dashboard" },
     { name: "Maaş & Personel", href: "/admin/payroll", icon: "payments" },
-    { name: "Bordrolar", href: "/admin/payrolls", icon: "description" },
-    { name: "Personel Listesi", href: "/admin/employees", icon: "group" },
-    { name: "Vergi & SGK", href: "/admin/taxes", icon: "assignment_turned_in" },
+    { name: "CRM Leads (Kanban)", href: "/crm/leads", icon: "view_kanban" },
+    { name: "SEM Portföy", href: "/sem/portfolio", icon: "campaign" },
+    { name: "SEO Sıra Takibi", href: "/seo/rank-tracking", icon: "query_stats" },
+    { name: "Sosyal Medya Onay", href: "/social-media/approval-center", icon: "thumb_up" },
+    { name: "Kişisel Performans", href: "/performance", icon: "monitoring" },
+    { name: "Müşteri Portalı", href: "/client-portal", icon: "person" },
+    { name: "Özel Müşteri Hesabı (Örnek)", href: "/admin/accounts/1", icon: "manage_accounts" },
 ];
 
 export function Sidebar() {
