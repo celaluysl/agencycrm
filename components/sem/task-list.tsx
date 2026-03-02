@@ -39,6 +39,19 @@ export function TaskList() {
         );
     };
 
+    const handleCompleteSelectedTasks = () => {
+        setTasks(prev => prev.map(t => selectedTasks.includes(t.id) ? { ...t, status: "done", completed: true } : t));
+        setSelectedTasks([]);
+    };
+
+    const handleToggleAllSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            setSelectedTasks(activeTasks.map(t => t.id));
+        } else {
+            setSelectedTasks([]);
+        }
+    };
+
     const getPriorityBadge = (priority: "high" | "medium" | "low") => {
         const maps = {
             high: { label: "YÜKSEK", className: "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800" },
@@ -68,7 +81,10 @@ export function TaskList() {
 
                 <div className="flex gap-2">
                     {selectedTasks.length > 0 && (
-                        <button className="text-[11px] font-bold text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md flex items-center gap-1 transition-colors">
+                        <button
+                            onClick={handleCompleteSelectedTasks}
+                            className="text-[11px] font-bold text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md flex items-center gap-1 transition-colors"
+                        >
                             <span className="material-symbols-outlined text-sm">done_all</span>
                             Tamamla ({selectedTasks.length})
                         </button>
@@ -82,7 +98,12 @@ export function TaskList() {
                     <thead className="bg-white dark:bg-[#1a2432] border-b border-gray-100 dark:border-gray-800">
                         <tr>
                             <th className="px-6 py-3 w-12 text-center">
-                                <input type="checkbox" className="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-700 dark:bg-gray-800" />
+                                <input
+                                    type="checkbox"
+                                    checked={activeTasks.length > 0 && selectedTasks.length === activeTasks.length}
+                                    onChange={handleToggleAllSelection}
+                                    className="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
+                                />
                             </th>
                             <th className="px-4 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Görev & Müşteri</th>
                             <th className="px-4 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-center">Öncelik</th>
@@ -128,7 +149,9 @@ export function TaskList() {
                                 <td className="px-4 py-4 text-center">
                                     <select
                                         value={task.status}
-                                        onChange={(e) => { }}
+                                        onChange={(e) => {
+                                            setTasks(prev => prev.map(t => t.id === task.id ? { ...t, status: e.target.value as SemTask['status'] } : t));
+                                        }}
                                         className={cn(
                                             "text-[10px] font-bold uppercase rounded-md px-2 py-1 outline-none border cursor-pointer",
                                             task.status === "in_progress" ? "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800" :
