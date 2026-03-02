@@ -41,4 +41,8 @@ export const ROUTES = {
         commissions: "/admin/commissions",
         analytics: "/admin/analytics",
     },
+    clientPortal: {
+        home: "/client-portal",
+        support: "/client-portal/support",
+    },
 } as const;
