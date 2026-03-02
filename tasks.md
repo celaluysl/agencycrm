@@ -285,7 +285,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Click navigation to detail page
   - _Gereksinimler: 3.2, 3.6, 3.8_
 
-- [ ] 7.4 Support Ticket sayfası oluştur
+- [x] 7.4 Support Ticket sayfası oluştur
   - `app/client-portal/support/page.tsx` - Server Component + Client Component
   - Ticket listesi
   - Chat-like interface

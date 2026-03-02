@@ -78,6 +78,8 @@ export const navigation = [
     },
     {
         name: "Müşteri Portalı", href: "#", icon: "person", items: [
+            { name: "Portal Anasayfa", href: "/client-portal" },
+            { name: "Destek Talepleri", href: "/client-portal/support" },
             { name: "Onay Merkezi", href: "/client-portal/musteri-onay-merkezi" },
             { name: "Portal Kontrol", href: "/client-portal/musteri-portali-kontrol-paneli" },
             { name: "Rapor Arşivi", href: "/client-portal/musteri-rapor-arsivi" },

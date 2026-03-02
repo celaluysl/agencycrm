@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sosyal Medya Onay Merkezi - AgenciFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white transition-colors duration-200">
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-[#e5e7eb] dark:border-[#2d3748] bg-white dark:bg-[#1a222c] px-6 py-3 lg:px-12">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AgenciFlow</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-wide transition-opacity hover:opacity-90">
+<span>Tümünü Onayla</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuATfBj33TLBl_D7-sdOttbC_QFrY9v6WKq4Xhe9ofCco7why7o9lnq67KZ2IpkCXZuFQP3rhlsWxevGNxbbxHk8_bLL3sOUjvtszqimZpOVIxhnDNoi4_Zmi3wdyRy7k2w_f_YdOqh0HKFXqlBx0Ttxm4aGFhVi2VKwKaabEqRUti-RYOXm297FxEU2284_ApiG1Ogpy1Ie3xk94jsiq0KQm3UG3W8rFELewGQANFPrsAsVg4J5MCbqr7M5YknmfDrp9RwffG8A5Qq1");'></div>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row h-[calc(100vh-65px)] overflow-hidden">
+<aside class="w-full lg:w-80 flex flex-col border-r border-[#e5e7eb] dark:border-[#2d3748] bg-white dark:bg-[#1a222c] overflow-y-auto">
+<div class="p-6">
+<h1 class="text-lg font-bold">İçerik Portalı</h1>
+<p class="text-[#617289] text-sm">Onay Bekleyen İçerikler (5)</p>
+</div>
+<nav class="flex flex-col gap-1 px-3">
+<div class="flex flex-col gap-3 rounded-xl border-2 border-primary bg-primary/5 p-4 cursor-pointer">
+<div class="flex items-start gap-3">
+<div class="h-14 w-14 rounded-lg bg-cover bg-center shrink-0 shadow-sm" data-alt="Reels video cover image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANhjCceyvJ1Vx-V_-9DL50oy-lXL5ZMkkMIo4Sieq2_0I3oJyzK-Ci3uECaGgeRILScBHtUCYkoOQwNqyj7TeN-5i_Q4DbKiHSboboLpHx6SqmDM_pHtZyRMznBrWxfGvjlFsDITE5EcLp5eXX15oQzJeszTOIcs1F68OI5B5gNy_EtUznhXTm9GVJxfM8wF1588KQWdnDsznGvHxq5g0Nq0rl_cJRNcanwtkUslF-9mbtM6LEik4INb4x0PHakuGlzBm43sFZcwaz");'></div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Reels</span>
+<h3 class="text-sm font-bold truncate">Haftalık Bülten - Reels</h3>
+<p class="text-xs text-[#617289] mt-1">24 Ekim, 18:00</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-xl border border-transparent hover:bg-gray-50 dark:hover:bg-white/5 p-4 cursor-pointer transition-all">
+<div class="flex items-start gap-3">
+<div class="h-14 w-14 rounded-lg bg-cover bg-center shrink-0 grayscale-[0.5]" data-alt="Social media post image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBpKZhAmYJiVPStlkKrYhTKWSrP2ftUmijNwKauX9oy9YXUq3p51XU2hv3dqsdqoTKVjZ1MPFtswouRTw_Tj4mytHmU3r_eBMKPpI07A-nKpDGV2ZJqdpMwPXm8dahRIYp-GUe4bYgs98Nj-HcQD__y8Sgw_tiijdsTVZcgKS35kBAwrwh9TXoC9IfcGe8Nhc20hDv6w9KEyPhVl28zIW1dIGJBRiEjp6pJigCwOR4JEoCQLkSHjhPexZkkzxYBUGa1DDMlKZM-bAXi");'></div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Post</span>
+<h3 class="text-sm font-bold truncate">Ürün Tanıtımı - Yeni Sezon</h3>
+<p class="text-xs text-[#617289] mt-1">25 Ekim, 12:00</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-xl border border-transparent hover:bg-gray-50 dark:hover:bg-white/5 p-4 cursor-pointer transition-all">
+<div class="flex items-start gap-3">
+<div class="h-14 w-14 rounded-lg bg-cover bg-center shrink-0 grayscale-[0.5]" data-alt="Instagram Story preview" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWaZJSLq1EEV79ycis8jXftvISUkA8jHzFnB_ZmCW8wTHnlymrzQMt0Wv348e-33cbuwXlZ0CUVHqfIKuKyyODCGTl7E_TEx_EqH0hpULnlvLG_75XV28byrqbuv3XnSXuKVQldxyokrjVBKn8D-8UFl7UNAeopK6pSuUC9lZUYFsIoKlmT7UsqvQB4r5FNIKkYq5OHKQ5FEmuuSfR5wuTm6ZSXKU1hFphaO_7dOVroorfs28m4Bc2i7aTnIKE1yK99VB4C6fkI9gZ");'></div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-xs font-bold text-[#617289] dark:text-gray-400 uppercase tracking-wider">Story</span>
+<h3 class="text-sm font-bold truncate">Soru-Cevap Etkinliği</h3>
+<p class="text-xs text-[#617289] mt-1">26 Ekim, 09:00</p>
+</div>
+</div>
+</div>
+</nav>
+<div class="mt-auto p-6 border-t border-[#e5e7eb] dark:border-[#2d3748]">
+<div class="flex items-center gap-3 text-[#617289] dark:text-gray-400">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+<span class="text-sm">Destek Merkezi</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10 flex flex-col items-center">
+<div class="max-w-4xl w-full flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black tracking-tight leading-tight">Haftalık Bülten - Reels</h2>
+<div class="flex items-center gap-3 mt-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">movie_filter</span> Reels
+                        </span>
+<span class="text-[#617289] dark:text-gray-400 text-sm font-medium">Planlanan Tarih: 24 Ekim 2023, 18:00</span>
+</div>
+</div>
+</div>
+<div class="relative w-full aspect-video md:aspect-[16/9] lg:aspect-[1.8/1] rounded-2xl overflow-hidden bg-black shadow-2xl group">
+<div class="absolute inset-0 flex items-center justify-center bg-cover bg-center opacity-80" data-alt="Professional reels video preview showing abstract tech animation" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0hs6WeX3tsjv860nrv_0yFWBsVanpkG7kvlTFxB8TzwkmpUwo-6m_veFk0yq8orHe__sTMMIiTtOJprm53dgtsrcE3Wk_b1qAyL8Gvk_7PKBkyqOoKuEPQxVPwOzkzHog-UqMKiBsPvpIQR9G92oJV5fyx2MTkiQF4FeumE4m7y9gqqNWuCNxOWoZ5gYCsmnt84-sC8js64ggf_uJGEJV5NKwdmzXQctg-o5igmj04qX0H7ku_V9NkHHu3ZAduKYtB48tklxXSkAG");'>
+<div class="size-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-5xl active-fill">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white/80">
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer">volume_up</span>
+<span class="text-sm font-mono">0:00 / 0:45</span>
+</div>
+<span class="material-symbols-outlined cursor-pointer">fullscreen</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+<div class="bg-white dark:bg-[#1a222c] p-6 rounded-2xl border border-[#e5e7eb] dark:border-[#2d3748] shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-[#111418] dark:text-white">
+<span class="material-symbols-outlined text-primary">notes</span>
+<h3 class="font-bold">İçerik Metni (Caption)</h3>
+</div>
+<p class="text-[#617289] dark:text-gray-300 leading-relaxed text-sm">
+                        Bu hafta teknoloji dünyasında neler oldu? 🚀 En yeni yapay zeka güncellemelerini ve ajansımızdaki son gelişmeleri sizler için derledik. Videonun sonundaki sürprizi kaçırmayın! 👇<br/><br/>
+                        Sizin bu haftaki favori haberiniz hangisi? Yorumlarda buluşalım.
+                    </p>
+</div>
+<div class="bg-white dark:bg-[#1a222c] p-6 rounded-2xl border border-[#e5e7eb] dark:border-[#2d3748] shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-[#111418] dark:text-white">
+<span class="material-symbols-outlined text-primary">tag</span>
+<h3 class="font-bold">Hashtagler</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-primary text-sm font-medium hover:underline cursor-pointer">#AgenciFlow</span>
+<span class="text-primary text-sm font-medium hover:underline cursor-pointer">#TechNews</span>
+<span class="text-primary text-sm font-medium hover:underline cursor-pointer">#DigitalMarketing</span>
+<span class="text-primary text-sm font-medium hover:underline cursor-pointer">#AI2023</span>
+<span class="text-primary text-sm font-medium hover:underline cursor-pointer">#AgencyLife</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center gap-6 py-8 border-t border-[#e5e7eb] dark:border-[#2d3748] mt-4">
+<p class="text-[#617289] dark:text-gray-400 text-sm font-medium">Paylaşılacak Platformlar:</p>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-[#1a222c] border border-[#e5e7eb] dark:border-[#2d3748]">
+<img class="w-5 h-5" data-alt="Instagram icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2rqNJQi6JTm0rtmxC2ne91ySr6eG4ILd5ETp0MUT9pd14_HFhC7zG8VMtgUGMH0NREKwD7o65gAcUTLAilzbiHfKt1Mn7OGkyQif68GhABob0H58a6PIzmoGCpBv7zG-xRJfkcMvhjR58DEY_BXBIUJ1OJslKzYR0jaGYomKjS-tNJp5t7vJcw5DKIjSIo7BjevJzwkqTyJ6xwlIcusONNb7r3gv7bUu5nYjfZOpOFdelyaVJbs3_VNr5eo3xM9Pgx_upk-exkHE1"/>
+<span class="text-xs font-bold">Instagram</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-[#1a222c] border border-[#e5e7eb] dark:border-[#2d3748]">
+<img class="w-5 h-5" data-alt="Facebook icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvGrSKXHp1CXit7RuU-fKYONrzgMob14mY05m9najSoqT1lcr-GglLtzC66SU5oG5j7XBoHiv0beETjhWXymbaUCyZmdTpEV4QC3VL7lznO4ylBU5gNfI-b4V-pHgTFuoXcK9tCnwzFrinkshmnVsHhcHYEwnVhjNJ0Un_gdi2UWSgQu96PldgOWXHOPF54U2HeRR1k-6W8F9e-eS11j_1nT-wAZ9Z4N3wBStz2XFha2tgtZ7ydqlGyokeQGopKzkW1ODlsSxrA-og"/>
+<span class="text-xs font-bold">Facebook</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-[#1a222c] border border-[#e5e7eb] dark:border-[#2d3748]">
+<img class="w-5 h-5" data-alt="TikTok icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBbv-Pp51siSSO26FatqMaa5hjR14DtYML69ow0bnGS1gq_sYmNXM_gczTgz10snrbK34svGX5CVVW_-mXuMOXG-DLAAhVIHFkU0N64TiRFhcF6CwaDTZ_ftpAGMJ-cIfc9x5wsVoNieUac8tGMdoYWSePTXDybjFZhYjxZAxIOeK--5IJQ1oiZLljjr7-g1sqf5grAImLn5eHRn15D-f2pE3I0lSEBxsNtSiRE0EOPL1EiFiECkuvjhITUc7fpCQ1N3WP7f_ZAM7S"/>
+<span class="text-xs font-bold">TikTok</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="w-full lg:w-96 flex flex-col border-l border-[#e5e7eb] dark:border-[#2d3748] bg-white dark:bg-[#1a222c] p-6 overflow-y-auto">
+<div class="flex flex-col gap-6">
+<div class="p-5 rounded-2xl bg-orange-50 dark:bg-orange-900/10 border-2 border-orange-200 dark:border-orange-900/30">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400">history_edu</span>
+<h3 class="text-sm font-bold text-orange-900 dark:text-orange-100">Kalan Revize Hakkınız</h3>
+</div>
+<span class="text-lg font-black text-orange-700 dark:text-orange-400">3 / 5</span>
+</div>
+<div class="w-full h-2.5 bg-orange-200 dark:bg-orange-900/40 rounded-full overflow-hidden mb-3">
+<div class="h-full bg-orange-500 dark:bg-orange-600 rounded-full" style="width: 60%"></div>
+</div>
+<p class="text-xs text-orange-800/80 dark:text-orange-300/80 leading-relaxed">
+                    Bu proje için toplam 5 revize hakkınızdan 2 tanesini kullandınız.
+                </p>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-1">Aksiyon Al</h2>
+<p class="text-sm text-[#617289]">Bu içerik için kararınızı verin.</p>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center gap-2 h-14 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-white font-black text-lg shadow-lg shadow-green-500/20 transition-all">
+<span class="material-symbols-outlined active-fill">check_circle</span>
+                    ONAYLA
+                </button>
+<button class="w-full flex items-center justify-center gap-2 h-14 rounded-xl border-2 border-[#f97316] text-[#f97316] hover:bg-[#f97316]/5 font-black text-lg transition-all">
+<span class="material-symbols-outlined">edit_note</span>
+                    REVİZE İSTE
+                </button>
+</div>
+<div class="flex flex-col gap-3 mt-4 pt-6 border-t border-[#e5e7eb] dark:border-[#2d3748]">
+<label class="text-sm font-bold text-[#111418] dark:text-white">Revizyon Notlarınız</label>
+<textarea class="w-full h-40 rounded-xl border-[#dbe0e6] dark:border-[#2d3748] dark:bg-[#101822] text-sm focus:ring-primary focus:border-primary p-4" placeholder="İçerikte yapılmasını istediğiniz değişiklikleri buraya yazın..."></textarea>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs leading-relaxed">
+<span class="material-symbols-outlined text-base shrink-0">info</span>
+<p>Notlarınız kreatif ekibimize anında iletilir ve içerik tekrar düzenlenir.</p>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium text-[#617289]">
+<span>Proje:</span>
+<span class="text-[#111418] dark:text-white">AgenciFlow Marka Hesabı</span>
+</div>
+<div class="flex justify-between text-xs font-medium text-[#617289]">
+<span>Atanan Temsilci:</span>
+<span class="text-[#111418] dark:text-white">Ahmet Yılmaz</span>
+</div>
+</div>
+</aside>
+</div>
+
+</body></html>
