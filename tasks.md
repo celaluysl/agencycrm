@@ -322,7 +322,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 4.3, 14.3_
 
 
-- [ ] 8.4 SEM Portfolio sayfası oluştur
+- [x] 8.4 SEM Portfolio sayfası oluştur
   - `app/(dashboard)/sem/portfolio/page.tsx` - Server Component
   - Müşteri portföy tablosu
   - Account health indicators
@@ -330,7 +330,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Platform badges (Google Ads, Meta Ads, LinkedIn Ads)
   - _Gereksinimler: 4.6_
 
-- [ ] 8.5 SEM Project Kanban sayfası oluştur
+- [x] 8.5 SEM Project Kanban sayfası oluştur
   - `app/(dashboard)/sem/projects/[id]/page.tsx` - Client Component
   - Project header (client logo, campaign name, progress)
   - Team members avatars
@@ -339,7 +339,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Active timer widget (bottom-right corner)
   - _Gereksinimler: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6_
 
-- [ ] 8.6 Critical Alerts Panel component oluştur
+- [x] 8.6 Critical Alerts Panel component oluştur
   - `components/sem/alert-panel.tsx` - Client Component
   - Alert types (high_cpa, budget_exceeded, low_quality_score)
   - Severity indicators (critical: kırmızı, warning: sarı)

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { KanbanTask } from './page';
@@ -87,11 +88,13 @@ export default function KanbanItem({ task }: KanbanItemProps) {
                     {task.assignees && task.assignees.length > 0 && (
                         <div className="flex -space-x-1.5 relative z-0">
                             {task.assignees.map(user => (
-                                <img
+                                <Image
                                     key={user.id}
                                     src={user.avatar}
                                     alt={user.name}
                                     title={user.name}
+                                    width={20}
+                                    height={20}
                                     className="w-5 h-5 rounded-full ring-1 ring-white dark:ring-gray-800 object-cover"
                                 />
                             ))}

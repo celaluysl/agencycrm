@@ -20,12 +20,18 @@ interface AlertPanelProps {
 }
 
 export function CriticalAlertsPanel({ alerts, onDismiss }: AlertPanelProps) {
-    const [localAlerts, setLocalAlerts] = useState<SemAlert[]>(alerts);
+    const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
 
     const handleDismiss = (id: string) => {
-        setLocalAlerts(prev => prev.filter(a => a.id !== id));
+        setDismissedIds(prev => {
+            const next = new Set(prev);
+            next.add(id);
+            return next;
+        });
         if (onDismiss) onDismiss(id);
     };
+
+    const visibleAlerts = alerts.filter(a => !dismissedIds.has(a.id));
 
     const getAlertConfig = (type: AlertType) => {
         switch (type) {
@@ -62,7 +68,7 @@ export function CriticalAlertsPanel({ alerts, onDismiss }: AlertPanelProps) {
         }
     };
 
-    if (localAlerts.length === 0) {
+    if (visibleAlerts.length === 0) {
         return (
             <div className="bg-white dark:bg-[#1a2432] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-5 space-y-4">
                 <h3 className="font-bold text-sm flex items-center gap-2 text-gray-500">
@@ -85,13 +91,13 @@ export function CriticalAlertsPanel({ alerts, onDismiss }: AlertPanelProps) {
                     Kritik Uyarılar
                 </h3>
                 <span className="bg-red-100 text-red-600 font-bold text-[10px] px-2 py-0.5 rounded-full">
-                    {localAlerts.length} Yeni
+                    {visibleAlerts.length} Yeni
                 </span>
             </div>
 
             <div className="space-y-3 overflow-hidden">
                 <AnimatePresence initial={false}>
-                    {localAlerts.map((alert) => {
+                    {visibleAlerts.map((alert) => {
                         const config = getAlertConfig(alert.type);
                         return (
                             <motion.div

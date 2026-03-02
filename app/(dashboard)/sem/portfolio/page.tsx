@@ -112,7 +112,7 @@ export default function SemPortfolioPage() {
                   <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <img src={item.client.logo} alt={item.client.name} className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 object-cover" />
+                        <Image src={item.client.logo} alt={item.client.name} width={32} height={32} className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 object-cover" />
                         <div>
                           <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{item.client.name}</p>
                           <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-0.5">{item.client.industry}</p>

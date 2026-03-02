@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import {
   DndContext,
@@ -134,7 +135,7 @@ export default function SemProjectKanbanPage() {
       {/* Project Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 shrink-0 bg-white dark:bg-[#1a2432] p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
         <div className="flex items-center gap-4">
-          <img src="https://i.pravatar.cc/150?u=b" alt="TechNova" className="w-12 h-12 rounded-lg border border-gray-200 dark:border-gray-700 object-cover" />
+          <Image src="https://i.pravatar.cc/150?u=b" alt="TechNova" width={48} height={48} className="w-12 h-12 rounded-lg border border-gray-200 dark:border-gray-700 object-cover" />
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold dark:text-white">TechNova Kampanyası</h1>
@@ -150,8 +151,8 @@ export default function SemProjectKanbanPage() {
         <div className="flex items-center gap-6">
           <div className="flex flex-col items-end gap-1">
             <div className="flex -space-x-2">
-              <img src="https://i.pravatar.cc/150?u=a" className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Celal" title="Celal" />
-              <img src="https://i.pravatar.cc/150?u=x" className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Ayşe" title="Ayşe" />
+              <Image src="https://i.pravatar.cc/150?u=a" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Celal" title="Celal" />
+              <Image src="https://i.pravatar.cc/150?u=x" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Ayşe" title="Ayşe" />
               <div className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432] bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-[10px] font-bold text-gray-500">+2</div>
             </div>
             <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Proje Ekibi</span>
