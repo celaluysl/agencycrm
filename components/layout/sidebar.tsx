@@ -62,6 +62,7 @@ export const navigation = [
     },
     {
         name: "SEM Merkezi", href: "#", icon: "campaign", items: [
+            { name: "SEM Operasyonları", href: "/sem/operations" },
             { name: "SEM Görevleri", href: "/sem/gelismis-gorev-yonetimli-sem-paneli" },
             { name: "Görev & SOP", href: "/sem/sem-gorev-detay-ve-sop-paneli" },
             { name: "Portföy Yönetimi", href: "/sem/sem-musteri-portfoy-yonetimi" },
