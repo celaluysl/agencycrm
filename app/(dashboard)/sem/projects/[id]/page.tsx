@@ -1,175 +1,204 @@
-
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import {
+  DndContext,
+  closestCorners,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragOverlay
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+import { ActiveTimerWidget } from "@/components/sem/active-timer";
+import KanbanColumn from "./KanbanColumn";
+import KanbanItem from "./KanbanItem";
 
-export default function Page() {
+export type TaskStatus = "ideas" | "in_progress" | "customer_approval" | "completed";
+
+export interface KanbanTask {
+  id: string;
+  columnId: TaskStatus;
+  content: string;
+  tags: string[];
+  priority: "low" | "medium" | "high";
+  dueDate?: string;
+  assignees?: { id: string; name: string; avatar: string }[];
+}
+
+const initialTasks: KanbanTask[] = [
+  { id: "task-1", columnId: "ideas", content: "Yeni A/B test senaryoları tasarlanacak", tags: ["Optimizasyon", "Test"], priority: "medium", assignees: [{ id: "1", name: "Celal", avatar: "https://i.pravatar.cc/150?u=a" }] },
+  { id: "task-2", columnId: "ideas", content: "Rakip analiz raporu oluşturulacak", tags: ["Analiz"], priority: "low" },
+  { id: "task-3", columnId: "in_progress", content: "Maksimum Performans kampanyası kurulumu", tags: ["Kurulum", "Google Ads"], priority: "high", dueDate: "Bugün 17:00", assignees: [{ id: "1", name: "Celal", avatar: "https://i.pravatar.cc/150?u=a" }] },
+  { id: "task-4", columnId: "customer_approval", content: "Aylık bütçe artış talebi", tags: ["Bütçe", "Onay"], priority: "high" },
+  { id: "task-5", columnId: "completed", content: "Eski reklam metinleri güncellendi", tags: ["Optimizasyon"], priority: "medium" },
+];
+
+const COLUMNS = [
+  { id: "ideas" as TaskStatus, title: "Fikirler", borderClass: "border-gray-200 dark:border-gray-800" },
+  { id: "in_progress" as TaskStatus, title: "İşlemde", borderClass: "border-blue-200 dark:border-blue-900/40" },
+  { id: "customer_approval" as TaskStatus, title: "Müşteri Onayında", borderClass: "border-purple-200 dark:border-purple-900/40" },
+  { id: "completed" as TaskStatus, title: "Tamamlandı", borderClass: "border-green-200 dark:border-green-900/40" }
+];
+
+export default function SemProjectKanbanPage() {
+  const params = useParams();
+  const projectId = params.id as string;
+
+  const [tasks, setTasks] = useState<KanbanTask[]>(initialTasks);
+  const [activeTask, setActiveTask] = useState<KanbanTask | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor)
+  );
+
+  const getTasksByColumn = (columnId: TaskStatus) => {
+    return tasks.filter(task => task.columnId === columnId);
+  };
+
+  const handleDragStart = (event: any) => {
+    const { active } = event;
+    const task = tasks.find(t => t.id === active.id);
+    if (task) setActiveTask(task);
+  };
+
+  const handleDragOver = (event: any) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    const activeTask = tasks.find(t => t.id === activeId);
+    const overTask = tasks.find(t => t.id === overId);
+
+    // Check if dragging over a column directly (empty column or not hitting an item)
+    const isOverAColumn = COLUMNS.some(col => col.id === overId);
+
+    if (activeTask) {
+      if (overTask && activeTask.columnId !== overTask.columnId) {
+        setTasks((prev) => {
+          const activeIndex = prev.findIndex(t => t.id === activeId);
+          const overIndex = prev.findIndex(t => t.id === overId);
+
+          let updated = [...prev];
+          updated[activeIndex] = { ...updated[activeIndex], columnId: overTask.columnId };
+          return arrayMove(updated, activeIndex, overIndex);
+        });
+      } else if (isOverAColumn && activeTask.columnId !== overId) {
+        setTasks((prev) => {
+          const activeIndex = prev.findIndex(t => t.id === activeId);
+          let updated = [...prev];
+          updated[activeIndex] = { ...updated[activeIndex], columnId: overId as TaskStatus };
+          return arrayMove(updated, activeIndex, prev.length - 1);
+        });
+      }
+    }
+  };
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    setActiveTask(null);
+
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    const activeTask = tasks.find(t => t.id === activeId);
+    const overTask = tasks.find(t => t.id === overId);
+
+    if (activeTask && overTask && activeTask.columnId === overTask.columnId) {
+      setTasks((prev) => {
+        const activeIndex = prev.findIndex(t => t.id === activeId);
+        const overIndex = prev.findIndex(t => t.id === overId);
+        return arrayMove(prev, activeIndex, overIndex);
+      });
+    }
+  };
+
   return (
-    <div className="flex-1 flex flex-col h-full px-6 py-6">
-      
-<div className="flex gap-6 h-full overflow-x-auto pb-10 scrollbar-hide">
-<div className="flex-none w-[350px] flex flex-col kanban-column">
-<div className="flex items-center justify-between mb-4 px-2">
-<div className="flex items-center gap-2">
-<span className="size-2 rounded-full bg-slate-400"></span>
-<h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider">TEKNİK İYİLEŞTİRMELER</h3>
-<span className="bg-slate-200 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded text-[10px] font-bold">4</span>
-</div>
-<button className="text-slate-400 hover:text-primary"><span className="material-symbols-outlined text-xl">add</span></button>
-</div>
-<div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all cursor-pointer relative group">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-rose-100 text-rose-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Kritik</span>
-<div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-<span className="material-symbols-outlined text-sm">schedule</span>
-<span>Est: 4s</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4">404 Hata Giderimi ve 301 Yönlendirmeleri</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOt97w2Bl3cWXB0aj0lyvrEaSbXrqyYcO84P2Oa8DnlWX1L5biL4VgcJMnvfCAT3Hsh1H09hwWI2OinVhJiojS73UUhB5a9D_XGx9mTJg2UZzcFHZVBpuL9IPcpwi-FjKaRdBBVx81K5Y7OgCGflzwvDF4jSLjb98cpX6bcTLBav4NXiYyH7lvPUqwOSimmCzOT7ZrQ3d9pBSPltrLjE9CWQr1cZHkguWLnUb8TacfCG_vm4-DmW-aJDJgI8djmJJcQFs3NLIUJ8ZC')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Caner Demir</span>
-</div>
-</div>
-</div>
-</div>
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all cursor-pointer group">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-amber-100 text-amber-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Orta</span>
-<div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-<span className="material-symbols-outlined text-sm">schedule</span>
-<span>Est: 2s</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4">Site Haritası (Sitemap.xml) Optimizasyonu</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuC-ts3OlrVX92KYbdSR-FrolR2OQmA_4nTq5sMTBLhHZUJD3MSJt8lv-anpht8zTKzIChT6sW7P6yLmk24fntnaE0B9S6MO83EogzWfIboEtuPl7RqPTsOD_5Mgv1b3kl0q0WUAe9F-Z4FkwC0N--Am2HUFFmIMtKhjjZDuDohrXK88FLpq2h5bPX_AyN8btPxA_uKaS5iTpBsMa3FLlI445Aa8u1ZM_528x8FopCcdaO63_dFGFTkFryMGHw03E5hGZGt28W5TTDIU')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Merve Aydın</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className="flex-none w-[350px] flex flex-col kanban-column">
-<div className="flex items-center justify-between mb-4 px-2">
-<div className="flex items-center gap-2">
-<span className="size-2 rounded-full bg-primary animate-pulse"></span>
-<h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider">İÇERİK PLANLAMA</h3>
-<span className="bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded text-[10px] font-bold">3</span>
-</div>
-</div>
-<div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border-l-4 border-l-primary border-t border-r border-b border-slate-200 dark:border-slate-700 transition-all cursor-pointer">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-blue-100 text-blue-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Yüksek</span>
-<div className="flex items-center gap-1.5 text-primary text-[10px] font-bold">
-<span className="material-symbols-outlined text-sm">schedule</span>
-<span>Est: 6s</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4">Anahtar Kelime Odaklı Blog İçeriği Yazımı</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBF_QTHNA7iYkHGc8yGnTGmQixvOYcxW-6vOszZurjfJSWrg8a8yP3V8OGJ1p3OnvDxy6xoWjorMMVZMVlEDUz0Qwq5yf6q9O17QfzTkpFSStWizRnUdBGCHFOSfWp1gdTAG3QElsjb4FVMqWdRz94oLCe7eNO1dZAdI3lWigJPRE26IfnitST-vi6qzP_4zo2geTQrrWAciKWjvM5XFNJICEBxEKdjXCPafLPdaXa9bCgqHeYpdiSldwFXeb1FecNbdwVaFY4gQUZq')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Selim Kurt</span>
-</div>
-</div>
-<div className="flex items-center gap-1 text-slate-400">
-<span className="material-symbols-outlined text-sm">description</span>
-<span className="text-[10px] font-bold">2</span>
-</div>
-</div>
-</div>
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-all cursor-pointer">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-amber-100 text-amber-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Orta</span>
-<div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-<span className="material-symbols-outlined text-sm">schedule</span>
-<span>Est: 3s</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4">Meta Tag ve Açıklama Optimizasyonu</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAap6CLJsaSU8W11dBYS1FsUibLaOlrQlrgo_H6QI5hYrWQfh4NO3_M-SAG8VP6f8-ompd04TRJQJCFpGA2HWlhcnqIGJ4gNROF6JV4KQ-DWnM2053WCbajhssdXXQbyUjEhD5zZdLkRKIs5HI9wRBUwgJ1EK6Ppw1yay8bFVOtyaQZjVgxceL6o32TefDG5bZQDsBYSIoW2NQ-9R4-6-mW99saYpAKThOs1aFmjzL-DHyCZjqwzTIo6jrZVXRPnQixhK5kdKRXD2Tj')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Ahmet Yılmaz</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className="flex-none w-[350px] flex flex-col kanban-column">
-<div className="flex items-center justify-between mb-4 px-2">
-<div className="flex items-center gap-2">
-<span className="size-2 rounded-full bg-amber-500"></span>
-<h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider">BACKLINK ÇALIŞMALARI</h3>
-<span className="bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded text-[10px] font-bold">2</span>
-</div>
-</div>
-<div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 border-l-4 border-l-amber-400 transition-all cursor-pointer">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-emerald-100 text-emerald-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Haftalık</span>
-<div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-<span className="material-symbols-outlined text-sm">link</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4">Sektörel Portal Tanıtım Yazısı Paylaşımı</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCi6y-evVpMMh-Cred_jOWlEh-zSg5rhUD9dI9ca9wp1QagdwDbhRYWbHIRcFY56Jil51IbXyGZk7JPqaON67kOwm-AukkbYrb1-Xoo8A7gMlSPZSJ6_ZD16rRMzD6LLcDjAA8m4UQRoCV_B5dZjOhGKH5Q_mfrizvpuE8RDW5pGLnv5kR9naL1vZdZDXO3FSzz0hzvYww_qhEud3rQgvKH2FxatAyFDBOphsRyXlhzH-MUlSAQ5YG_7NevQZ3MoP1UJNoU2jKESzye')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Deniz Yalçın</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className="flex-none w-[350px] flex flex-col kanban-column">
-<div className="flex items-center justify-between mb-4 px-2">
-<div className="flex items-center gap-2">
-<span className="size-2 rounded-full bg-emerald-500"></span>
-<h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider">TAMAMLANDI</h3>
-<span className="bg-emerald-100 text-emerald-600 px-1.5 py-0.5 rounded text-[10px] font-bold">18</span>
-</div>
-</div>
-<div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-hide">
-<div className="task-card bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
-<div className="flex justify-between items-start mb-3">
-<span className="bg-slate-100 text-slate-600 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Tamamlandı</span>
-<div className="flex items-center gap-1.5 text-emerald-500 text-[10px]">
-<span className="material-symbols-outlined text-sm">verified</span>
-</div>
-</div>
-<h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug mb-4 line-through">Rakip Analizi Raporu (Ekim 2024)</h4>
-<div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
-<div className="flex items-center gap-2">
-<div className="size-7 rounded-full bg-cover shadow-sm border border-slate-100" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIUI4GzOBAgKNtV0zTLXjo_FrSJ6cDRXILmY4mzJI9lrYiDLsYHJYcmE9vI90hrsco1YSQKFlTyU0Z_UJvVl1v_XGXByPKfldkIdtaE4ICbdarBC7ZreDaErXS4JkUJ9YPEKmbi9hxfogP2rGzxpLyQzexu04_nCvBbEIYLhs6n9JWjPtLCo1ziIej7rN2FC-NxeSOXnZ_jrzEejUzpGQFI-eWNI0-P22V-0OdW6vW_-zCYL4MAUJO4zF6d8itbdZc0xunKni0asqF')" }}></div>
-<div className="flex flex-col">
-<span className="text-[10px] text-slate-400 leading-none">Atanan</span>
-<span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">Elif Kaya</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    <div className="flex flex-col h-[calc(100vh-4rem)] p-4 md:p-6 bg-gray-50/30 dark:bg-transparent overflow-hidden">
+
+      {/* Project Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 shrink-0 bg-white dark:bg-[#1a2432] p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+        <div className="flex items-center gap-4">
+          <Image src="https://i.pravatar.cc/150?u=b" alt="TechNova" width={48} height={48} className="w-12 h-12 rounded-lg border border-gray-200 dark:border-gray-700 object-cover" />
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold dark:text-white">TechNova Kampanyası</h1>
+              <span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+            </div>
+            <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
+              <span className="material-symbols-outlined text-[14px]">calendar_month</span>
+              Q4 Dönemi (Ekim - Aralık)
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <div className="flex flex-col items-end gap-1">
+            <div className="flex -space-x-2">
+              <Image src="https://i.pravatar.cc/150?u=a" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Celal" title="Celal" />
+              <Image src="https://i.pravatar.cc/150?u=x" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432]" alt="Ayşe" title="Ayşe" />
+              <div className="w-8 h-8 rounded-full border-2 border-white dark:border-[#1a2432] bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-[10px] font-bold text-gray-500">+2</div>
+            </div>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Proje Ekibi</span>
+          </div>
+
+          <div className="w-32 flex flex-col items-end gap-1.5 hidden sm:flex">
+            <span className="text-[10px] font-bold text-gray-500">%35 Bütçe Tüketimi</span>
+            <div className="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+              <div className="w-[35%] h-full bg-primary rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Kanban Board Layout */}
+      <div className="flex-1 overflow-x-auto overflow-y-hidden pb-4 custom-scrollbar select-none">
+        <div className="flex gap-4 h-full min-w-max items-start">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+          >
+            {COLUMNS.map((column) => (
+              <KanbanColumn
+                key={column.id}
+                id={column.id}
+                title={column.title}
+                borderClass={column.borderClass}
+                count={getTasksByColumn(column.id).length}
+                tasks={getTasksByColumn(column.id)}
+              />
+            ))}
+
+            <DragOverlay>
+              {activeTask ? <KanbanItem task={activeTask} /> : null}
+            </DragOverlay>
+          </DndContext>
+        </div>
+      </div>
+
+      {/* Timer Widget Positioned Bottom Right */}
+      <div className="fixed bottom-6 right-6 z-40 w-80 shadow-2xl rounded-xl ring-1 ring-black/5 dark:ring-white/10 opacity-90 hover:opacity-100 transition-opacity">
+        <ActiveTimerWidget />
+      </div>
 
     </div>
   );

@@ -2,8 +2,36 @@ import React from "react";
 import { ActiveTimerWidget } from "@/components/sem/active-timer";
 import { TaskList } from "@/components/sem/task-list";
 import { KpiCard } from "@/components/shared/kpi-card";
+import { CriticalAlertsPanel, SemAlert } from "@/components/sem/alert-panel";
 
 export default function SemOperationsPage() {
+    const mockAlerts: SemAlert[] = [
+        {
+            id: "1",
+            type: "budget_exceeded",
+            clientName: "Global Lojistik",
+            campaignName: "Yurtdışı Nakliye",
+            message: "Hesapta kampanya durduruldu. Kredi kartından ödeme çekilemedi.",
+            timestamp: "10 dk önce"
+        },
+        {
+            id: "2",
+            type: "low_quality_score",
+            clientName: "Luxe Otel Grubu",
+            campaignName: "Erken Rezervasyon",
+            message: "Seçili 12 anahtar kelimenin kalite puanı 3'ün altına düştü. TBM maliyetleri artıyor.",
+            timestamp: "1 saat önce"
+        },
+        {
+            id: "3",
+            type: "high_cpa",
+            clientName: "Acme Corp",
+            campaignName: "B2B Yazılım Lead",
+            message: "Haftalık dönüşüm maliyeti (CPA) hedef hedefin %40 üzerine çıktı.",
+            timestamp: "2 saat önce"
+        }
+    ];
+
     return (
         <div className="flex-1 p-4 md:p-8 space-y-6 max-w-7xl mx-auto w-full">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -119,30 +147,7 @@ export default function SemOperationsPage() {
                     <ActiveTimerWidget />
 
                     {/* Critical Alerts Panel */}
-                    <div className="bg-white dark:bg-[#1a2432] rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-5 space-y-4">
-                        <h3 className="font-bold text-sm flex items-center gap-2 text-red-500">
-                            <span className="material-symbols-outlined">warning</span>
-                            Kritik Uyarılar
-                        </h3>
-
-                        <div className="space-y-3">
-                            <div className="flex gap-3 p-3 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-lg">
-                                <span className="material-symbols-outlined text-red-500 text-lg">credit_card_off</span>
-                                <div>
-                                    <h4 className="text-xs font-bold text-red-800 dark:text-red-400">Bakiye Yetersiz</h4>
-                                    <p className="text-[10px] text-red-600 dark:text-red-300 mt-0.5">Global Lojistik hesabında kampanya durduruldu. Kart reddedildi.</p>
-                                </div>
-                            </div>
-
-                            <div className="flex gap-3 p-3 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-900/30 rounded-lg">
-                                <span className="material-symbols-outlined text-yellow-600 text-lg">trending_down</span>
-                                <div>
-                                    <h4 className="text-xs font-bold text-yellow-800 dark:text-yellow-400">Dönüşüm Düşüşü</h4>
-                                    <p className="text-[10px] text-yellow-600 dark:text-yellow-300 mt-0.5">Luxe Otel Grubu reklamlarında son 2 günde %40 performans kaybı tespit edildi.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <CriticalAlertsPanel alerts={mockAlerts} />
                 </div>
 
             </div>
