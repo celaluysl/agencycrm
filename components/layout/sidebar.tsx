@@ -55,7 +55,7 @@ export const navigation = [
             { name: "Operasyon Paneli", href: "/seo/seo-operasyon-paneli" },
             { name: "Teknik Kanban", href: "/seo/seo-proje-ve-teknik-kanban-panosu" },
             { name: "Sıralama Takibi", href: "/seo/rank-tracking" },
-            { name: "Yayıncı Envanteri", href: "/seo/tanitim-yazisi-yayinci-envanteri" },
+            { name: "Yayıncı Envanteri", href: "/seo/publisher-inventory" },
             { name: "Tedarikçi Backlink", href: "/seo/tedarikci-bilgili-backlink-paneli" },
             { name: "Teknik SEO Analizi", href: "/seo/teknik-seo-analiz-ve-sorgu-paneli" },
         ]

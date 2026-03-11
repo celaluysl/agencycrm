@@ -412,7 +412,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Search volume ve difficulty columns
   - _Gereksinimler: 7.1_
 
-- [ ] 10.2 Publisher Inventory sayfası oluştur
+- [x] 10.2 Publisher Inventory sayfası oluştur
   - `app/(dashboard)/seo/publisher-inventory/page.tsx` - Server Component
   - Publisher tablosu (DR, traffic, spam score, price)
   - Advanced filters (DR range slider, traffic threshold, price scale)
