@@ -1,0 +1,435 @@
+<html class="light" lang="tr"><head></head><body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white">```html
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgenciFlow - Sistem Logları ve Güvenlik Paneli</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dbe0e6;
+            border-radius: 10px;
+        }
+    </style>
+
+
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col bg-white dark:bg-[#1a2432] border-r border-[#dbe0e6] dark:border-gray-800">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary rounded-lg size-10 flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-none">AgenciFlow</h1>
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider mt-1">Süper Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Genel Bakış</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[22px]">security</span>
+<span class="text-sm font-semibold">Sistem ve Güvenlik</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">manage_accounts</span>
+<span class="text-sm font-medium">Kullanıcı Yönetimi</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">api</span>
+<span class="text-sm font-medium">API Entegrasyonları</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+<span class="text-sm font-medium">Yedekleme</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Sistem Ayarları</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-gray-100 dark:border-gray-800 pt-6">
+<button class="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-[#111418] dark:text-white rounded-lg py-2.5 text-sm font-bold transition-all">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    Çıkış Yap
+                </button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto custom-scrollbar">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-white/80 dark:bg-[#1a2432]/80 backdrop-blur-md border-b border-[#f0f2f4] dark:border-gray-800 px-8 py-4">
+<div class="flex items-center gap-6">
+<div>
+<h2 class="text-xl font-bold tracking-tight">Sistem Logları ve Güvenlik Paneli</h2>
+<p class="text-xs text-[#617289]">Altyapı İzleme, Yetki Denetimi ve Güvenlik Olayları</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4 border-r dark:border-gray-700 pr-4">
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-[#617289] relative">
+<span class="material-symbols-outlined text-[22px]">shield_with_heart</span>
+<span class="absolute top-2 right-2 size-2 bg-green-500 rounded-full border-2 border-white dark:border-[#1a2432]"></span>
+</button>
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-[#617289]">
+<span class="material-symbols-outlined text-[22px]">history</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold leading-tight">Caner Özdemir</p>
+<p class="text-[10px] text-[#617289] font-medium">Süper Admin</p>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCum4COz_JUijqvzw6G9PFAwG5P7Wjcm2U3KizTQimJ4vMworO2vGVHnbwWS-bW-j6vYfHVAZROC3AD3CHVQteSHLWRI_iWPmtM7SgDROXWHum5otWuLpgW_D8ZPX4lR4N6FVtlOeD2bWzxO80MIsPovDwNwAAMP0vevMj9bn7tnJI-1oPCw4FPTrzZnUcwx43kV_ly0lz_qU3N6SxnZfa-qZMbXfWjHmItHN6hTF1fRK_0kd1D6T526vOw92i1S-34JTn7RSeHPOLg");'></div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-6">
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-[#1a2432] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">dns</span>
+<span class="flex items-center gap-1 text-[#07883b] text-xs font-bold">
+<span class="size-2 bg-[#07883b] rounded-full animate-pulse"></span> Çevrimiçi
+                        </span>
+</div>
+<p class="text-[#617289] text-xs font-semibold uppercase tracking-wider">Sunucu Yükü (CPU)</p>
+<p class="text-2xl font-bold mt-1">24.2%</p>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[24%]"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="material-symbols-outlined text-orange-500 bg-orange-500/10 p-2 rounded-lg">memory</span>
+<span class="text-[#617289] text-[10px] font-bold">8.4GB / 32GB</span>
+</div>
+<p class="text-[#617289] text-xs font-semibold uppercase tracking-wider">Bellek Kullanımı</p>
+<p class="text-2xl font-bold mt-1">26.3%</p>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-orange-500 h-full w-[26%]"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="material-symbols-outlined text-green-500 bg-green-500/10 p-2 rounded-lg">link</span>
+<span class="text-[#07883b] text-xs font-bold bg-[#07883b]/10 px-2 py-1 rounded">Aktif</span>
+</div>
+<p class="text-[#617289] text-xs font-semibold uppercase tracking-wider">Google/Meta API</p>
+<p class="text-2xl font-bold mt-1">Stabil</p>
+<div class="flex gap-1 mt-3">
+<div class="h-1 flex-1 bg-green-500 rounded-full"></div>
+<div class="h-1 flex-1 bg-green-500 rounded-full"></div>
+<div class="h-1 flex-1 bg-green-500 rounded-full"></div>
+<div class="h-1 flex-1 bg-green-500 rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] p-5 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="material-symbols-outlined text-red-500 bg-red-500/10 p-2 rounded-lg">security_update_warning</span>
+<span class="text-red-600 text-xs font-bold bg-red-600/10 px-2 py-1 rounded">3 Kritik</span>
+</div>
+<p class="text-[#617289] text-xs font-semibold uppercase tracking-wider">Güvenlik Olayları</p>
+<p class="text-2xl font-bold mt-1">Risk Yok</p>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-full"></div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-8 space-y-6">
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">list_alt</span>
+                            Aktivite Logları (Kritik İşlemler)
+                        </h3>
+<div class="flex gap-2">
+<div class="relative">
+<input class="pl-8 pr-4 py-1.5 text-xs bg-gray-50 dark:bg-gray-800 border-none rounded-lg focus:ring-1 focus:ring-primary w-48" placeholder="Loglarda ara..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1.5 text-sm text-[#617289]">search</span>
+</div>
+<button class="p-1.5 bg-gray-50 dark:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined text-sm text-[#617289]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 dark:bg-gray-800/50">
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Kullanıcı</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">İşlem</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Veri/Modül</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Tarih</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-right">Durum</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-primary">MY</div>
+<span class="text-xs font-bold text-[#111418] dark:text-white">Mert Yılmaz</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-medium">Müşteri Silme</td>
+<td class="px-6 py-4 text-xs text-[#617289]">CyberCore A.Ş.</td>
+<td class="px-6 py-4 text-xs text-[#617289]">24 Eki, 14:32</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Tamamlandı</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-orange-100 flex items-center justify-center text-[10px] font-bold text-orange-600">ZA</div>
+<span class="text-xs font-bold text-[#111418] dark:text-white">Zeynep Aras</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-medium">Şifre Kasası Erişimi</td>
+<td class="px-6 py-4 text-xs text-[#617289]">Meta Ads Manager</td>
+<td class="px-6 py-4 text-xs text-[#617289]">24 Eki, 12:15</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Denetlendi</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-red-100 flex items-center justify-center text-[10px] font-bold text-red-600">BY</div>
+<span class="text-xs font-bold text-[#111418] dark:text-white">Burak Yılmaz</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-medium">Bütçe Değişikliği</td>
+<td class="px-6 py-4 text-xs text-[#617289]">EcoStore (+₺45,000)</td>
+<td class="px-6 py-4 text-xs text-[#617289]">24 Eki, 11:05</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Onaylandı</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-600">ED</div>
+<span class="text-xs font-bold text-[#111418] dark:text-white">Ece Demir</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-medium">API Konfigürasyonu</td>
+<td class="px-6 py-4 text-xs text-[#617289]">Google Analytics 4</td>
+<td class="px-6 py-4 text-xs text-[#617289]">24 Eki, 09:44</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Tamamlandı</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-[#f0f2f4] dark:border-gray-800 flex justify-center">
+<button class="text-[11px] font-bold text-primary hover:underline">Tüm Kayıtları Gör (2,450+)</button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                            Yetki Yönetimi Özeti
+                        </h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">engineering</span>
+<span class="text-xs font-bold">Adminler</span>
+</div>
+<span class="text-sm font-bold">4</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">psychology</span>
+<span class="text-xs font-bold">Uzmanlar</span>
+</div>
+<span class="text-sm font-bold">18</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-orange-500">handshake</span>
+<span class="text-xs font-bold">Satış Ekibi</span>
+</div>
+<span class="text-sm font-bold">6</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">gate</span>
+<span class="text-xs font-bold">Müşteri Portalları</span>
+</div>
+<span class="text-sm font-bold">42</span>
+</div>
+<button class="w-full mt-2 py-2.5 bg-primary text-white rounded-lg text-xs font-bold shadow-md hover:bg-blue-700 transition-all">
+                            Yetki Düzenleyiciyi Aç
+                        </button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex items-center justify-between">
+<h3 class="font-bold text-base flex items-center gap-2 text-red-600">
+<span class="material-symbols-outlined">gpp_maybe</span>
+                            Güvenlik Uyarıları
+                        </h3>
+<span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase">Kritik</span>
+</div>
+<div class="p-4 space-y-3">
+<div class="p-3 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-red-600 text-[20px]">login</span>
+<div>
+<p class="text-xs font-bold text-red-700 dark:text-red-400">Şüpheli Giriş Denemesi</p>
+<p class="text-[10px] text-red-600/70">IP: 185.12.XX.XX (Amsterdam) - 5 başarısız deneme</p>
+</div>
+</div>
+<div class="p-3 bg-orange-50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-900/20 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-orange-600 text-[20px]">cached</span>
+<div>
+<p class="text-xs font-bold text-orange-700 dark:text-orange-400">Olağandışı Kasa Erişimi</p>
+<p class="text-[10px] text-orange-600/70">Zeynep A. 10 dk içinde 5 farklı şifre görüntüledi.</p>
+</div>
+</div>
+<div class="p-3 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/20 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-blue-600 text-[20px]">key</span>
+<div>
+<p class="text-xs font-bold text-blue-700 dark:text-blue-400">API Anahtarı Rotasyonu</p>
+<p class="text-[10px] text-blue-600/70">Meta API anahtarının süresi 3 gün içinde doluyor.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+                        Sunucu Yanıt Süreleri (ms)
+                    </h3>
+<span class="text-[10px] font-bold text-[#617289] uppercase tracking-widest">Son 24 Saat</span>
+</div>
+<div class="flex items-end gap-1.5 h-32">
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[45%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[38%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[52%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-primary rounded-t-sm h-[42%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[35%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[48%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[55%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[62%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[50%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[45%]"></div>
+</div>
+<div class="flex justify-between mt-4 border-t border-gray-100 dark:border-gray-800 pt-4">
+<div class="text-center">
+<p class="text-lg font-bold">124ms</p>
+<p class="text-[10px] text-[#617289] font-bold uppercase">Ortalama</p>
+</div>
+<div class="text-center">
+<p class="text-lg font-bold">99.98%</p>
+<p class="text-[10px] text-[#617289] font-bold uppercase">Uptime</p>
+</div>
+<div class="text-center">
+<p class="text-lg font-bold">0.02%</p>
+<p class="text-[10px] text-[#617289] font-bold uppercase">Hata Oranı</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">hub</span>
+                        Servis Entegrasyon Durumu
+                    </h3>
+<span class="text-[10px] font-bold text-green-500 uppercase tracking-widest">Tümü Aktif</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">database</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold">Veritabanı Cluster (PostgreSQL)</span>
+<span class="text-[10px] font-bold text-green-500">SAĞLIKLI</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[100%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400 text-lg">mail</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold">SMTP Sunucusu (SendGrid)</span>
+<span class="text-[10px] font-bold text-green-500">SAĞLIKLI</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[100%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-400 text-lg">folder_shared</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold">S3 Dosya Depolama (AWS)</span>
+<span class="text-[10px] font-bold text-orange-500">GECİKMELİ (42ms)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-orange-500 h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+```</body></html>

@@ -349,7 +349,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 9. Sosyal Medya Modülü
 
-- [ ] 9.1 Social Media Portfolio sayfası oluştur
+- [x] 9.1 Social Media Portfolio sayfası oluştur
   - `app/(dashboard)/social-media/portfolio/page.tsx` - Server Component
   - Portfolio tablosu (client, platforms, posting targets)
   - Posting target progress bars
@@ -358,7 +358,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Pending approvals section
   - _Gereksinimler: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 9.2 Portfolio Filter Bar component oluştur
+- [x] 9.2 Portfolio Filter Bar component oluştur
   - `components/social-media/portfolio-filter.tsx` - Client Component
   - Sector filter
   - Channel filter (Instagram, Facebook, TikTok, LinkedIn, Twitter)

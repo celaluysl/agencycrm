@@ -1,0 +1,370 @@
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgenciFlow - Toplu Ödeme Destekli Prim Raporu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                        "success": "#07883b",
+                        "warning": "#e78b08",
+                        "danger": "#e73908",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dbe0e6;
+            border-radius: 10px;
+        }
+        .highlight-earned {
+            background-color: rgba(7, 136, 59, 0.03);
+            border-left: 4px solid #07883b;
+        }
+        .dropdown-menu {
+            display: none;
+        }
+        .group:focus-within .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col bg-white dark:bg-[#1a2432] border-r border-[#dbe0e6] dark:border-gray-800">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary rounded-lg size-10 flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-none">AgenciFlow</h1>
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider mt-1">Muhasebe Departmanı</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Genel Bakış</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+<span class="text-sm font-semibold">Hakediş Raporu</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+<span class="text-sm font-medium">Faturalar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="text-sm font-medium">Satış Ekibi</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-sm font-medium">Banka Talimatları</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-gray-100 dark:border-gray-800 pt-6">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white rounded-lg py-2.5 text-sm font-bold transition-all shadow-md mb-2">
+<span class="material-symbols-outlined text-sm">account_balance_wallet</span>
+                        Banka Talimatı Oluştur
+                    </button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto custom-scrollbar relative">
+<header class="sticky top-0 z-20 flex items-center justify-between bg-white/80 dark:bg-[#1a2432]/80 backdrop-blur-md border-b border-[#f0f2f4] dark:border-gray-800 px-8 py-4">
+<div>
+<h2 class="text-xl font-bold tracking-tight text-[#111418] dark:text-white">Satışçı Aylık Prim Hakediş Raporu</h2>
+<p class="text-xs text-[#617289]">Ödeme Günü Gelen Kesinleşmiş Prim Özetleri</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4 border-r dark:border-gray-700 pr-4">
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-[#617289] relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2432]"></span>
+</button>
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-[#617289]">
+<span class="material-symbols-outlined text-[22px]">history</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold leading-tight">Deniz Aksoy</p>
+<p class="text-[10px] text-[#617289] font-medium">Muhasebe Sorumlusu</p>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNxf9-Y-7fKqNXhXjwONy8buXTBXFhtEd4rKZ7stBG3qA2Q5J6Hr76Wj6re714PEu8Y3LNkvhtkrZW1tJkucyexKkqrlHJSOfl3DPhXmc_caQc-lXWgH6VqRIwsQaDwiPT1CHXElnY9FKFE71bG5-YTaCzlUIHN5itbfiJiTTEOhj-ymb5U4J2bjq4os0_tN9Tg9MpE9np1UOBL8H9B9xPmi7O3cu6ZQQLKVVJabyEWMNcMSr-BzgQuh7dLuEvDB9n2be8e-EUnIj9");'></div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-6 pb-24">
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Kesinleşen Ödenecek Prim (11.11.2023)</p>
+<p class="text-2xl font-bold text-primary">₺14.800,00</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-[#617289] font-bold">
+<span class="material-symbols-outlined text-xs">event_available</span> 11 Kasım'da kesinleşen tutar
+                        </div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Ödeme Durumu: Hazır</p>
+<p class="text-2xl font-bold text-success">₺104.250,00</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-success font-bold">
+<span class="material-symbols-outlined text-xs">task_alt</span> 8 Kalem için ödeme onayı verildi
+                        </div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] p-6 rounded-xl border border-[#dbe0e6] dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider">Bu Ay Ödenen Toplam Prim</p>
+<p class="text-2xl font-bold text-[#111418] dark:text-white">₺0,00</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-[#617289] font-bold">
+<span class="material-symbols-outlined text-xs">payments</span> Henüz ödeme yapılmadı
+                        </div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-12 bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center bg-white dark:bg-[#1a2432] sticky left-0">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-success">check_circle</span>
+                                Onaylı Prim Hakedişleri (Ödemeye Hazır)
+                            </h3>
+<div class="flex gap-3 items-center">
+<div class="flex items-center gap-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2">
+<span class="material-symbols-outlined text-sm text-[#617289]">calendar_month</span>
+<select class="bg-transparent border-none text-xs font-bold text-[#617289] focus:ring-0 py-1.5 pl-1 pr-8">
+<option value="10">Ekim 2023</option>
+<option value="11">Kasım 2023</option>
+<option value="12">Aralık 2023</option>
+<option value="01">Ocak 2024</option>
+<option value="02">Şubat 2024</option>
+</select>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">description</span>
+                                        BANKA ÖDEME DOSYASI OLUŞTUR
+                                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white dark:bg-[#1a2432] border border-[#dbe0e6] dark:border-gray-700 rounded-xl shadow-xl z-30 overflow-hidden">
+<div class="p-2 flex flex-col">
+<button class="flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors group/item text-left">
+<div class="size-8 rounded bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-success">
+<span class="material-symbols-outlined text-xl">table_view</span>
+</div>
+<div>
+<p class="text-xs font-bold text-[#111418] dark:text-white leading-tight">Excel (XLSX)</p>
+<p class="text-[9px] text-[#617289]">Standart muhasebe formatı</p>
+</div>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors group/item text-left">
+<div class="size-8 rounded bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">data_object</span>
+</div>
+<div>
+<p class="text-xs font-bold text-[#111418] dark:text-white leading-tight">Banka CSV Formatı</p>
+<p class="text-[9px] text-[#617289]">Toplu ödeme yükleme dosyası</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 dark:bg-gray-800/50">
+<th class="px-6 py-4 w-10">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</th>
+<th class="px-4 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Satışçı İsmi</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Ödeme Dönemi</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Müşteri / Proje</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Hizmet Kalemi</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Ödeme Tarihi</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Prim (%10)</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">Durum</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="highlight-earned hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary font-bold text-xs">YK</div>
+<div>
+<p class="text-sm font-bold">Yavuz Kara</p>
+<p class="text-[10px] text-[#617289]">Sr. Satış Temsilcisi</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-semibold">Ekim 2023</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-bold">Lojistik Global A.Ş.</p>
+<p class="text-[10px] text-[#617289]">Proje No: #2341</p>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-[#617289] rounded text-[10px] font-bold uppercase">Yıllık Danışmanlık</span></td>
+<td class="px-6 py-4 text-xs font-semibold">
+<div class="flex flex-col">
+<span>11.11.2023</span>
+<span class="text-[9px] text-success font-bold uppercase italic">Bugün</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<p class="text-sm font-bold text-success">₺12.000,00</p>
+<span class="inline-flex items-center w-fit px-1.5 py-0.5 rounded bg-success/10 text-success text-[9px] font-bold mt-1 uppercase">Hak Edildi</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">ONAYLANDI</span>
+</td>
+</tr>
+<tr class="highlight-earned hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 font-bold text-xs">AS</div>
+<div>
+<p class="text-sm font-bold">Aslı Soylu</p>
+<p class="text-[10px] text-[#617289]">Inside Sales</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-semibold">Ekim 2023</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-bold">E-Ticaret Devleri</p>
+<p class="text-[10px] text-[#617289]">Proje No: #3119</p>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-[#617289] rounded text-[10px] font-bold uppercase">Entegrasyon Destek</span></td>
+<td class="px-6 py-4 text-xs font-semibold">
+<div class="flex flex-col">
+<span>11.11.2023</span>
+<span class="text-[9px] text-success font-bold uppercase italic">Bugün</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<p class="text-sm font-bold text-success">₺2.800,00</p>
+<span class="inline-flex items-center w-fit px-1.5 py-0.5 rounded bg-success/10 text-success text-[9px] font-bold mt-1 uppercase">Hak Edildi</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">ONAYLANDI</span>
+</td>
+</tr>
+<tr class="highlight-earned hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 font-bold text-xs">ME</div>
+<div>
+<p class="text-sm font-bold">Mert Erkan</p>
+<p class="text-[10px] text-[#617289]">Key Account Mgr.</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-semibold">Ekim 2023</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs font-bold">Teknoloji Parkı</p>
+<p class="text-[10px] text-[#617289]">Proje No: #4402</p>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-[#617289] rounded text-[10px] font-bold uppercase">Altyapı Yenileme</span></td>
+<td class="px-6 py-4 text-xs font-semibold">
+<div class="flex flex-col">
+<span>11.11.2023</span>
+<span class="text-[9px] text-success font-bold uppercase italic">Bugün</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<p class="text-sm font-bold text-success">₺7.500,00</p>
+<span class="inline-flex items-center w-fit px-1.5 py-0.5 rounded bg-success/10 text-success text-[9px] font-bold mt-1 uppercase">Hak Edildi</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">ONAYLANDI</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-gray-50/30 dark:bg-gray-800/20 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<p class="text-xs text-[#617289] font-medium">Bu dönem için ödenmeye hazır 12 prim kalemi listeleniyor.</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-gray-200 dark:border-gray-700 rounded text-xs font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Önceki</button>
+<button class="px-3 py-1 border border-gray-200 dark:border-gray-700 rounded text-xs font-bold bg-primary text-white hover:bg-blue-700 transition-colors">Sonraki</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-0 left-64 right-0 bg-white/95 dark:bg-[#1a2432]/95 backdrop-blur-md border-t border-primary/20 p-4 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] transition-all transform animate-in slide-in-from-bottom duration-300">
+<div class="max-w-7xl mx-auto flex items-center justify-between px-4">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">check_box</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-[#617289] uppercase tracking-tighter">Seçili Kalem</span>
+<span class="text-sm font-bold text-[#111418] dark:text-white">2 Hakediş Seçildi</span>
+</div>
+</div>
+<div class="h-8 w-px bg-gray-200 dark:bg-gray-700"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-[#617289] uppercase tracking-tighter">Ödenecek Toplam</span>
+<span class="text-lg font-bold text-success leading-none">₺14.800,00</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-bold text-[#617289] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            Seçimi Temizle
+                        </button>
+<button class="flex items-center gap-2 px-6 py-2 bg-success text-white rounded-lg text-xs font-bold hover:bg-green-700 transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+                            ÖDEME TALİMATI GÖNDER
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

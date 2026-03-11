@@ -1,0 +1,379 @@
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgenciFlow - Müşteri Sağlık ve Karlılık Analizi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                        "vip": "#8b5cf6",
+                        "risk": "#ef4444",
+                        "success": "#22c55e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dbe0e6;
+            border-radius: 10px;
+        }
+        .segment-card {
+            @apply relative overflow-hidden transition-all hover:shadow-md border border-[#dbe0e6] dark:border-gray-800 rounded-xl p-6 bg-white dark:bg-[#1a2432];
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col bg-white dark:bg-[#1a2432] border-r border-[#dbe0e6] dark:border-gray-800">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary rounded-lg size-10 flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-2xl">monitoring</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-none">AgenciFlow</h1>
+<p class="text-[#617289] text-[10px] font-bold uppercase tracking-wider mt-1">Süper Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Genel Bakış</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[22px]">health_and_safety</span>
+<span class="text-sm font-semibold">Müşteri Sağlığı</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+<span class="text-sm font-medium">Karlılık Analizi</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+<span class="text-sm font-medium">Segmentasyon</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings_suggest</span>
+<span class="text-sm font-medium">AI Önerileri</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-gray-100 dark:border-gray-800 pt-6">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white rounded-lg py-2.5 text-sm font-bold transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">analytics</span>
+                    Yıllık Strateji Raporu
+                </button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto custom-scrollbar">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-white/80 dark:bg-[#1a2432]/80 backdrop-blur-md border-b border-[#f0f2f4] dark:border-gray-800 px-8 py-4">
+<div class="flex items-center gap-6">
+<div>
+<h2 class="text-xl font-bold tracking-tight">Müşteri Sağlık ve Karlılık Analizi</h2>
+<p class="text-xs text-[#617289]">Segmentasyon, Sağlık Skorları ve AI Destekli Fırsatlar</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4 border-r dark:border-gray-700 pr-4">
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-[#617289] relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2432]"></span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold leading-tight">Admin Kullanıcı</p>
+<p class="text-[10px] text-[#617289] font-medium">Süper Admin</p>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCum4COz_JUijqvzw6G9PFAwG5P7Wjcm2U3KizTQimJ4vMworO2vGVHnbwWS-bW-j6vYfHVAZROC3AD3CHVQteSHLWRI_iWPmtM7SgDROXWHum5otWuLpgW_D8ZPX4lR4N6FVtlOeD2bWzxO80MIsPovDwNwAAMP0vevMj9bn7tnJI-1oPCw4FPTrzZnUcwx43kV_ly0lz_qU3N6SxnZfa-qZMbXfWjHmItHN6hTF1fRK_0kd1D6T526vOw92i1S-34JTn7RSeHPOLg");'></div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-6">
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="segment-card border-l-4 border-l-vip">
+<div class="flex justify-between items-center mb-4">
+<span class="material-symbols-outlined text-vip bg-vip/10 p-2 rounded-lg">star</span>
+<span class="text-vip text-xs font-bold bg-vip/10 px-2 py-1 rounded">24 Müşteri</span>
+</div>
+<h3 class="text-sm font-bold">En Değerli Müşteriler (VIP)</h3>
+<p class="text-2xl font-bold mt-1">₺2.1M <span class="text-xs font-normal text-[#617289]">Yıllık Değer</span></p>
+<div class="mt-4 flex -space-x-2">
+<div class="size-7 rounded-full border-2 border-white dark:border-[#1a2432] bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuApd7wABpyDAoZ2wYREosRUOP7paHPK49i7HH3a4SnOhyfoS08h6nV9dseWo0cC5iuLq6RnNBv7WRNN0EtJBvM1fPi41rjSrJIUy8dM-LX8KMW8QRqS45WLtuTAxvWionLl-Pp1PW243Sm9JJPUySg1l2WxFjfdaVJkjVvGmQ5NRTu8MpWHCYajAZSj2dnMYwUgygaBR67swbqV_4dQ2hbOGYTZ3ZaBMwH0b9NVw3swqVI2mhN03g3zXNOPBz6nWX-4PxKn4ON4ERYw");'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-[#1a2432] bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsJqcdiXpE0AqS-1hBrgBufEKFz5H0Ac37geitBCue3FKT6B1S4CZwuYCPlrRrMKzNsrpSC0k1vtVg1XMzaFAZuVHvCAtG8uXdQnbyCB7apB1lH5oczpJG4EEkBan6RhEZA2rRfgC6yi5z1v3dZFwhlzX3l_iPXd9wGyvFxJs59Rqhfym7zPO769HtUg-enTpXXWLez66PLyh9DxDRl1VQC5xojOrwl4LBZHV6gUsUNVlfgHXvVvi_xmqoD1BH_rsNJEgZEByWCZbE");'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-[#1a2432] bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBetpMAViHItMGnpjPNucEA0es-uKScwaUzEbDIoN1oq8PkfyYyRi4ShQKGcSo48rTnlbZglMmgET1ygmk0gS1oGW4LZJPmfZ9nSz5CJxPXyQpFNSnEBvVXwZMiKmYI6iE2w2Q__YQjm1BgH4YZFLbidU9HMLqHSBopuwM51EpPztHNc-7hyQFPGKw7AOOysMi3v7pMfRAANxCcMt1V6IQODhi2fJs4twXnNYUt8cLgwJjq_3D7eU16ycymc7I-QojOQDBMBtw7Og3r");'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-[#1a2432] bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold">+21</div>
+</div>
+</div>
+<div class="segment-card border-l-4 border-l-risk">
+<div class="flex justify-between items-center mb-4">
+<span class="material-symbols-outlined text-risk bg-risk/10 p-2 rounded-lg">warning</span>
+<span class="text-risk text-xs font-bold bg-risk/10 px-2 py-1 rounded">8 Müşteri</span>
+</div>
+<h3 class="text-sm font-bold">Riskli Müşteriler</h3>
+<p class="text-2xl font-bold mt-1">12% <span class="text-xs font-normal text-[#617289]">Churn Riski</span></p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] font-bold text-risk uppercase">Düşük Performans / Ödeme Sorunu</span>
+</div>
+</div>
+<div class="segment-card border-l-4 border-l-success">
+<div class="flex justify-between items-center mb-4">
+<span class="material-symbols-outlined text-success bg-success/10 p-2 rounded-lg">new_releases</span>
+<span class="text-success text-xs font-bold bg-success/10 px-2 py-1 rounded">12 Müşteri</span>
+</div>
+<h3 class="text-sm font-bold">Yeni Kazanılanlar</h3>
+<p class="text-2xl font-bold mt-1">₺480k <span class="text-xs font-normal text-[#617289]">Yeni Ciro</span></p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] font-bold text-success uppercase">Son 30 Gün İçinde Aktif</span>
+</div>
+</div>
+</section>
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                        Müşteri Sağlık Skoru Tablosu
+                    </h3>
+<div class="flex gap-2">
+<input class="text-xs border-gray-200 dark:border-gray-700 dark:bg-gray-800 rounded-lg px-3 py-1.5 w-64" placeholder="Müşteri ara..." type="text"/>
+<button class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-lg text-[#617289]">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 dark:bg-gray-800/50">
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Müşteri Adı</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Hizmet Süresi</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Ödeme Düzeni</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider">Operasyonel Başarı (SEO/SEM)</th>
+<th class="px-6 py-4 text-[10px] font-bold text-[#617289] uppercase tracking-wider text-center">Sağlık Puanı</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">TC</div>
+<div>
+<p class="text-sm font-bold">TechCorp Solutions</p>
+<p class="text-[10px] text-[#617289]">VIP Segment</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">24 Ay</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">DÜZENLİ</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-4">
+<div><p class="text-[9px] text-[#617289] font-bold">SEO</p><p class="text-xs font-bold text-green-500">92/100</p></div>
+<div><p class="text-[9px] text-[#617289] font-bold">SEM</p><p class="text-xs font-bold text-blue-500">88/100</p></div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-24 bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[94%]"></div>
+</div>
+<span class="text-xs font-bold">94</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xs">GL</div>
+<div>
+<p class="text-sm font-bold">GreenLeaf E-Ticaret</p>
+<p class="text-[10px] text-[#617289]">Riskli</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">6 Ay</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">GECİKMELİ</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-4">
+<div><p class="text-[9px] text-[#617289] font-bold">SEO</p><p class="text-xs font-bold text-orange-500">45/100</p></div>
+<div><p class="text-[9px] text-[#617289] font-bold">SEM</p><p class="text-xs font-bold text-red-500">32/100</p></div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-24 bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[38%]"></div>
+</div>
+<span class="text-xs font-bold text-red-500">38</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">MM</div>
+<div>
+<p class="text-sm font-bold">Moda Mania</p>
+<p class="text-[10px] text-[#617289]">Yeni Kazanılan</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">1 Ay</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">BEKLEMEDE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-4">
+<div><p class="text-[9px] text-[#617289] font-bold">SEO</p><p class="text-xs font-bold text-gray-400">--</p></div>
+<div><p class="text-[9px] text-[#617289] font-bold">SEM</p><p class="text-xs font-bold text-blue-500">76/100</p></div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-24 bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full w-[72%]"></div>
+</div>
+<span class="text-xs font-bold text-blue-500">72</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                            Cross-Sell Fırsat Haritası (AI Destekli)
+                        </h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded">YENİ FIRSATLAR</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="p-4 border border-[#f0f2f4] dark:border-gray-800 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 flex items-center gap-4">
+<div class="size-10 rounded-lg bg-white dark:bg-gray-700 flex items-center justify-center border border-gray-100 dark:border-gray-600">
+<span class="material-symbols-outlined text-primary">auto_graph</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">CyberCore Güvenlik</p>
+<p class="text-[10px] text-[#617289]">Mevcut: SEO • <span class="text-primary font-bold">Öneri: LinkedIn Ads</span></p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-green-500">88% Uyum</p>
+<button class="text-[10px] font-bold text-white bg-primary px-3 py-1 rounded mt-1">Teklif Oluştur</button>
+</div>
+</div>
+<div class="p-4 border border-[#f0f2f4] dark:border-gray-800 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 flex items-center gap-4">
+<div class="size-10 rounded-lg bg-white dark:bg-gray-700 flex items-center justify-center border border-gray-100 dark:border-gray-600">
+<span class="material-symbols-outlined text-primary">video_library</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Artisans Home</p>
+<p class="text-[10px] text-[#617289]">Mevcut: SEM • <span class="text-primary font-bold">Öneri: İçerik Üretimi</span></p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-green-500">74% Uyum</p>
+<button class="text-[10px] font-bold text-white bg-primary px-3 py-1 rounded mt-1">Teklif Oluştur</button>
+</div>
+</div>
+<div class="p-4 border border-[#f0f2f4] dark:border-gray-800 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 flex items-center gap-4">
+<div class="size-10 rounded-lg bg-white dark:bg-gray-700 flex items-center justify-center border border-gray-100 dark:border-gray-600">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">PetLovers Co.</p>
+<p class="text-[10px] text-[#617289]">Mevcut: SEO • <span class="text-primary font-bold">Öneri: E-Ticaret Opt.</span></p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-green-500">62% Uyum</p>
+<button class="text-[10px] font-bold text-white bg-primary px-3 py-1 rounded mt-1">Teklif Oluştur</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2432] rounded-xl border border-[#dbe0e6] dark:border-gray-800 overflow-hidden shadow-sm flex flex-col">
+<div class="px-6 py-5 border-b border-[#f0f2f4] dark:border-gray-800 flex justify-between items-center">
+<h3 class="font-bold text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">balance</span>
+                            Proje Bazlı Kar/Zarar
+                        </h3>
+<div class="flex gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+<button class="px-3 py-1 text-[10px] font-bold bg-white dark:bg-gray-700 rounded-md shadow-sm">Kârlılık</button>
+<button class="px-3 py-1 text-[10px] font-bold text-[#617289]">Efor</button>
+</div>
+</div>
+<div class="p-6">
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-xs font-bold">Global SEO Mastery</p>
+<p class="text-[10px] text-green-500 font-bold uppercase tracking-widest">En Yüksek Kar</p>
+</div>
+<p class="text-sm font-bold text-green-500">62% Marj</p>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-2.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[62%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-xs font-bold">Fashion App Development</p>
+<p class="text-[10px] text-[#617289] font-bold uppercase tracking-widest">Normal Karlılık</p>
+</div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">28% Marj</p>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[28%]"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-100 dark:border-gray-800">
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-xs font-bold">TechSupport Portal (L1)</p>
+<p class="text-[10px] text-red-500 font-bold uppercase tracking-widest">Zarar / Aşırı Efor</p>
+</div>
+<p class="text-sm font-bold text-red-500">-8% Marj</p>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-2.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[10%]"></div>
+</div>
+<p class="text-[10px] text-[#617289] mt-2 italic">Aşırı revizyon ve beklenmeyen efor maliyeti.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
