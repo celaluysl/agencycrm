@@ -48,7 +48,7 @@ export const navigation = [
     },
     {
         name: "SEO Merkezi", href: "#", icon: "query_stats", items: [
-            { name: "Teknik Denetim Raporu", href: "/seo/kapsamli-seo-teknik-denetim-raporu" },
+            { name: "Teknik Denetim Raporu", href: "/seo/technical-audit/1" },
             { name: "Backlink Satınalma", href: "/seo/kelime-odakli-backlink-satin-alma-paneli" },
             { name: "SEO Görevleri", href: "/seo/seo-gorev-detay-ve-sop-paneli" },
             { name: "Portföy Takibi", href: "/seo/seo-musteri-portfoy-takibi" },
