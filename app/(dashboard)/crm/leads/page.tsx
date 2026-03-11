@@ -41,6 +41,8 @@ import {
   Megaphone,
   MoreHorizontal,
 } from "lucide-react";
+import { NewLeadModal } from "@/components/crm/new-lead-modal";
+import { SourceFilter } from "@/components/crm/source-filter";
 
 // ─── Types ───────────────────────────────────────────
 type ColumnId = "new" | "contacted" | "proposal_sent" | "potential" | "won" | "lost";
@@ -212,6 +214,8 @@ function KanbanColumn({ col, leads }: { col: typeof COLUMNS[0]; leads: Lead[] })
 export default function LeadsKanbanPage() {
   const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sourceFilter, setSourceFilter] = useState<LeadSource[]>([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -220,6 +224,10 @@ export default function LeadsKanbanPage() {
 
   const highValueLeads = leads.filter((l) => l.value >= 50000 && l.columnId !== "lost");
   const totalPipeline = leads.filter((l) => l.columnId !== "lost").reduce((sum, l) => sum + l.value, 0);
+
+  const filteredLeads = sourceFilter.length > 0
+    ? leads.filter((l) => sourceFilter.includes(l.source))
+    : leads;
 
   const onDragStart = (e: DragStartEvent) => setActiveId(e.active.id as string);
 
@@ -287,7 +295,7 @@ export default function LeadsKanbanPage() {
               <span className="font-bold text-primary">{totalPipeline.toLocaleString("tr-TR")} ₺</span>
             </p>
           </div>
-          <Button className="h-10 bg-primary hover:bg-primary/90 self-start md:self-auto">
+          <Button className="h-10 bg-primary hover:bg-primary/90 self-start md:self-auto" onClick={() => setIsModalOpen(true)}>
             <Plus className="mr-2 h-4 w-4" /> Yeni Lead
           </Button>
         </div>
@@ -311,6 +319,10 @@ export default function LeadsKanbanPage() {
             ))}
           </div>
         )}
+        {/* Source Filter */}
+        <div className="mt-3">
+          <SourceFilter selected={sourceFilter} onChange={setSourceFilter} />
+        </div>
       </div>
 
       {/* Kanban Board */}
@@ -327,7 +339,7 @@ export default function LeadsKanbanPage() {
               <KanbanColumn
                 key={col.id}
                 col={col}
-                leads={leads.filter((l) => l.columnId === col.id)}
+                leads={filteredLeads.filter((l) => l.columnId === col.id)}
               />
             ))}
           </div>
@@ -337,6 +349,11 @@ export default function LeadsKanbanPage() {
           </DragOverlay>
         </DndContext>
       </div>
+
+      <NewLeadModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
