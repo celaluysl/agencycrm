@@ -7,14 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 
 export function PortfolioFilter() {
-  const [sector, setSector] = useState("");
-  const [channel, setChannel] = useState("");
-  const [status, setStatus] = useState("");
+  const [sector, setSector] = useState<string | undefined>();
+  const [channel, setChannel] = useState<string | undefined>();
+  const [status, setStatus] = useState<string | undefined>();
 
   const clearFilters = () => {
-    setSector("");
-    setChannel("");
-    setStatus("");
+    setSector(undefined);
+    setChannel(undefined);
+    setStatus(undefined);
   };
 
   const hasFilters = sector || channel || status;
@@ -85,19 +85,19 @@ export function PortfolioFilter() {
           {sector && sector !== "Tüm Sektörler" && (
             <Badge variant="secondary" className="flex items-center gap-1">
               Sektör: {sector}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => setSector("")} />
+              <X className="h-3 w-3 cursor-pointer" onClick={() => setSector(undefined)} />
             </Badge>
           )}
           {channel && channel !== "Tüm Kanallar" && (
             <Badge variant="secondary" className="flex items-center gap-1">
               Kanal: {channel}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => setChannel("")} />
+              <X className="h-3 w-3 cursor-pointer" onClick={() => setChannel(undefined)} />
             </Badge>
           )}
           {status && status !== "Hepsi" && (
             <Badge variant="secondary" className="flex items-center gap-1">
               Durum: {status}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => setStatus("")} />
+              <X className="h-3 w-3 cursor-pointer" onClick={() => setStatus(undefined)} />
             </Badge>
           )}
           <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs h-6 px-2">

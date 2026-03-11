@@ -72,7 +72,7 @@ export const navigation = [
         name: "Sosyal Medya", href: "#", icon: "thumb_up", items: [
             { name: "Raporlama Paneli", href: "/social-media/raporlama-destekli-sosyal-medya-paneli" },
             { name: "Görev & SOP", href: "/social-media/sosyal-medya-gorev-detay-ve-sop-paneli" },
-            { name: "Portföy Yönetimi", href: "/social-media/sosyal-medya-musteri-portfoyu" },
+            { name: "Portföy Yönetimi", href: "/social-media/portfolio" },
             { name: "Onay Merkezi", href: "/social-media/sosyal-medya-onay-merkezi" },
             { name: "Proje & İçerik", href: "/social-media/sosyal-medya-proje-ve-icerik-panosu" },
         ]
