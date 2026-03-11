@@ -366,7 +366,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Filter chips display
   - _Gereksinimler: 5.7_
 
-- [ ] 9.3 Approval Center sayfası oluştur
+- [x] 9.3 Approval Center sayfası oluştur
   - `app/(dashboard)/social-media/approval-center/page.tsx` - Client Component
   - Content preview (full-size image/video player)
   - Content metadata (caption, hashtags, scheduled date, platforms)
@@ -376,7 +376,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6_
 
 
-- [ ] 9.4 Content Preview component oluştur
+- [x] 9.4 Content Preview component oluştur
   - `components/social-media/content-preview.tsx` - Client Component
   - Image/video player (next/image ve HTML5 video)
   - Zoom in/out controls
@@ -384,7 +384,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Keyboard shortcuts (Arrow keys: next/prev, Space: approve, R: request revision)
   - _Gereksinimler: 6.1, 6.9_
 
-- [ ] 9.5 Revision Feedback Modal component oluştur
+- [x] 9.5 Revision Feedback Modal component oluştur
   - `components/social-media/revision-modal.tsx` - Client Component
   - Textarea for detailed feedback
   - Character counter
