@@ -459,7 +459,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 11. CRM Modülü
 
-- [ ] 11.1 Leads Kanban Board sayfası oluştur
+- [x] 11.1 Leads Kanban Board sayfası oluştur
   - `app/(dashboard)/crm/leads/page.tsx` - Client Component
   - Kanban board (new, contacted, proposal_sent, potential, won, lost)
   - High-value opportunities section (üstte)
@@ -469,7 +469,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Lost leads: grayscale effect + cancel icon
   - _Gereksinimler: 9.1, 9.2, 9.4, 9.6, 9.7_
 
-- [ ] 11.2 Lead Card component oluştur
+- [x] 11.2 Lead Card component oluştur
   - `components/crm/lead-card.tsx` - Client Component
   - Company name, contact person
   - Potential value display
