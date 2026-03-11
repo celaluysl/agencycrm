@@ -283,6 +283,19 @@ export default function LeadsKanbanPage() {
 
   const activeLead = activeId ? leads.find((l) => l.id === activeId) : null;
 
+  const handleAddLead = (data: { company: string; contact: string; email: string; phone: string; value: string; source: string }) => {
+    const newLead: Lead = {
+      id: `l-${Date.now()}`,
+      columnId: "new",
+      company: data.company,
+      contact: data.contact,
+      value: Number(data.value),
+      source: data.source as LeadSource,
+      avatar: `https://i.pravatar.cc/150?u=${Date.now()}`,
+    };
+    setLeads((prev) => [newLead, ...prev]);
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-gray-50 dark:bg-[#111827]">
       {/* Header */}
@@ -353,6 +366,7 @@ export default function LeadsKanbanPage() {
       <NewLeadModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddLead}
       />
     </div>
   );
