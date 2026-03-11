@@ -74,7 +74,7 @@ export const navigation = [
             { name: "Görev & SOP", href: "/social-media/sosyal-medya-gorev-detay-ve-sop-paneli" },
             { name: "Portföy Yönetimi", href: "/social-media/portfolio" },
             { name: "Onay Merkezi", href: "/social-media/approval-center" },
-            { name: "Proje & İçerik", href: "/social-media/sosyal-medya-proje-ve-icerik-panosu" },
+            { name: "Proje & İçerik", href: "/social-media/projects/1" },
         ]
     },
     {

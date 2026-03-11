@@ -392,7 +392,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Submit button
   - _Gereksinimler: 6.5_
 
-- [ ] 9.6 Social Media Project Kanban sayfası oluştur
+- [x] 9.6 Social Media Project Kanban sayfası oluştur
   - `app/(dashboard)/social-media/projects/[id]/page.tsx` - Client Component
   - Kanban board (ideas, design/editing, customer_approval, scheduled/published)
   - Content type badges (story, post, reels)
