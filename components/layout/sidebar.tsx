@@ -22,7 +22,7 @@ export const navigation = [
     },
     {
         name: "CRM & Satış", href: "#", icon: "view_kanban", items: [
-            { name: "Aday Müşteriler", href: "/crm/aday-musteri-detay-sayfasi" },
+            { name: "Aday Müşteriler", href: "/crm/leads" },
             { name: "Ortak Müşteriler", href: "/crm/hizmet-detayli-ortak-musteri-yonetim-merkezi" },
             { name: "Akıllı Satış", href: "/crm/kapasite-analizli-akilli-satis-paneli" },
             { name: "Satış Ekibi", href: "/crm/satis-ekibi-detayli-kokpit-paneli" },
