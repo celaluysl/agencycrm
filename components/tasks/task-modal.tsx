@@ -170,8 +170,9 @@ const DEFAULT_TASK: TaskModalData = {
 };
 
 function formatTimer(totalMinutes: number) {
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
+  const safeTotalMinutes = Math.max(0, Math.floor(totalMinutes));
+  const hours = Math.floor(safeTotalMinutes / 60);
+  const minutes = safeTotalMinutes % 60;
   const seconds = 0;
 
   return [hours, minutes, seconds]
@@ -286,7 +287,7 @@ export function TaskModal({
 
   const handleManualTimeAdd = () => {
     const value = Number(manualMinutes);
-    if (!Number.isFinite(value) || value <= 0) return;
+    if (!Number.isFinite(value) || !Number.isInteger(value) || value <= 0) return;
     setTrackedMinutes((current) => current + value);
     setManualMinutes("");
   };
@@ -604,6 +605,7 @@ export function TaskModal({
                       <Input
                         type="number"
                         min="1"
+                        step="1"
                         value={manualMinutes}
                         onChange={(event) => setManualMinutes(event.target.value)}
                         placeholder="15"
