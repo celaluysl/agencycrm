@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -78,6 +78,8 @@ export function NewLeadModal({ open, onClose, onSubmit }: NewLeadModalProps) {
   const [form, setForm] = useState<LeadFormData>(EMPTY_FORM);
   const [errors, setErrors] = useState<FieldError>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Tracks whether the user closed the modal mid-flight to prevent ghost submission
+  const cancelledRef = useRef(false);
 
   const handleChange = (field: keyof LeadFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -93,9 +95,15 @@ export function NewLeadModal({ open, onClose, onSubmit }: NewLeadModalProps) {
       setErrors(validationErrors);
       return;
     }
+    cancelledRef.current = false;
     setIsSubmitting(true);
     // Simulate async submit
     await new Promise((r) => setTimeout(r, 800));
+    // If user closed the modal during submission, abort — do not add lead
+    if (cancelledRef.current) {
+      setIsSubmitting(false);
+      return;
+    }
     onSubmit?.(form);
     setIsSubmitting(false);
     setForm(EMPTY_FORM);
@@ -104,13 +112,17 @@ export function NewLeadModal({ open, onClose, onSubmit }: NewLeadModalProps) {
   };
 
   const handleClose = () => {
+    // Signal any in-flight submission to abort
+    cancelledRef.current = true;
+    setIsSubmitting(false);
     setForm(EMPTY_FORM);
     setErrors({});
     onClose();
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
+    // Prevent Dialog from closing via Escape/overlay while submission is in-flight
+    <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen && !isSubmitting) handleClose(); }}>
       <DialogContent className="sm:max-w-[520px] bg-white dark:bg-[#1f2937] gap-0 p-0 overflow-hidden rounded-2xl">
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className="text-xl font-black text-[#111418] dark:text-white">

@@ -225,7 +225,10 @@ export default function LeadsKanbanPage() {
   const highValueLeads = leads.filter((l) => l.value >= 50000 && l.columnId !== "lost");
   const totalPipeline = leads.filter((l) => l.columnId !== "lost").reduce((sum, l) => sum + l.value, 0);
 
-  const filteredLeads = sourceFilter.length > 0
+  // Suspend source filter during a drag so the dnd-kit item indices always match
+  // the rendered array — otherwise hidden (filtered-out) leads cause index skew.
+  const isDragging = activeId !== null;
+  const filteredLeads = (sourceFilter.length > 0 && !isDragging)
     ? leads.filter((l) => sourceFilter.includes(l.source))
     : leads;
 
