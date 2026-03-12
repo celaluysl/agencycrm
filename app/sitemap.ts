@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 
 const staticRoutes = [
   "/",
-  "/dashboard",
   "/admin/accounts",
   "/admin/analytics",
   "/admin/commissions",
