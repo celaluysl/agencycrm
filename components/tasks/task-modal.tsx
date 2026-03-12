@@ -187,15 +187,14 @@ export function TaskModal({
   const [status, setStatus] = useState<TaskStatus>(activeTask.status);
   const [checklist, setChecklist] = useState(activeTask.checklist);
   const [activity, setActivity] = useState(activeTask.activity);
-  const [trackedSeconds, setTrackedSeconds] = useState(activeTask.trackedMinutes * 60);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
     setStatus(activeTask.status);
     setChecklist(activeTask.checklist);
     setActivity(activeTask.activity);
-    setTrackedSeconds(activeTask.trackedMinutes * 60);
     setComment("");
+    // TimeTracker resets automatically via key={activeTask.id} below.
   }, [activeTask]);
 
   const totalComments = activity.filter((item) => item.type === "comment").length;
@@ -458,13 +457,10 @@ export function TaskModal({
                 <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
                   Zaman Takibi
                 </h3>
+                {/* key resets TimeTracker when the active task changes. */}
                 <TimeTracker
-                  initialSeconds={trackedSeconds}
-                  onTick={setTrackedSeconds}
-                  onReset={() => setTrackedSeconds(0)}
-                  onManualAdd={(minutes) =>
-                    setTrackedSeconds((prev) => prev + minutes * 60)
-                  }
+                  key={activeTask.id}
+                  initialSeconds={activeTask.trackedMinutes * 60}
                 />
               </section>
 

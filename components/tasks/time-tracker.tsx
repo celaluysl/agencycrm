@@ -1,5 +1,11 @@
 "use client";
 
+// düzenlendi: çift state senkronizasyon döngüsü giderildi.
+// TimeTracker artık elapsed süreyi tamamen kendisi yönetir; parent
+// sadece key={taskId} ile görev değişimini bildirir, geri besleme
+// callback'i yoktur. onTick ref ile stabilize edildiğinden interval
+// her render'da yeniden oluşmaz.
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Clock3, Pause, Play, Plus, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,13 +16,16 @@ import { cn } from "@/lib/utils";
 export type TimerState = "idle" | "running" | "paused";
 
 export interface TimeTrackerProps {
-  /** Initial elapsed seconds (e.g. previously tracked time). */
+  /** Seed value in seconds — read once on mount (use key prop to reset on task change). */
   initialSeconds?: number;
-  /** Called every second while running, with total elapsed seconds. */
+  /**
+   * Called every second while running, with the current total elapsed seconds.
+   * Stabilised via ref internally; changing this prop never restarts the interval.
+   */
   onTick?: (totalSeconds: number) => void;
-  /** Called when the timer is stopped/reset. */
+  /** Called when the timer is reset to zero. */
   onReset?: () => void;
-  /** Called when the user saves a manual entry (value in minutes). */
+  /** Called when the user commits a manual entry (value in minutes). */
   onManualAdd?: (minutes: number) => void;
   className?: string;
 }
@@ -37,16 +46,19 @@ export function TimeTracker({
   className,
 }: TimeTrackerProps) {
   const [timerState, setTimerState] = useState<TimerState>("idle");
+  // initialSeconds is used only as the seed — never written back from parent.
   const [elapsed, setElapsed] = useState(initialSeconds);
   const [manualInput, setManualInput] = useState("");
   const [manualError, setManualError] = useState("");
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Sync initial seconds if prop changes (e.g. task switch)
-  useEffect(() => {
-    setElapsed(initialSeconds);
-    setTimerState("idle");
-  }, [initialSeconds]);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Keep callbacks in refs so the interval closure never needs to be recreated.
+  const onTickRef = useRef(onTick);
+  const onResetRef = useRef(onReset);
+  const onManualAddRef = useRef(onManualAdd);
+  useEffect(() => { onTickRef.current = onTick; }, [onTick]);
+  useEffect(() => { onResetRef.current = onReset; }, [onReset]);
+  useEffect(() => { onManualAddRef.current = onManualAdd; }, [onManualAdd]);
 
   const clearTimer = useCallback(() => {
     if (intervalRef.current) {
@@ -55,38 +67,33 @@ export function TimeTracker({
     }
   }, []);
 
-  const startTicking = useCallback(() => {
+  useEffect(() => {
+    if (timerState !== "running") {
+      clearTimer();
+      return;
+    }
+
     clearTimer();
     intervalRef.current = setInterval(() => {
       setElapsed((prev) => {
         const next = prev + 1;
-        onTick?.(next);
+        onTickRef.current?.(next);
         return next;
       });
     }, 1000);
-  }, [clearTimer, onTick]);
 
-  useEffect(() => {
-    if (timerState === "running") {
-      startTicking();
-    } else {
-      clearTimer();
-    }
     return clearTimer;
-  }, [timerState, startTicking, clearTimer]);
+  }, [timerState, clearTimer]);
 
   const handleStartPause = () => {
-    setTimerState((prev) => {
-      if (prev === "running") return "paused";
-      return "running";
-    });
+    setTimerState((prev) => (prev === "running" ? "paused" : "running"));
   };
 
   const handleReset = () => {
     clearTimer();
     setTimerState("idle");
     setElapsed(0);
-    onReset?.();
+    onResetRef.current?.();
   };
 
   const handleManualAdd = () => {
@@ -101,7 +108,7 @@ export function TimeTracker({
     setManualError("");
     const addedSeconds = value * 60;
     setElapsed((prev) => prev + addedSeconds);
-    onManualAdd?.(value);
+    onManualAddRef.current?.(value);
     setManualInput("");
   };
 
