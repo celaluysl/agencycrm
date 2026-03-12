@@ -6,13 +6,11 @@ import {
   CheckCircle2,
   Clock3,
   Download,
+  Plus,
   FileImage,
   FileText,
   MessageSquare,
   Paperclip,
-  Play,
-  Plus,
-  Square,
   Trash2,
   UserRound,
 } from "lucide-react";
@@ -26,12 +24,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   SopChecklist,
   type SopChecklistItem,
 } from "@/components/tasks/sop-checklist";
+import { TimeTracker } from "@/components/tasks/time-tracker";
 import { cn } from "@/lib/utils";
 
 type TaskStatus = "todo" | "in_progress" | "review" | "done";
@@ -167,17 +165,6 @@ const DEFAULT_TASK: TaskModalData = {
   ],
 };
 
-function formatTimer(totalMinutes: number) {
-  const safeTotalMinutes = Math.max(0, Math.floor(totalMinutes));
-  const hours = Math.floor(safeTotalMinutes / 60);
-  const minutes = safeTotalMinutes % 60;
-  const seconds = 0;
-
-  return [hours, minutes, seconds]
-    .map((unit) => String(unit).padStart(2, "0"))
-    .join(":");
-}
-
 function getAttachmentIcon(type: AttachmentType) {
   switch (type) {
     case "image":
@@ -200,30 +187,16 @@ export function TaskModal({
   const [status, setStatus] = useState<TaskStatus>(activeTask.status);
   const [checklist, setChecklist] = useState(activeTask.checklist);
   const [activity, setActivity] = useState(activeTask.activity);
-  const [trackedMinutes, setTrackedMinutes] = useState(activeTask.trackedMinutes);
-  const [isRunning, setIsRunning] = useState(false);
-  const [manualMinutes, setManualMinutes] = useState("");
+  const [trackedSeconds, setTrackedSeconds] = useState(activeTask.trackedMinutes * 60);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
     setStatus(activeTask.status);
     setChecklist(activeTask.checklist);
     setActivity(activeTask.activity);
-    setTrackedMinutes(activeTask.trackedMinutes);
-    setIsRunning(false);
-    setManualMinutes("");
+    setTrackedSeconds(activeTask.trackedMinutes * 60);
     setComment("");
   }, [activeTask]);
-
-  useEffect(() => {
-    if (!isRunning) return;
-
-    const intervalId = window.setInterval(() => {
-      setTrackedMinutes((current) => current + 1);
-    }, 60000);
-
-    return () => window.clearInterval(intervalId);
-  }, [isRunning]);
 
   const totalComments = activity.filter((item) => item.type === "comment").length;
 
@@ -268,13 +241,6 @@ export function TaskModal({
       ...current,
     ]);
     setComment("");
-  };
-
-  const handleManualTimeAdd = () => {
-    const value = Number(manualMinutes);
-    if (!Number.isFinite(value) || !Number.isInteger(value) || value <= 0) return;
-    setTrackedMinutes((current) => current + value);
-    setManualMinutes("");
   };
 
   const handleMarkComplete = () => {
@@ -492,61 +458,14 @@ export function TaskModal({
                 <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
                   Zaman Takibi
                 </h3>
-
-                <div className="rounded-2xl border bg-background p-4">
-                  <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
-                    <Clock3 className="size-4" />
-                    Geçen Süre
-                  </div>
-                  <p className="mt-3 text-3xl font-black tracking-tight">
-                    {formatTimer(trackedMinutes)}
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Toplam kayıt: {trackedMinutes} dakika
-                  </p>
-
-                  <div className="mt-4 flex gap-2">
-                    <Button
-                      size="sm"
-                      className="flex-1"
-                      onClick={() => setIsRunning((current) => !current)}
-                    >
-                      <Play className="size-4" />
-                      {isRunning ? "Durdur" : "Başlat"}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => {
-                        setIsRunning(false);
-                        setTrackedMinutes(0);
-                      }}
-                    >
-                      <Square className="size-4" />
-                      Sıfırla
-                    </Button>
-                  </div>
-
-                  <div className="mt-4 space-y-2">
-                    <label className="text-xs uppercase tracking-wide text-muted-foreground">
-                      Manuel Süre Ekle (dk)
-                    </label>
-                    <div className="flex gap-2">
-                      <Input
-                        type="number"
-                        min="1"
-                        step="1"
-                        value={manualMinutes}
-                        onChange={(event) => setManualMinutes(event.target.value)}
-                        placeholder="15"
-                      />
-                      <Button variant="outline" onClick={handleManualTimeAdd}>
-                        <Plus className="size-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                <TimeTracker
+                  initialSeconds={trackedSeconds}
+                  onTick={setTrackedSeconds}
+                  onReset={() => setTrackedSeconds(0)}
+                  onManualAdd={(minutes) =>
+                    setTrackedSeconds((prev) => prev + minutes * 60)
+                  }
+                />
               </section>
 
               <section className="space-y-4">
