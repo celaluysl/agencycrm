@@ -843,7 +843,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Error logging (Sentry entegrasyonu hazırlığı)
   - _Gereksinimler: 20.4_
 
-- [ ] 20.2 Custom error pages
+- [x] 20.2 Custom error pages
   - `app/not-found.tsx` - 404 page
   - `app/error.tsx` - 500 page
   - User-friendly error messages
