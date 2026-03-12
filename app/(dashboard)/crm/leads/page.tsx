@@ -41,6 +41,8 @@ import {
   Megaphone,
   MoreHorizontal,
 } from "lucide-react";
+import { NewLeadModal } from "@/components/crm/new-lead-modal";
+import { SourceFilter } from "@/components/crm/source-filter";
 
 // ─── Types ───────────────────────────────────────────
 type ColumnId = "new" | "contacted" | "proposal_sent" | "potential" | "won" | "lost";
@@ -212,6 +214,8 @@ function KanbanColumn({ col, leads }: { col: typeof COLUMNS[0]; leads: Lead[] })
 export default function LeadsKanbanPage() {
   const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sourceFilter, setSourceFilter] = useState<LeadSource[]>([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -220,6 +224,13 @@ export default function LeadsKanbanPage() {
 
   const highValueLeads = leads.filter((l) => l.value >= 50000 && l.columnId !== "lost");
   const totalPipeline = leads.filter((l) => l.columnId !== "lost").reduce((sum, l) => sum + l.value, 0);
+
+  // Suspend source filter during a drag so the dnd-kit item indices always match
+  // the rendered array — otherwise hidden (filtered-out) leads cause index skew.
+  const isDragging = activeId !== null;
+  const filteredLeads = (sourceFilter.length > 0 && !isDragging)
+    ? leads.filter((l) => sourceFilter.includes(l.source))
+    : leads;
 
   const onDragStart = (e: DragStartEvent) => setActiveId(e.active.id as string);
 
@@ -275,6 +286,19 @@ export default function LeadsKanbanPage() {
 
   const activeLead = activeId ? leads.find((l) => l.id === activeId) : null;
 
+  const handleAddLead = (data: { company: string; contact: string; email: string; phone: string; value: string; source: string }) => {
+    const newLead: Lead = {
+      id: `l-${Date.now()}`,
+      columnId: "new",
+      company: data.company,
+      contact: data.contact,
+      value: Number(data.value),
+      source: data.source as LeadSource,
+      avatar: `https://i.pravatar.cc/150?u=${Date.now()}`,
+    };
+    setLeads((prev) => [newLead, ...prev]);
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-gray-50 dark:bg-[#111827]">
       {/* Header */}
@@ -287,7 +311,7 @@ export default function LeadsKanbanPage() {
               <span className="font-bold text-primary">{totalPipeline.toLocaleString("tr-TR")} ₺</span>
             </p>
           </div>
-          <Button className="h-10 bg-primary hover:bg-primary/90 self-start md:self-auto">
+          <Button className="h-10 bg-primary hover:bg-primary/90 self-start md:self-auto" onClick={() => setIsModalOpen(true)}>
             <Plus className="mr-2 h-4 w-4" /> Yeni Lead
           </Button>
         </div>
@@ -311,6 +335,10 @@ export default function LeadsKanbanPage() {
             ))}
           </div>
         )}
+        {/* Source Filter */}
+        <div className="mt-3">
+          <SourceFilter selected={sourceFilter} onChange={setSourceFilter} />
+        </div>
       </div>
 
       {/* Kanban Board */}
@@ -327,7 +355,7 @@ export default function LeadsKanbanPage() {
               <KanbanColumn
                 key={col.id}
                 col={col}
-                leads={leads.filter((l) => l.columnId === col.id)}
+                leads={filteredLeads.filter((l) => l.columnId === col.id)}
               />
             ))}
           </div>
@@ -337,6 +365,12 @@ export default function LeadsKanbanPage() {
           </DragOverlay>
         </DndContext>
       </div>
+
+      <NewLeadModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddLead}
+      />
     </div>
   );
 }

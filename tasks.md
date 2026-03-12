@@ -478,7 +478,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Drag animation (Framer Motion)
   - _Gereksinimler: 9.3, 14.9_
 
-- [ ] 11.3 New Lead Modal component oluştur
+- [x] 11.3 New Lead Modal component oluştur
   - `components/crm/new-lead-modal.tsx` - Client Component
   - Form fields (company name, contact person, email, phone, potential value, source)
   - Zod validation (leadSchema)
@@ -486,7 +486,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 9.8_
 
 
-- [ ] 11.4 Source Filter component oluştur
+- [x] 11.4 Source Filter component oluştur
   - `components/crm/source-filter.tsx` - Client Component
   - Filter chips (LinkedIn, referral, website, email, ads)
   - Active filter highlighting
