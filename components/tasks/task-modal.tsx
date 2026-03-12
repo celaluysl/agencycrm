@@ -1,212 +1,239 @@
-
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { SopChecklist, SopItem } from "@/components/tasks/sop-checklist";
+import { TimeTracker } from "@/components/tasks/time-tracker";
+import { ActivityFeed, ActivityItem } from "@/components/tasks/activity-feed";
+import {
+  CheckCircle2,
+  Flag,
+  User,
+  CalendarDays,
+  Tag,
+  Paperclip,
+  Download,
+  FileText,
+  Image as ImageIcon,
+  X,
+} from "lucide-react";
 
-export function TaskModal() {
+// ─── Types ───────────────────────────────────────────────
+type Priority = "critical" | "high" | "medium" | "low";
+type Status = "todo" | "in_progress" | "review" | "done";
+
+const PRIORITY_CONFIG: Record<Priority, { label: string; color: string }> = {
+  critical: { label: "Kritik", color: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400" },
+  high: { label: "Yüksek", color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400" },
+  medium: { label: "Orta", color: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" },
+  low: { label: "Düşük", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
+};
+
+const STATUS_CONFIG: Record<Status, { label: string; color: string }> = {
+  todo: { label: "Yapılacak", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
+  in_progress: { label: "Devam Ediyor", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
+  review: { label: "İncelemede", color: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" },
+  done: { label: "Tamamlandı", color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
+};
+
+export interface TaskData {
+  id: string;
+  title: string;
+  description?: string;
+  status: Status;
+  priority: Priority;
+  assignee: string;
+  dueDate: string;
+  tags: string[];
+  sopItems: SopItem[];
+  activityItems: ActivityItem[];
+  attachments: { name: string; size: string; type: "image" | "pdf" | "doc" }[];
+}
+
+interface TaskDetailModalProps {
+  task: TaskData | null;
+  open: boolean;
+  onClose: () => void;
+  onMarkComplete?: (taskId: string) => void;
+}
+
+type Tab = "sop" | "activity" | "attachments";
+
+export function TaskDetailModal({ task, open, onClose, onMarkComplete }: TaskDetailModalProps) {
+  const [activeTab, setActiveTab] = useState<Tab>("sop");
+  const [isComplete, setIsComplete] = useState(task?.status === "done");
+
+  if (!task) return null;
+
+  const priority = PRIORITY_CONFIG[task.priority];
+  const status = STATUS_CONFIG[task.status];
+
+  const handleMarkComplete = () => {
+    setIsComplete(true);
+    onMarkComplete?.(task.id);
+  };
+
+  const TABS: { id: Tab; label: string; count?: number }[] = [
+    { id: "sop", label: "SOP Checklist", count: task.sopItems.length },
+    { id: "activity", label: "Aktiviteler", count: task.activityItems.length },
+    { id: "attachments", label: "Dosyalar", count: task.attachments.length },
+  ];
+
+  const FILE_ICON: Record<string, React.ReactNode> = {
+    image: <ImageIcon className="h-4 w-4 text-blue-500" />,
+    pdf: <FileText className="h-4 w-4 text-rose-500" />,
+    doc: <FileText className="h-4 w-4 text-indigo-500" />,
+  };
+
   return (
-    <div className="flex-1 flex flex-col flex-1 flex items-center justify-center p-6 overflow-hidden">
-      
-<div className="bg-white dark:bg-[#1a202c] w-full max-w-6xl h-full max-h-[850px] shadow-2xl rounded-xl flex flex-col overflow-hidden border dark:border-[#2d3748]">
-<div className="px-6 py-4 border-b border-[#e5e7eb] dark:border-[#2d3748] flex items-center justify-between shrink-0">
-<div className="flex items-center gap-3">
-<span className="material-symbols-outlined text-primary">search_insights</span>
-<div className="flex flex-col">
-<h1 className="text-[#111418] dark:text-white text-xl font-bold">Teknik SEO Denetimi ve Hata Giderimi</h1>
-<p className="text-xs text-[#617289] uppercase font-semibold tracking-wider">Proje: Teksan Global - SEO Hizmeti</p>
-</div>
-</div>
-<div className="flex items-center gap-3">
-<button className="flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 rounded-lg text-sm font-bold">
-<span className="material-symbols-outlined !text-sm">check_circle</span>
-                        Devam Ediyor
-                    </button>
-<button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
-<span className="material-symbols-outlined text-gray-500">close</span>
-</button>
-</div>
-</div>
-<div className="flex flex-1 overflow-hidden">
-<div className="flex-1 overflow-y-auto border-r border-[#e5e7eb] dark:border-[#2d3748] bg-white dark:bg-[#1a202c]">
-<div className="flex border-b border-[#e5e7eb] dark:border-[#2d3748] px-6 gap-8 shrink-0">
-<a className="flex items-center border-b-2 border-primary text-primary py-4" href="#">
-<span className="text-sm font-bold">Genel Bakış</span>
-</a>
-<a className="flex items-center border-b-2 border-transparent text-[#617289] py-4" href="#">
-<span className="text-sm font-medium">SOP Kontrol Listesi</span>
-</a>
-<a className="flex items-center border-b-2 border-transparent text-[#617289] py-4" href="#">
-<span className="text-sm font-medium">Aktivite</span>
-</a>
-<a className="flex items-center border-b-2 border-transparent text-[#617289] py-4" href="#">
-<span className="text-sm font-medium">Dosyalar</span>
-</a>
-</div>
-<div className="p-6 space-y-8">
-<section>
-<h3 className="text-sm font-bold text-[#111418] dark:text-white mb-3">Görev Açıklaması</h3>
-<div className="text-[#4b5563] dark:text-gray-300 text-sm leading-relaxed space-y-3">
-<p>Web sitesinin teknik sağlığını artırmak için Search Console ve Screaming Frog verilerine dayanarak 404 hataları, meta etiket eksiklikleri ve site hızı optimizasyonları yapılacaktır.</p>
-</div>
-</section>
-<section className="bg-background-light dark:bg-background-dark/50 rounded-xl p-5 border border-primary/10">
-<div className="flex justify-between items-center mb-4">
-<div className="flex items-center gap-2">
-<span className="material-symbols-outlined text-primary">rule</span>
-<h3 className="text-sm font-bold text-[#111418] dark:text-white">Standart Operasyon Prosedürü (SOP) Kontrol Listesi</h3>
-</div>
-<div className="flex items-center gap-4">
-<p className="text-[#111418] dark:text-white text-sm font-bold">0/5</p>
-<div className="w-32 h-2 rounded-full bg-gray-200 dark:bg-gray-700">
-<div className="h-2 rounded-full bg-primary" style={{ "width": "0%" }}></div>
-</div>
-</div>
-</div>
-<div className="space-y-3">
-<label className="flex items-center gap-3 p-3 bg-white dark:bg-background-dark border border-[#e5e7eb] dark:border-[#2d3748] rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-<input className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox" />
-<span className="text-sm text-[#111418] dark:text-white font-medium">404 hataları ve yönlendirmeler kontrol edildi mi?</span>
-</label>
-<label className="flex items-center gap-3 p-3 bg-white dark:bg-background-dark border border-[#e5e7eb] dark:border-[#2d3748] rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-<input className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox" />
-<span className="text-sm text-[#111418] dark:text-white font-medium">Eksik Meta Title ve Description etiketleri girildi mi?</span>
-</label>
-<label className="flex items-center gap-3 p-3 bg-white dark:bg-background-dark border border-[#e5e7eb] dark:border-[#2d3748] rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-<input className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox" />
-<span className="text-sm text-[#111418] dark:text-white font-medium">Görsel boyutları ve alt etiketleri optimize edildi mi?</span>
-</label>
-<label className="flex items-center gap-3 p-3 bg-white dark:bg-background-dark border border-[#e5e7eb] dark:border-[#2d3748] rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-<input className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox" />
-<span className="text-sm text-[#111418] dark:text-white font-medium">XML Sitemap ve Robots.txt dosyaları güncellendi mi?</span>
-</label>
-<label className="flex items-center gap-3 p-3 bg-white dark:bg-background-dark border border-[#e5e7eb] dark:border-[#2d3748] rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-<input className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox" />
-<span className="text-sm text-[#111418] dark:text-white font-medium">Sayfa açılış hızı (LCP, CLS) iyileştirmeleri yapıldı mı?</span>
-</label>
-</div>
-</section>
-<section className="space-y-4">
-<h3 className="text-sm font-bold text-[#111418] dark:text-white">Aktivite ve Yorumlar</h3>
-<div className="space-y-4">
-<div className="flex gap-4">
-<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvca6uENs1mszCQw1yI6tZEVAb1FuSvK2pWIj4MAhQNFxlpnrTXTKUdrWLp5VRh0OaoN5f1I9hCe9Aevn5y-OfjOXkEnIzHgqDLp0S8leDIJthsF5L7qW_AocMONXdMGOvEM8Qt3cQk3UMtUzjSJ-zcnr4PYkQmvc1mxyS-QZrg92tz_Cik5XsQtEObCZEGukJ9kBYZXAXbHVF9XspcTBwlB_PIqt3h2gdgwzpo2mpSB6iQ10cm7NHcdtrNmWXJ7VqyUFaUj2r7DuH')" }}></div>
-<div className="flex-1 bg-background-light dark:bg-background-dark/50 p-3 rounded-lg">
-<div className="flex justify-between items-center mb-1">
-<span className="text-sm font-bold dark:text-white">Merve Aydın</span>
-<span className="text-xs text-gray-500">2s önce</span>
-</div>
-<p className="text-sm text-[#4b5563] dark:text-gray-300">Selam <span className="text-primary font-semibold">@Can</span>, teknik analiz raporlarını inceledim. Screaming Frog tarama sonuçlarını ekler kısmına yükler misin?</p>
-</div>
-</div>
-</div>
-<div className="mt-6 flex gap-3 items-start border-t border-[#e5e7eb] dark:border-[#2d3748] pt-4">
-<div className="size-8 rounded-full bg-cover bg-center shrink-0" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbDYt-veoNWd5vFeMLccIQEPlgecEgXSPBrynUX67TCsVHv6VaP-nliee-Z7HGYFS1Yd382_yWRLMf-c8WmC32_UDk9MDbshY5ulx9EhVeqrurt0rd-GRkXtrk491z0FW0MY5KsdVtrz-7uKZO4J1BoEh-hYoHW5AHGbCzEKFeViw0bvYXYLaU5ZjJkrVxXXydGv_S_-JH_zZUQRZtopq-fgfPE9rXnyM5NRHbx2zX24cda6E0W3Z_jeEOdt3M1Lho77gHdssylLHS')" }}></div>
-<div className="flex-1 relative">
-<textarea className="w-full rounded-lg border-[#e5e7eb] dark:border-[#2d3748] dark:bg-background-dark dark:text-white text-sm focus:ring-primary focus:border-primary resize-none p-3" placeholder="Yorum ekle... Bahsetmek için @ kullanın" rows={3}></textarea>
-<div className="flex justify-between items-center mt-2">
-<div className="flex gap-2">
-<button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded text-gray-500"><span className="material-symbols-outlined !text-lg">attach_file</span></button>
-<button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded text-gray-500"><span className="material-symbols-outlined !text-lg">sentiment_satisfied</span></button>
-</div>
-<button className="bg-primary text-white text-xs font-bold py-1.5 px-4 rounded-lg">Yorum Yap</button>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-<div className="w-80 overflow-y-auto bg-background-light dark:bg-background-dark/30 p-6 flex flex-col gap-8 shrink-0">
-<div className="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e5e7eb] dark:border-[#2d3748] shadow-sm">
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Zaman Takibi</h3>
-<div className="flex flex-col items-center gap-4">
-<div className="text-3xl font-black text-[#111418] dark:text-white font-mono">01:12:45</div>
-<button className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 rounded-lg transition-colors">
-<span className="material-symbols-outlined">stop_circle</span>
-                                Sayacı Durdur
-                            </button>
-<div className="w-full pt-4 border-t border-gray-100 dark:border-gray-800">
-<label className="text-[10px] font-bold uppercase text-gray-400 mb-2 block">Manuel Süre Ekle</label>
-<div className="flex gap-2">
-<input className="form-input flex-1 min-w-0 text-xs border-[#e5e7eb] dark:border-[#2d3748] dark:bg-background-dark dark:text-white rounded-lg px-2 py-1.5 focus:ring-primary focus:border-primary" placeholder="00:00" type="text" />
-<button className="bg-primary text-white p-1.5 rounded-lg hover:bg-blue-600">
-<span className="material-symbols-outlined !text-sm">add</span>
-</button>
-</div>
-</div>
-<p className="text-[10px] text-gray-500">Şu anki çalışma: Teknik Denetim</p>
-</div>
-</div>
-<div className="space-y-5">
-<div>
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Atanan</h3>
-<div className="flex items-center gap-3 p-2 bg-white dark:bg-[#1a202c] rounded-lg border border-[#e5e7eb] dark:border-[#2d3748] cursor-pointer">
-<div className="size-8 rounded-full bg-cover bg-center" style={{ "backgroundImage": "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBy27oCekJQlcsbTAj_ArD3C0dn0MVyI77KeDXZmawTbWqCr51UecgjguvwHcsNYkIMdgfpsrcPnVgqLwkhaydsn7PVBeSbYOboFqSUD-2W1gXAdavlYy84Hq2asbkbc_tXq3vb5l_voPof6HHrLh_kfkhzS0_rCzHoeqDOoNC_tTTPRIJpOq_v0ucx7qR6AjDccBCga6rxk5uqzhK7Sb_PjsQJIPEonfMBFCVkI-F8pmBqIaho04qIMeJWsy7egGn8qDf0j8sNyC1m')" }}></div>
-<span className="text-sm font-medium dark:text-white">Can Özdemir</span>
-<span className="material-symbols-outlined ml-auto text-gray-400">expand_more</span>
-</div>
-</div>
-<div className="grid grid-cols-2 gap-3">
-<div>
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Başlangıç Tarihi</h3>
-<div className="flex items-center gap-2 p-2 bg-white dark:bg-[#1a202c] rounded-lg border border-[#e5e7eb] dark:border-[#2d3748] cursor-pointer">
-<span className="material-symbols-outlined text-gray-400 !text-sm">calendar_today</span>
-<span className="text-[11px] font-medium dark:text-white">20 Ara, 2023</span>
-</div>
-</div>
-<div>
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Bitiş Tarihi</h3>
-<div className="flex items-center gap-2 p-2 bg-white dark:bg-[#1a202c] rounded-lg border border-[#e5e7eb] dark:border-[#2d3748] cursor-pointer">
-<span className="material-symbols-outlined text-gray-400 !text-sm">event_available</span>
-<span className="text-[11px] font-medium dark:text-white">22 Ara, 2023</span>
-</div>
-</div>
-</div>
-<div>
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Öncelik</h3>
-<div className="flex items-center gap-2">
-<span className="px-3 py-1 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-full text-xs font-bold">Yüksek</span>
-<button className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full text-gray-400">
-<span className="material-symbols-outlined !text-sm">edit</span>
-</button>
-</div>
-</div>
-</div>
-<div>
-<div className="flex justify-between items-center mb-3">
-<h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Ekler</h3>
-<button className="text-xs text-primary font-bold hover:underline">+ Yükle</button>
-</div>
-<div className="space-y-2">
-<div className="flex items-center gap-3 p-2 bg-white dark:bg-[#1a202c] rounded-lg border border-[#e5e7eb] dark:border-[#2d3748] hover:border-primary cursor-pointer group">
-<span className="material-symbols-outlined text-gray-400 group-hover:text-primary">description</span>
-<div className="flex flex-col min-w-0">
-<span className="text-xs font-medium dark:text-white truncate">teknik_denetim_raporu.pdf</span>
-<span className="text-[10px] text-gray-500">2.4 MB</span>
-</div>
-</div>
-</div>
-</div>
-<div className="mt-auto pt-6 border-t border-gray-200 dark:border-[#2d3748]">
-<p className="text-[10px] text-gray-400"><span className="font-bold">Zeynep Kılıç</span> tarafından 20 Ara 2023'te oluşturuldu</p>
-</div>
-</div>
-</div>
-<div className="px-6 py-4 border-t border-[#e5e7eb] dark:border-[#2d3748] flex justify-between items-center bg-white dark:bg-[#1a202c] shrink-0">
-<button className="flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white transition-colors">
-<span className="material-symbols-outlined">delete</span>
-<span className="text-sm font-bold">Görevi Sil</span>
-</button>
-<div className="flex gap-3">
-<button className="px-6 py-2 border border-[#dbe0e6] dark:border-[#2d3748] text-[#111418] dark:text-white text-sm font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                        Pencereyi Kapat
-                    </button>
-<button className="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                        Tamamlandı Olarak İşaretle
-                    </button>
-</div>
-</div>
-</div>
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl w-full h-[85vh] flex flex-col p-0 gap-0 bg-white dark:bg-[#1f2937] rounded-2xl overflow-hidden">
+        {/* Header */}
+        <DialogHeader className="p-6 pb-4 shrink-0 border-b border-gray-200 dark:border-gray-800">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <Badge variant="outline" className={`text-[10px] font-bold ${status.color} border-0`}>
+                  {status.label}
+                </Badge>
+                <Badge variant="outline" className={`flex items-center gap-1 text-[10px] font-bold ${priority.color} border-0`}>
+                  <Flag className="h-2.5 w-2.5" />
+                  {priority.label}
+                </Badge>
+                {task.tags.map((tag) => (
+                  <Badge key={tag} variant="outline" className="text-[10px] font-medium text-muted-foreground">
+                    <Tag className="h-2.5 w-2.5 mr-1" />{tag}
+                  </Badge>
+                ))}
+              </div>
+              <DialogTitle className="text-xl font-black text-[#111418] dark:text-white leading-snug">
+                {task.title}
+              </DialogTitle>
+              {task.description && (
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{task.description}</p>
+              )}
+            </div>
+            <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={onClose}>
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </DialogHeader>
 
-    </div>
+        {/* Body */}
+        <div className="flex flex-1 overflow-hidden">
+          {/* Main content */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {/* Tabs */}
+            <div className="flex border-b border-gray-200 dark:border-gray-800 px-6 shrink-0">
+              {TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-1.5 px-3 py-3 text-sm font-bold border-b-2 transition-colors -mb-px
+                    ${activeTab === tab.id
+                      ? "border-primary text-primary"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                    }`}
+                >
+                  {tab.label}
+                  {tab.count !== undefined && (
+                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${activeTab === tab.id ? "bg-primary/10 text-primary" : "bg-gray-200 dark:bg-gray-800 text-muted-foreground"}`}>
+                      {tab.count}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab content */}
+            <div className="flex-1 overflow-y-auto p-6">
+              {activeTab === "sop" && <SopChecklist items={task.sopItems} />}
+              {activeTab === "activity" && <ActivityFeed items={task.activityItems} />}
+              {activeTab === "attachments" && (
+                <div className="flex flex-col gap-2">
+                  {task.attachments.length === 0 ? (
+                    <p className="text-sm text-muted-foreground text-center py-8">Henüz dosya eklenmemiş.</p>
+                  ) : (
+                    task.attachments.map((file, i) => (
+                      <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                            {FILE_ICON[file.type]}
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-[#111418] dark:text-white">{file.name}</p>
+                            <p className="text-xs text-muted-foreground">{file.size}</p>
+                          </div>
+                        </div>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary">
+                          <Download className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right sidebar */}
+          <div className="w-64 shrink-0 border-l border-gray-200 dark:border-gray-800 flex flex-col overflow-y-auto p-5 gap-6">
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Görev Bilgileri</h3>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2.5">
+                  <User className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-muted-foreground font-medium">Atanan</p>
+                    <p className="text-xs font-bold text-[#111418] dark:text-white">{task.assignee}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CalendarDays className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-muted-foreground font-medium">Son Tarih</p>
+                    <p className="text-xs font-bold text-[#111418] dark:text-white">{task.dueDate}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Paperclip className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-muted-foreground font-medium">Dosyalar</p>
+                    <p className="text-xs font-bold text-[#111418] dark:text-white">{task.attachments.length} dosya</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Süre Takibi</h3>
+              <TimeTracker />
+            </div>
+
+            <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800">
+              <Button
+                className={`w-full text-sm font-bold ${
+                  isComplete
+                    ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                    : "bg-[#111418] hover:bg-gray-800 text-white dark:bg-white dark:text-[#111418] dark:hover:bg-gray-100"
+                }`}
+                onClick={handleMarkComplete}
+                disabled={isComplete}
+              >
+                <CheckCircle2 className="mr-2 h-4 w-4" />
+                {isComplete ? "Tamamlandı ✓" : "Tamamlandı Olarak İşaretle"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
