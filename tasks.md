@@ -43,15 +43,15 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - _Gereksinimler: 1.1, 15.2_
 
 
-- [ ] 1.4 TypeScript konfigürasyonunu optimize et
+- [x] 1.4 TypeScript konfigürasyonunu optimize et
   - `tsconfig.json` dosyasında path aliases ayarla (@/ için)
   - Strict mode'u aktif et
   - `types/` klasörü oluştur ve temel interface'leri tanımla
   - _Gereksinimler: 15.1_
 
-- [ ] 1.5 ESLint ve Prettier yapılandırması yap
-  - `.eslintrc.json` dosyasını Next.js best practices için yapılandır
-  - `.prettierrc` dosyası oluştur
+- [x] 1.5 ESLint ve Prettier yapılandırması yap
+  - `eslint.config.mjs` dosyasını Next.js best practices için yapılandır
+  - `.prettierrc.json` dosyası oluştur
   - Pre-commit hooks için Husky kurulumu yap (opsiyonel)
   - _Gereksinimler: 20.12_
 
@@ -1059,4 +1059,3 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 - Tüm görevler Türkçe olarak yazılmıştır
 - TypeScript ve Next.js 14+ App Router kullanılacaktır
 - Toplam 51 sayfa tasarımı kapsanmaktadır
-
