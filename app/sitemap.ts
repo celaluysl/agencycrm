@@ -1,0 +1,87 @@
+import type { MetadataRoute } from "next";
+
+const staticRoutes = [
+  "/",
+  "/dashboard",
+  "/admin/accounts",
+  "/admin/analytics",
+  "/admin/commissions",
+  "/admin/dashboard",
+  "/admin/departman-operasyon-detayi",
+  "/admin/ik-verimlilik-ve-kapasite-analizi",
+  "/admin/invoices",
+  "/admin/payroll",
+  "/admin/payroll/maas-ve-personel-odemeleri-paneli",
+  "/admin/sistem-loglari-ve-guvenlik-paneli",
+  "/admin/site-bazli-hizmet-yonetim-paneli",
+  "/client-portal",
+  "/client-portal/approvals",
+  "/client-portal/musteri-onay-merkezi",
+  "/client-portal/musteri-portali-kontrol-paneli",
+  "/client-portal/musteri-rapor-arsivi",
+  "/client-portal/support",
+  "/crm/aday-musteri-detay-sayfasi",
+  "/crm/hizmet-detayli-ortak-musteri-yonetim-merkezi",
+  "/crm/kapasite-analizli-akilli-satis-paneli",
+  "/crm/leads",
+  "/crm/satis-ekibi-detayli-kokpit-paneli",
+  "/crm/satisci-aylik-prim-hakedis-raporu-onaylananlar",
+  "/crm/satisci-hakedis-ve-prim-paneli",
+  "/crm/yuksek-deger-odakli-kanban-panosu",
+  "/finance/banka-ve-kasa-yonetim-merkezi",
+  "/finance/banka-ve-kasa-yonetimi",
+  "/finance/fatura-ve-tahsilat-takip-merkezi",
+  "/finance/fatura-ve-tahsilat-yonetimi",
+  "/finance/finans-ve-muhasebe-kontrol-paneli",
+  "/finance/gelir-ve-gider-yonetim-merkezi",
+  "/finance/karlilik-ve-butce-analiz-raporu",
+  "/finance/musteri-cari-hesap-takibi",
+  "/finance/musteri-cari-ve-risk-yonetimi",
+  "/finance/musteri-saglik-ve-karlilik-analizi",
+  "/finance/super-admin-finansal-kokpit",
+  "/performance",
+  "/performance/gorev-odakli-calisma-alani",
+  "/performance/uzman-performans-paneli",
+  "/projects/ai-kategori-icerigi-olusturma-paneli",
+  "/projects/atanan-musteriler-ve-durum-takibi",
+  "/projects/destek-talebi-yonetimi",
+  "/projects/musteri-proje-detay-ekrani",
+  "/projects/toplu-odeme-destekli-prim-raporu",
+  "/sem/gelismis-gorev-yonetimli-sem-paneli",
+  "/sem/operations",
+  "/sem/portfolio",
+  "/sem/sem-gorev-detay-ve-sop-paneli",
+  "/sem/sem-musteri-portfoy-yonetimi",
+  "/seo/kelime-odakli-backlink-satin-alma-paneli",
+  "/seo/publisher-inventory",
+  "/seo/rank-tracking",
+  "/seo/seo-gorev-detay-ve-sop-paneli",
+  "/seo/seo-musteri-portfoy-takibi",
+  "/seo/seo-operasyon-paneli",
+  "/seo/seo-proje-ve-teknik-kanban-panosu",
+  "/seo/technical-analysis",
+  "/seo/tedarikci-bilgili-backlink-paneli",
+  "/seo/teknik-seo-analiz-ve-sorgu-paneli",
+  "/social-media/approval-center",
+  "/social-media/approvals",
+  "/social-media/portfolio",
+  "/social-media/raporlama-destekli-sosyal-medya-paneli",
+  "/social-media/sosyal-medya-gorev-detay-ve-sop-paneli",
+  "/social-media/sosyal-medya-musteri-portfoyu",
+] as const;
+
+function getBaseUrl() {
+  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = getBaseUrl();
+  const lastModified = new Date();
+
+  return staticRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: route === "/" ? "daily" : "weekly",
+    priority: route === "/" ? 1 : 0.7,
+  }));
+}

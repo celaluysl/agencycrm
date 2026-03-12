@@ -741,7 +741,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Breadcrumb schema
   - _Gereksinimler: 16.6_
 
-- [ ] 17.4 Sitemap ve robots.txt oluştur
+- [x] 17.4 Sitemap ve robots.txt oluştur
   - `app/sitemap.ts` - Dynamic sitemap generation
   - `app/robots.ts` - Robots.txt configuration
   - _Gereksinimler: 20.8, 20.9_
