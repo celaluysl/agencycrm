@@ -28,18 +28,16 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  SopChecklist,
+  type SopChecklistItem,
+} from "@/components/tasks/sop-checklist";
 import { cn } from "@/lib/utils";
 
 type TaskStatus = "todo" | "in_progress" | "review" | "done";
 type TaskPriority = "low" | "medium" | "high" | "critical";
 type AttachmentType = "pdf" | "image" | "doc";
 type ActivityType = "comment" | "status_change" | "assignment";
-
-export interface TaskChecklistItem {
-  id: string;
-  label: string;
-  done: boolean;
-}
 
 export interface TaskActivityItem {
   id: string;
@@ -73,7 +71,7 @@ export interface TaskModalData {
   estimatedMinutes: number;
   trackedMinutes: number;
   tags: string[];
-  checklist: TaskChecklistItem[];
+  checklist: SopChecklistItem[];
   activity: TaskActivityItem[];
   attachments: TaskAttachmentItem[];
 }
@@ -227,11 +225,6 @@ export function TaskModal({
     return () => window.clearInterval(intervalId);
   }, [isRunning]);
 
-  const completedChecklistCount = checklist.filter((item) => item.done).length;
-  const checklistProgress = checklist.length
-    ? Math.round((completedChecklistCount / checklist.length) * 100)
-    : 0;
-
   const totalComments = activity.filter((item) => item.type === "comment").length;
 
   const sidebarFacts = useMemo(
@@ -259,14 +252,6 @@ export function TaskModal({
     ],
     [activeTask]
   );
-
-  const toggleChecklistItem = (id: string) => {
-    setChecklist((current) =>
-      current.map((item) =>
-        item.id === id ? { ...item, done: !item.done } : item
-      )
-    );
-  };
 
   const handleAddComment = () => {
     const trimmed = comment.trim();
@@ -357,61 +342,7 @@ export function TaskModal({
               </section>
 
               <section className="space-y-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-                      SOP Kontrol Listesi
-                    </h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Görev tamamlanmadan önce zorunlu adımları kontrol et.
-                    </p>
-                  </div>
-                  <div className="min-w-44 space-y-2">
-                    <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-                      <span>
-                        {completedChecklistCount}/{checklist.length} tamamlandı
-                      </span>
-                      <span>%{checklistProgress}</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-muted">
-                      <div
-                        className="h-2 rounded-full bg-primary transition-all"
-                        style={{ width: `${checklistProgress}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  {checklist.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => toggleChecklistItem(item.id)}
-                      className={cn(
-                        "flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition-colors",
-                        item.done
-                          ? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/40 dark:bg-emerald-900/10"
-                          : "border-border bg-background hover:border-primary/40"
-                      )}
-                    >
-                      <CheckCircle2
-                        className={cn(
-                          "mt-0.5 size-5 shrink-0",
-                          item.done ? "text-emerald-500" : "text-muted-foreground"
-                        )}
-                      />
-                      <span
-                        className={cn(
-                          "text-sm",
-                          item.done && "text-muted-foreground line-through"
-                        )}
-                      >
-                        {item.label}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+                <SopChecklist items={checklist} onChange={setChecklist} />
               </section>
 
               <section className="space-y-4">
