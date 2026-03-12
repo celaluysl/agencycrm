@@ -9,7 +9,6 @@ import {
   Plus,
   FileImage,
   FileText,
-  MessageSquare,
   Paperclip,
   Trash2,
   UserRound,
@@ -24,27 +23,23 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
 import {
   SopChecklist,
   type SopChecklistItem,
 } from "@/components/tasks/sop-checklist";
 import { TimeTracker } from "@/components/tasks/time-tracker";
+import {
+  ActivityFeed,
+  type ActivityItem,
+  type ActivityAttachment,
+} from "@/components/tasks/activity-feed";
 import { cn } from "@/lib/utils";
 
 type TaskStatus = "todo" | "in_progress" | "review" | "done";
 type TaskPriority = "low" | "medium" | "high" | "critical";
 type AttachmentType = "pdf" | "image" | "doc";
-type ActivityType = "comment" | "status_change" | "assignment";
-
-export interface TaskActivityItem {
-  id: string;
-  type: ActivityType;
-  author: string;
-  authorAvatar?: string;
-  content: string;
-  createdAt: string;
-}
+// ActivityItem type is re-exported from activity-feed for consumers.
+export type { ActivityItem as TaskActivityItem } from "@/components/tasks/activity-feed";
 
 export interface TaskAttachmentItem {
   id: string;
@@ -70,7 +65,7 @@ export interface TaskModalData {
   trackedMinutes: number;
   tags: string[];
   checklist: SopChecklistItem[];
-  activity: TaskActivityItem[];
+  activity: ActivityItem[];
   attachments: TaskAttachmentItem[];
 }
 
@@ -108,12 +103,6 @@ const PRIORITY_LABELS: Record<TaskPriority, string> = {
   medium: "Orta",
   high: "Yüksek",
   critical: "Kritik",
-};
-
-const ACTIVITY_LABELS: Record<ActivityType, string> = {
-  comment: "Yorum",
-  status_change: "Durum Güncellemesi",
-  assignment: "Atama",
 };
 
 const DEFAULT_TASK: TaskModalData = {
@@ -186,18 +175,30 @@ export function TaskModal({
   const activeTask = task ?? DEFAULT_TASK;
   const [status, setStatus] = useState<TaskStatus>(activeTask.status);
   const [checklist, setChecklist] = useState(activeTask.checklist);
-  const [activity, setActivity] = useState(activeTask.activity);
-  const [comment, setComment] = useState("");
+  const [activity, setActivity] = useState<ActivityItem[]>(activeTask.activity);
 
   useEffect(() => {
     setStatus(activeTask.status);
     setChecklist(activeTask.checklist);
     setActivity(activeTask.activity);
-    setComment("");
     // TimeTracker resets automatically via key={activeTask.id} below.
   }, [activeTask]);
 
   const totalComments = activity.filter((item) => item.type === "comment").length;
+
+  const handleAddComment = (content: string, attachments: ActivityAttachment[]) => {
+    setActivity((current) => [
+      {
+        id: `comment-${Date.now()}`,
+        type: "comment",
+        author: "Sen",
+        content,
+        createdAt: "Şimdi",
+        attachments: attachments.length > 0 ? attachments : undefined,
+      },
+      ...current,
+    ]);
+  };
 
   const sidebarFacts = useMemo(
     () => [
@@ -224,23 +225,6 @@ export function TaskModal({
     ],
     [activeTask]
   );
-
-  const handleAddComment = () => {
-    const trimmed = comment.trim();
-    if (!trimmed) return;
-
-    setActivity((current) => [
-      {
-        id: `comment-${Date.now()}`,
-        type: "comment",
-        author: "Sen",
-        content: trimmed,
-        createdAt: "Şimdi",
-      },
-      ...current,
-    ]);
-    setComment("");
-  };
 
   const handleMarkComplete = () => {
     setStatus("done");
@@ -310,60 +294,12 @@ export function TaskModal({
                 <SopChecklist items={checklist} onChange={setChecklist} />
               </section>
 
-              <section className="space-y-4">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-                    Aktivite Akışı
-                  </h3>
-                  <Badge variant="outline">{activity.length} kayıt</Badge>
-                </div>
-
-                <div className="rounded-2xl border bg-muted/10 p-4">
-                  <div className="flex gap-3">
-                    <Avatar>
-                      <AvatarFallback>SN</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 space-y-3">
-                      <Textarea
-                        value={comment}
-                        onChange={(event) => setComment(event.target.value)}
-                        placeholder="Yorum ekle veya ekip arkadaşından aksiyon iste..."
-                      />
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs text-muted-foreground">
-                          Yorumlar görev geçmişine eklenir.
-                        </span>
-                        <Button size="sm" onClick={handleAddComment}>
-                          <MessageSquare className="size-4" />
-                          Yorum Yap
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {activity.map((item) => (
-                    <div key={item.id} className="flex gap-3">
-                      <Avatar>
-                        <AvatarImage src={item.authorAvatar} alt={item.author} />
-                        <AvatarFallback>{item.author.slice(0, 2).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <div className="min-w-0 flex-1 rounded-2xl border bg-background p-4">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-sm font-semibold">{item.author}</span>
-                          <Badge variant="outline">{ACTIVITY_LABELS[item.type]}</Badge>
-                          <span className="text-xs text-muted-foreground">
-                            {item.createdAt}
-                          </span>
-                        </div>
-                        <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                          {item.content}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <section>
+                <ActivityFeed
+                  items={activity}
+                  onAddComment={handleAddComment}
+                  teamMembers={["Can Özdemir", "Merve Aydın", "Zeynep Kılıç"]}
+                />
               </section>
 
               <section className="space-y-4">
