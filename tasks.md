@@ -837,7 +837,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
 
 ### 20. Error Handling ve Accessibility
 
-- [ ] 20.1 Error Boundary implementasyonu
+- [x] 20.1 Error Boundary implementasyonu
   - `components/error-boundary.tsx` - React Error Boundary
   - Graceful error handling
   - Error logging (Sentry entegrasyonu hazırlığı)
