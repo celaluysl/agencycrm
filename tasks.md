@@ -525,7 +525,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - SWR ile data sync
   - _Gereksinimler: 10.4, 10.10_
 
-- [ ] 12.4 Activity Feed component oluştur
+- [x] 12.4 Activity Feed component oluştur
   - `components/tasks/activity-feed.tsx` - Client Component
   - Activity items (comments, status changes, assignments)
   - @mention support (autocomplete)
