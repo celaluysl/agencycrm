@@ -1,6 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import {
+  PerformanceBadges,
+  type PerformanceBadgeItem,
+} from "@/components/performance/badges";
+import {
   ProductivityChart,
   type ProductivityChartDatum,
 } from "@/components/performance/productivity-chart";
@@ -395,6 +399,7 @@ export default async function PerformancePage({ searchParams }: PageProps) {
   const selectedPeriod = getSelectedPeriod(resolvedSearchParams?.period);
   const snapshot = PERIOD_SNAPSHOTS[selectedPeriod];
   const chartData: ProductivityChartDatum[] = snapshot.chart;
+  const badgeItems: PerformanceBadgeItem[] = snapshot.badges;
 
   let donutOffset = 0;
 
@@ -555,34 +560,7 @@ export default async function PerformancePage({ searchParams }: PageProps) {
                 <ComparisonPill value={`${snapshot.badges.filter((item) => item.unlocked).length} açık rozet`} />
               </div>
 
-              <div className={cn("grid gap-4", snapshot.badges.length > 3 ? "sm:grid-cols-2" : "grid-cols-1")}>
-                {snapshot.badges.map((badge) => (
-                  <div
-                    key={badge.name}
-                    className={cn(
-                      "rounded-2xl border p-4 transition-transform",
-                      badge.accentClass,
-                      badge.unlocked ? "shadow-sm" : "grayscale"
-                    )}
-                  >
-                    <div className="mb-4 flex items-start justify-between gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 shadow-sm dark:bg-slate-900/60">
-                        {badge.icon}
-                      </div>
-                      <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-600 dark:bg-slate-900/60 dark:text-slate-300">
-                        {badge.unlocked ? "Açık" : `%${badge.progress}`}
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold">{badge.name}</h3>
-                    <p className="mt-1 text-sm leading-6 opacity-80">{badge.description}</p>
-                    {!badge.unlocked && (
-                      <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/70 dark:bg-slate-900/60">
-                        <div className="h-full rounded-full bg-slate-500" style={{ width: `${badge.progress}%` }} />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <PerformanceBadges items={badgeItems} />
             </div>
           </div>
         </section>
