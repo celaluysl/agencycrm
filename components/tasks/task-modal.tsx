@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
   CheckCircle2,
@@ -162,6 +162,24 @@ export function TaskModal({
   const [checklist, setChecklist] = useState(activeTask.checklist);
   const [activity, setActivity] = useState<ActivityItem[]>(activeTask.activity);
   const [attachments, setAttachments] = useState<TaskAttachmentFile[]>(activeTask.attachments);
+
+  // Always mirrors the latest attachments state so cleanup closures can
+  // access current blob URLs without stale-closure issues.
+  const attachmentsRef = useRef<TaskAttachmentFile[]>(activeTask.attachments);
+  useEffect(() => {
+    attachmentsRef.current = attachments;
+  }, [attachments]);
+
+  // Revoke every blob URL that was created in this session before task switch
+  // or component unmount — covers the bulk-replacement path missed by the
+  // per-item handleDeleteAttachment.
+  useEffect(() => {
+    return () => {
+      for (const f of attachmentsRef.current) {
+        if (f.url?.startsWith("blob:")) URL.revokeObjectURL(f.url);
+      }
+    };
+  }, [activeTask]); // runs on task change AND final unmount
 
   useEffect(() => {
     setStatus(activeTask.status);
