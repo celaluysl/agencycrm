@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  useEffect,
   useRef,
   useState,
   useCallback,
@@ -74,9 +73,24 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+// Mention token format: spaces replaced by underscores so the token is a
+// single unambiguous word — e.g. "Can Özdemir" → stored as @Can_Özdemir.
+// \p{L} matches any Unicode letter (includes Turkish ö ı ç ş ü ğ etc.).
+const MENTION_TOKEN_RE = /(@[\p{L}\d_]+)/gu;
+const MENTION_DETECT_RE = /@([\p{L}\d_]*)$/u;
+
+function nameToToken(name: string): string {
+  return name.replace(/\s+/g, "_");
+}
+
+function tokenToDisplay(token: string): string {
+  // "@Can_Özdemir" → "@Can Özdemir"
+  return token.replace(/_/g, " ");
+}
+
 function extractMentionQuery(text: string, cursorPos: number): string | null {
   const before = text.slice(0, cursorPos);
-  const match = before.match(/@(\w*)$/);
+  const match = before.match(MENTION_DETECT_RE);
   return match ? match[1] : null;
 }
 
@@ -109,15 +123,12 @@ function ActivityItemCard({ item }: { item: ActivityItem }) {
           <span className="text-xs text-muted-foreground">{item.createdAt}</span>
         </div>
 
-        {/* Content with @mention highlights */}
+        {/* Content with @mention highlights — tokens are @Name_Surname format */}
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          {item.content.split(/(@\w+)/g).map((part, i) =>
-            /^@\w+$/.test(part) ? (
-              <span
-                key={i}
-                className="font-semibold text-primary"
-              >
-                {part}
+          {item.content.split(MENTION_TOKEN_RE).map((part, i) =>
+            /^@[\p{L}\d_]+$/u.test(part) ? (
+              <span key={i} className="font-semibold text-primary">
+                {tokenToDisplay(part)}
               </span>
             ) : (
               part
@@ -165,15 +176,18 @@ export function ActivityFeed({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mentionListRef = useRef<HTMLUListElement>(null);
 
-  // Reset visible count when items change (e.g. task switch)
-  useEffect(() => {
-    setVisibleCount(pageSize);
-  }, [items, pageSize]);
+  // No useEffect on `items` here — resetting visibleCount whenever items
+  // changes would also fire on every new comment, collapsing the expanded
+  // history (see: pagination-reset-on-comment bug).
+  // Task-switch resets are handled by key={taskId} in the parent instead.
 
-  // Filtered mention suggestions
+  // Filtered mention suggestions — normalize query (underscores → spaces) so
+  // "@Can_Öz" typed as a token still matches the display name "Can Özdemir".
   const mentionSuggestions = mentionQuery !== null
     ? teamMembers.filter((m) =>
-        m.toLowerCase().startsWith(mentionQuery.toLowerCase())
+        m.toLowerCase().startsWith(
+          mentionQuery.replace(/_/g, " ").toLowerCase()
+        )
       )
     : [];
 
@@ -187,12 +201,13 @@ export function ActivityFeed({
       const el = textareaRef.current;
       if (!el) return;
       const cursor = el.selectionStart ?? comment.length;
-      const before = comment.slice(0, cursor).replace(/@\w*$/, `@${name} `);
+      const token = nameToToken(name); // "Can Özdemir" → "Can_Özdemir"
+      // Replace the partial @query with the full token + trailing space.
+      const before = comment.slice(0, cursor).replace(MENTION_DETECT_RE, `@${token} `);
       const after = comment.slice(cursor);
       const next = before + after;
       setComment(next);
       closeMention();
-      // Restore focus
       setTimeout(() => {
         el.focus();
         el.setSelectionRange(before.length, before.length);

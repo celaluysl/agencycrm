@@ -295,7 +295,10 @@ export function TaskModal({
               </section>
 
               <section>
+                {/* key resets all ActivityFeed state (visibleCount, compose, mentions)
+                    when the active task changes — avoids pagination-reset-on-comment bug. */}
                 <ActivityFeed
+                  key={activeTask.id}
                   items={activity}
                   onAddComment={handleAddComment}
                   teamMembers={["Can Özdemir", "Merve Aydın", "Zeynep Kılıç"]}
