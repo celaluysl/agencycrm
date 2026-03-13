@@ -556,7 +556,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Time period filter (7, 30, 90 days)
   - _Gereksinimler: 12.1, 12.2, 12.3, 12.4, 12.5, 12.9_
 
-- [ ] 13.2 Productivity Chart component oluştur
+- [x] 13.2 Productivity Chart component oluştur
   - `components/performance/productivity-chart.tsx` - Client Component
   - Line chart (Recharts veya Chart.js)
   - Time spent vs value produced
