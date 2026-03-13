@@ -535,7 +535,7 @@ Bu doküman, Stitch Agency Platform (AgenciFlow) için detaylı implementasyon g
   - Slide-in animation (Framer Motion)
   - _Gereksinimler: 10.6, 10.7, 14.3_
 
-- [ ] 12.5 Task Attachments component oluştur
+- [x] 12.5 Task Attachments component oluştur
   - `components/tasks/task-attachments.tsx` - Client Component
   - File list (name, size, type)
   - Drag-and-drop upload
