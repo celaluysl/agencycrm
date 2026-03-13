@@ -5,10 +5,6 @@ import {
   CalendarDays,
   CheckCircle2,
   Clock3,
-  Download,
-  Plus,
-  FileImage,
-  FileText,
   Paperclip,
   Trash2,
   UserRound,
@@ -33,20 +29,20 @@ import {
   type ActivityItem,
   type ActivityAttachment,
 } from "@/components/tasks/activity-feed";
+import {
+  TaskAttachments,
+  fileToAttachment,
+  type TaskAttachmentFile,
+} from "@/components/tasks/task-attachments";
 import { cn } from "@/lib/utils";
 
 type TaskStatus = "todo" | "in_progress" | "review" | "done";
 type TaskPriority = "low" | "medium" | "high" | "critical";
-type AttachmentType = "pdf" | "image" | "doc";
-// ActivityItem type is re-exported from activity-feed for consumers.
-export type { ActivityItem as TaskActivityItem } from "@/components/tasks/activity-feed";
 
-export interface TaskAttachmentItem {
-  id: string;
-  name: string;
-  size: string;
-  type: AttachmentType;
-}
+// ActivityItem re-exported for consumers.
+export type { ActivityItem as TaskActivityItem } from "@/components/tasks/activity-feed";
+// TaskAttachmentFile re-exported for consumers.
+export type { TaskAttachmentFile as TaskAttachmentItem } from "@/components/tasks/task-attachments";
 
 export interface TaskModalData {
   id: string;
@@ -66,7 +62,7 @@ export interface TaskModalData {
   tags: string[];
   checklist: SopChecklistItem[];
   activity: ActivityItem[];
-  attachments: TaskAttachmentItem[];
+  attachments: TaskAttachmentFile[];
 }
 
 interface TaskModalProps {
@@ -149,21 +145,10 @@ const DEFAULT_TASK: TaskModalData = {
     },
   ],
   attachments: [
-    { id: "attachment-1", name: "teknik-denetim-raporu.pdf", size: "2.4 MB", type: "pdf" },
-    { id: "attachment-2", name: "kirmizi-linkler.png", size: "860 KB", type: "image" },
+    { id: "attachment-1", name: "teknik-denetim-raporu.pdf", size: "2.4 MB", type: "pdf" as const },
+    { id: "attachment-2", name: "kirmizi-linkler.png", size: "860 KB", type: "image" as const },
   ],
 };
-
-function getAttachmentIcon(type: AttachmentType) {
-  switch (type) {
-    case "image":
-      return <FileImage className="size-4 text-blue-500" />;
-    case "doc":
-      return <FileText className="size-4 text-indigo-500" />;
-    default:
-      return <FileText className="size-4 text-rose-500" />;
-  }
-}
 
 export function TaskModal({
   open = false,
@@ -176,13 +161,29 @@ export function TaskModal({
   const [status, setStatus] = useState<TaskStatus>(activeTask.status);
   const [checklist, setChecklist] = useState(activeTask.checklist);
   const [activity, setActivity] = useState<ActivityItem[]>(activeTask.activity);
+  const [attachments, setAttachments] = useState<TaskAttachmentFile[]>(activeTask.attachments);
 
   useEffect(() => {
     setStatus(activeTask.status);
     setChecklist(activeTask.checklist);
     setActivity(activeTask.activity);
+    setAttachments(activeTask.attachments);
     // TimeTracker resets automatically via key={activeTask.id} below.
   }, [activeTask]);
+
+  const handleUpload = (files: File[]) => {
+    const next = files.map((f) => fileToAttachment(f));
+    setAttachments((prev) => [...prev, ...next]);
+  };
+
+  const handleDeleteAttachment = (id: string) => {
+    setAttachments((prev) => {
+      const removed = prev.find((f) => f.id === id);
+      // Revoke blob URL to free memory
+      if (removed?.url?.startsWith("blob:")) URL.revokeObjectURL(removed.url);
+      return prev.filter((f) => f.id !== id);
+    });
+  };
 
   const totalComments = activity.filter((item) => item.type === "comment").length;
 
@@ -305,42 +306,12 @@ export function TaskModal({
                 />
               </section>
 
-              <section className="space-y-4">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-                    Ekler
-                  </h3>
-                  <Button size="sm" variant="outline">
-                    <Plus className="size-4" />
-                    Dosya Ekle
-                  </Button>
-                </div>
-
-                <div className="space-y-3">
-                  {activeTask.attachments.map((attachment) => (
-                    <div
-                      key={attachment.id}
-                      className="flex items-center justify-between gap-3 rounded-2xl border bg-background p-4"
-                    >
-                      <div className="flex min-w-0 items-center gap-3">
-                        <div className="rounded-xl bg-muted p-2">
-                          {getAttachmentIcon(attachment.type)}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="truncate text-sm font-medium">
-                            {attachment.name}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {attachment.size}
-                          </p>
-                        </div>
-                      </div>
-                      <Button size="icon-sm" variant="ghost">
-                        <Download className="size-4" />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
+              <section>
+                <TaskAttachments
+                  attachments={attachments}
+                  onUpload={handleUpload}
+                  onDelete={handleDeleteAttachment}
+                />
               </section>
             </div>
           </div>
