@@ -381,6 +381,18 @@ function buildAreaPath(values: number[], maxValue: number, width: number, height
   return `${linePath} L${width},${height} L0,${height} Z`;
 }
 
+function getChartLabelGridClass(length: number) {
+  if (length === 3) {
+    return "grid-cols-3";
+  }
+
+  if (length === 4) {
+    return "grid-cols-4";
+  }
+
+  return "grid-cols-7";
+}
+
 function describeTrend(current: number, target: number) {
   const delta = target - current;
   const positive = delta <= 10;
@@ -519,7 +531,7 @@ export default async function PerformancePage({ searchParams }: PageProps) {
               <div
                 className={cn(
                   "mt-4 grid gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400",
-                  snapshot.chart.length === 3 ? "grid-cols-3" : "grid-cols-4 sm:grid-cols-7"
+                  getChartLabelGridClass(snapshot.chart.length)
                 )}
               >
                 {snapshot.chart.map((item) => (
